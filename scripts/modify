@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat temp_file.txt |grep 'http://geodata'|tail -n +3| uniq|cut -c 7- |sed 's/.$//' >temp_file2.txt

@@ -1,0 +1,2 @@
+#!/bin/bash
+for i in $(cat ./temp_file2.txt); do wget $i; done
