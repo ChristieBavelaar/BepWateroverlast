@@ -44,16 +44,14 @@ def tweets_append_tif(tweets,tif):
     return tweets_tif
 
 if __name__ == '__main__':
-    default = input("Default? y/n \n")
+    default = input("Sample? y/n \n")
     if(default == "n"):
-        twitterFile=input("Enter csv file name of the twitter data:")
-        tifFile=input("Enter csv file name of the tif data:")
-        saveFile=input('Enter name of saveFile')
-        tweets= pd.read_csv('../../pandafied_data' + twitterFile)
-        tif= pd.read_csv('../../pandafied_data' + tifFile)
+        saveFile= "twitter_2010-2017_XY_tiff.csv"
+        tweets= pd.read_csv("../../pandafied_data/twitter_2010-2017_XY.csv")
+        tif= pd.read_csv('../../pandafied_data/lat_lon_to_filename.csv')
     elif(default == "y"):
         tweets= pd.read_csv('../../pandafied_data/pandafied_twitter_2017_12.csv')
         tif= pd.read_csv('../../pandafied_data/lat_lon_to_filename.csv')
-        saveFile='tweetsWithTif.csv'
+        saveFile='twitter_sample_tiff.csv'
     tweets_tif=tweets_append_tif(tweets=tweets, tif=tif)
     tweets_tif.to_csv('../../pandafied_data/'+saveFile, index=False)

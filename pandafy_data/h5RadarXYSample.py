@@ -6,7 +6,7 @@ from pyproj import CRS, Transformer
 import sys
 from tqdm import tqdm
 
-def pandafy_h5_make_radarXY(folder='../../KNMI/RADNL_CLIM____MFBSNL25_01H_20080101T000000_20090101T000000_0002/RAD_NL25_RAC_MFBS_01H/2008/', save_name_radar='../pandafied_data/pandafied_h5_radar.csv'):
+def pandafy_h5_make_radarXY(folder='../../KNMI/RADNL_CLIM____MFBSNL25_01H_20080101T000000_20090101T000000_0002/RAD_NL25_RAC_MFBS_01H/2008/', save_name_radar='../pandafied_data/pandafied_h5_radar_sample.csv'):
     '''
         This function maps the y,x pixel coordinates of the KNMI precipitation data to boxes with a longitude latitude center and corner points.
     '''
@@ -53,10 +53,17 @@ def pandafy_h5_make_radarXY(folder='../../KNMI/RADNL_CLIM____MFBSNL25_01H_200801
     radar.to_csv(save_name_radar,index=False)
 
 if __name__ == '__main__':
-    startYear = int(sys.argv[1])
-    endYear = int(sys.argv[2])
-    
-    for year in range(startYear, endYear):
-        folder = "../../KNMI/RADNL_CLIM____MFBSNL25_01H_"+ str(year) + "0101T000000_" + str(year +1) + "0101T000000_0002/RAD_NL25_RAC_MFBS_01H/" +str(year) + "/"
-        saveFile = '../../pandafied_data/pandafied_h5_radar_' + str(year) + '.csv'
-        pandafy_h5_make_radarXY(folder = folder, save_name_radar= saveFile)
+    print("This script only uses imput data from december. The default option takes data from december 2017, but it is possible to specify other years.")
+    default = input("Default? y/n \n")
+    if default == "n":
+        startYear = input("Start Year: ")
+        endYear = input("End Year: ")     
+        
+        for year in range(startYear, endYear):
+            folder = "../../KNMI/RADNL_CLIM____MFBSNL25_01H_"+ str(year) + "0101T000000_" + str(year +1) + "0101T000000_0002/RAD_NL25_RAC_MFBS_01H/" +str(year) + "/"
+            saveFile = '../../pandafied_data/pandafied_h5_radar_' + str(year) + '.csv'
+            pandafy_h5_make_radarXY(folder = folder, save_name_radar= saveFile)
+    elif default = "y":
+        folder = "../../KNMI/RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/2017/"
+        saveFile = '../../pandafied_data/201712/pandafied_h5_radar_201712.csv'
+        pandafy_h5_make_radarXY(folder=folder, save_name_radar=saveFile)

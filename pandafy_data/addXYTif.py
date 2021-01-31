@@ -2,10 +2,12 @@ import pandas as pd
 import numpy as np 
 
 def load_pandafied(folder='../../pandafied_data/', radarFile = "pandafied_h5_radar.csv", tifFile="lat_lon_to_filename.csv"):
-    print("load radar data")
+    print("load radar data: " + folder + radarFile)
     radar = pd.read_csv(folder + radarFile)
-    print("load tif data")
+    print(radar)
+    print("load tif data: " + folder + tifFile)
     tif = pd.read_csv(folder + tifFile)
+    print (tif)
     return radar, tif
 
 def combineDataFrames(folder='../../pandafied_data/', radarFile = "pandafied_h5_radar.csv", tifFile="lat_lon_to_filename.csv", saveFile="tifFilename_XY.csv"):

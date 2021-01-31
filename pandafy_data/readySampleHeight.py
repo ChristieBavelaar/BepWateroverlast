@@ -24,11 +24,11 @@ def make_labels(data,label_on):
     data['labels'] = labels
     return data
 
-def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_rain_2017_12.csv", tweetFile="tweetsWithTif.csv", saveFile="labeledSample.csv"):
+def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_rain_2017_12.csv", tweetFile="tweetsWithHeight.csv", saveFile="labeledSample.csv"):
     #first load the data
     rain,tweets_XY = load_pandafied(folder=folder, rainFile=rainFile, tweetFile=tweetFile)
     #pick relevant columns from tweets_XY
-    tweets_XY = tweets_XY.drop(columns=['latlon', 'time'])
+    tweets_XY = tweets_XY[['text', 'radarX', 'radarY', 'date']]
     #remove duplicates
     tweets_XY = tweets_XY.drop_duplicates()
     

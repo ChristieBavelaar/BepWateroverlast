@@ -65,30 +65,24 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             sum_data = pd.DataFrame(sum_data)
     return data
 
-def printname(name):
-    print(name)
-
-def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',save_name_rain='../../pandafied_data/pandafied_h5_rain_2007-2020.csv',folder = '../../KNMI/'):
+def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar_sample.csv',save_name_rain='../../pandafied_data/pandafied_h5_rain_2017_12.csv',folder = '../../KNMI/'):
     '''
         This function reads the KNMI precipitation data, aggregates it by summing up the amount of rain per day, it puts it into a pandas dataframe and saves it to disk.
     '''
-    year_folders = [f for f in listdir(folder)]
-    year_folders.sort()
     results = []
     year_counter = 2017
-    total_year = len(year_folders)
-    for year_folder in year_folders:
-        super_folder = folder+year_folder+'/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
-        month_folders = [f for f in listdir(super_folder)]
-        month_folders.sort()
-        for i in range(len(month_folders)):
-            month_folders[i] += '/'
-            print(month_folders[i])
-        num_cores = multiprocessing.cpu_count()
-        print("num_cores: " + str(num_cores))
+    total_year = 1
+    
+    super_folder = folder+ 'RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
+    month_folders = ['12']
+    month_folders.sort()
+    for i in range(len(month_folders)):
+        month_folders[i] += '/'
+        print(month_folders[i])
+    num_cores = multiprocessing.cpu_count()
+    print("num_cores: " + str(num_cores))
 
-        #results.append(Parallel(n_jobs=num_cores)(delayed(parallel_data_parsing)(month_folders[i],super_folder,year_counter,total_year,i,len(month_folders)) for i in range(len(month_folders))))
-        year_counter += 1
+    results.append(Parallel(n_jobs=num_cores)(delayed(parallel_data_parsing)(month_folders[i],super_folder,year_counter,total_year,i,len(month_folders)) for i in range(len(month_folders))))
     
     data = {}
     data['rain'] = []
@@ -115,7 +109,4 @@ def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',sav
     print(7)
 
 if __name__ == '__main__':
-    #startYear = int(sys.argv[1])
-    #nrYears = int(sys.argv[2])
-    
     pandafy_h5()

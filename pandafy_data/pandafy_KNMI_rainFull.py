@@ -9,27 +9,6 @@ from joblib import Parallel, delayed
 import multiprocessing
 import numpy as np
 
-def make_labels(data,label_on):
-    labels = []
-    print("make_labels:")
-    for i in tqdm(data[label_on]):
-        try:
-            if np.isnan(i):
-                num=0
-            else:
-                num=1
-        except:
-            num=1
-        labels.append(num)
-    data['labels'] = labels
-    return data
-
-def twit_time_to_standard(time_stamp):
-    time_stamp = mktime_tz(parsedate_tz(time_stamp))
-    dt = datetime.fromtimestamp(time_stamp, pytz.timezone('Europe/Amsterdam'))
-    s = dt.strftime('%Y%m%d%H%M')
-    return s
-
 def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_counter,subfolder_total):
     data = {}
     data['rain'] = []
@@ -86,6 +65,9 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             sum_data = pd.DataFrame(sum_data)
     return data
 
+def printname(name):
+    print(name)
+
 def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',save_name_rain='../../pandafied_data/pandafied_h5_rain_2007-2020.csv',folder = '../../KNMI/'):
     '''
         This function reads the KNMI precipitation data, aggregates it by summing up the amount of rain per day, it puts it into a pandas dataframe and saves it to disk.
@@ -93,10 +75,11 @@ def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',sav
     year_folders = [f for f in listdir(folder)]
     year_folders.sort()
     results = []
-    year_counter = 2017
+    year_counter = 0
     total_year = len(year_folders)
     for year_folder in year_folders:
-        super_folder = folder+year_folder+'/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
+        year = 2010 + year_counter
+        super_folder = folder+year_folder+'/RAD_NL25_RAC_MFBS_01H/'+ str(year) +'/'
         month_folders = [f for f in listdir(super_folder)]
         month_folders.sort()
         for i in range(len(month_folders)):
@@ -105,7 +88,7 @@ def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',sav
         num_cores = multiprocessing.cpu_count()
         print("num_cores: " + str(num_cores))
 
-        #results.append(Parallel(n_jobs=num_cores)(delayed(parallel_data_parsing)(month_folders[i],super_folder,year_counter,total_year,i,len(month_folders)) for i in range(len(month_folders))))
+        results.append(Parallel(n_jobs=num_cores)(delayed(parallel_data_parsing)(month_folders[i],super_folder,year_counter,total_year,i,len(month_folders)) for i in range(len(month_folders))))
         year_counter += 1
     
     data = {}
@@ -124,28 +107,16 @@ def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',sav
             print(len(d.index))
             data = data.append(d,sort=False)
     print(data[(data.radarX==442.0) & (data.radarY==251.0)])
+    print(5)
     print(len(data.index))
     print(data)
     print("len index: ",len(data.index))
-    return data
-
-def selectSampleTweets(tweetfile='../../pandafied_data/pandafied_twitter_2007-2020_XY.csv'):
-    tweets = pd.read_csv(tweetfile)
-    tweets = tweets['201712' in tweets['date']]
-    print(tweets)
+    print(6)
+    data.to_csv(save_name_rain,index=False)
+    print(7)
 
 if __name__ == '__main__':
-    #startYear = int(sys.argv[1])
-    #nrYears = int(sys.argv[2])
-
-    rain = pandafy_h5()
-    selectSampleTweets()
-    #pick relevant columns from tweets_XY
-    #tweets_XY = tweets_XY[['radarX','radarY','date','text']]
-    #remove duplicates
-    #tweets_XY = tweets_XY.drop_duplicates()
-
-    #merge and label dataset
-    #rainTweets = pd.merge(rain, tweets_XY, on=('radarX','radarY','date'), how='left')
-    #rainTweets = make_labels(rainTweets,'text')
-    #rainTweets.to_csv("../../pandafied_data/labeledSample2017-12.csv", index=False)
+    #if len(sys.argv) >= 2 and sys.argv[1] == 'grace':
+        #pandafy_h5(folder='/scratch/lamers/KNMI_big/KNMI-data_2020-01-29_15-56-00/rad_nl25_rac_mfbs_01h/2.0/0002/')
+    #else:
+        pandafy_h5()
