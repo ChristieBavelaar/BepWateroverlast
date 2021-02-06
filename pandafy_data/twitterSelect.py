@@ -22,7 +22,7 @@ def selectSampleTweets(tweetfile='../../pandafied_data/pandafied_twitter_2007-20
 
 if __name__ == '__main__':
     sample = input("Sample? y/n \n")
-    if sample = "y":
+    if sample == "y":
         selectSampleTweets()
-    elif sample = "n":
+    elif sample == "n":
         selectTweets()
