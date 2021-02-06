@@ -113,7 +113,7 @@ def addHeightKwartetSearch(data):
 
     return(data)
     
-def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_rain_2017_12.csv", tweetFile="twitter_sample_tiff.csv", saveFile="labeledSample.csv"):
+def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_rain_2007-2020.csv", tweetFile="twitter_2010-2017_XY_tiff.csv", saveFile="labeledData_eq.csv"):
     #first load the data
     rain,tweets_XY = load_pandafied(folder=folder, rainFile=rainFile, tweetFile=tweetFile)
     #pick relevant columns from tweets_XY
@@ -131,7 +131,9 @@ def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_r
     rainTweets_eq = filter_tweets(data=rainTweets_eq, threshold=0)
     rainTweets_eq.to_csv("../../pandafied_data/raintweets_eq.csv", index=False)
 
-    final = addHeightKwartetSearch(rainTweets_eq)
+    #Add the heigth
+    #final = addHeightKwartetSearch(rainTweets_eq)
+    final = rainTweets_eq
 
     #print and save
     print(final)
@@ -139,11 +141,11 @@ def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_r
     return final
 
 if __name__ == '__main__':
-    default = input("Default? y/n")
-    if(default == "n"):
-        rainFile=input("Enter file name of rain data:")
-        tweetFile=input("Enter file name of twitter data:")
-        saveFile=input("Enter name of save file:")
+    sample = input("Sample? y/n")
+    if(sample == "y"):
+        rainFile="pandafied_h5_rain_2017_12.csv"
+        tweetFile= "twitter_sample_tiff.csv"
+        saveFile="labeledSample_eq.csv"
         combineDataFrames(rainFile=rainFile, tweetFile=tweetFile, saveFile=saveFile)
-    elif(default == "y"):
+    elif(sample == "n"):
         combineDataFrames()

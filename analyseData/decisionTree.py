@@ -13,25 +13,27 @@ from sklearn.model_selection import cross_val_score
 #self-made functions
 sys.path.append(os.path.realpath('../functions/'))
 from equalizeData import equalize_data
-from filterTwitter import filterTwitter
+from filterTweets import filter_tweets
 sys.path.append(os.path.realpath('../pandafy_data/'))
 
-def decisionTree(folder='../../pandafied_data/', sampleFile='labeledSample.csv'):
+def decisionTree(folder='../../pandafied_data/', inputFile='labeledSample.csv'):
     #load data
-    rainTweets = pd.read_csv(folder + sampleFile)
-
+    rainTweets_eq = pd.read_csv(folder + sampleFile)
+    print("data loaded")
     #filter out instances with no rain
-    rainTweets = filterTwitter(data=rainTweets, threshold=0)
+    #rainTweets = filterTwitter(data=rainTweets, threshold=0)
    
     #create sampleset with equal number of positive and negative examples
-    rainTweets_eq = equalize_data(rainTweets)
-    rainTweets_eq.to_csv("../../pandafied_data/raintweets_eq.csv", index=False)
+    #rainTweets_eq = equalize_data(rainTweets)
+    #rainTweets_eq.to_csv("../../pandafied_data/raintweets_eq.csv", index=False)
 
     #set labels
     labels = np.array(rainTweets_eq['labels'])
     
     #set features and convert to numpy array
-    features= rainTweets_eq[['rain']]
+    #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
+    features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','labels', 'latlon','tiffile'])
+    
     features = np.array(features)
 
     #k-fold cross validation
@@ -55,9 +57,9 @@ def decisionTree(folder='../../pandafied_data/', sampleFile='labeledSample.csv')
     print(cross_val_score(estimator=clf, X=features, y=labels, cv=skf, scoring="accuracy"))
    
 if __name__ == '__main__':
-    default = input("Default? y/n \n")
-    if(default == "n"):
-        sampleFile=input("Enter csv file name of the data:")
-        decisionTree(sampleFile=sampleFile)
-    elif(default == "y"):
+    sample = input("Sample? y/n \n")
+    if(sample == "y"):
+        sampleFile="labeledSample_eq.csv"
+        decisionTree(inputFile=sampleFile)
+    elif(sample == "n"):
         decisionTree()

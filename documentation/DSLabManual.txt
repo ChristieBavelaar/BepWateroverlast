@@ -1,0 +1,19 @@
+Access silver:
+    ssh s[studentnr]@ssh.liacs.nl
+    password: het zelfde wachtwoord als voor usis
+
+Access mithril:
+    ssh mithril
+
+Repository from local directory to silver:
+    1. zip the Repository
+    2. scp [repository].zip s[studentnr]@ssh.liacs.nl:/home/s[STUDENTNR]
+
+Repository from silver to mithril:
+    scp [repository].zip mithril:/home/s[STUDENTNR] 
+
+
+
+
+
+
