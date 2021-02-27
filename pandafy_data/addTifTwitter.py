@@ -20,27 +20,37 @@ def add_filename(df,tif,idx,total):
     df = copy.deepcopy(df)
     print(idx,total)
     latlon = df['latlon'].values.tolist()[0]
-    latlon_point = ast.literal_eval(str(latlon))
-    point = Point(latlon_point[1], latlon_point[0])
-    for i in range(len(tif['latlon_sw'])):
-        sw = ast.literal_eval(str(tif['latlon_sw'][i]))
-        se = ast.literal_eval(str(tif['latlon_se'][i]))
-        ne = ast.literal_eval(str(tif['latlon_ne'][i]))
-        nw = ast.literal_eval(str(tif['latlon_nw'][i]))
-        polygon = Polygon(((sw[1], sw[0]), (se[1], se[0]), (ne[1], ne[0]), (nw[1], nw[0]), (sw[1], sw[0])))
-        if(polygon.contains(point)):
-            df['tiffile'] = [tif['file_name'][i]]
-            return df
-    return df
+
+    # Soms is een deel van het twitter bericht in de colom latlon terecht gekomen. 
+    # Probeer de waarde van latlon om te zetten naar een punt
+    # Als dit niet lukt is de waarde een deel van het twitter bericht
+    # Sla de gehele rij over, deze komt niet in de output
+    try:
+        latlon_point = ast.literal_eval(str(latlon))
+        point = Point(latlon_point[1], latlon_point[0])
+        for i in range(len(tif['latlon_sw'])):
+            sw = ast.literal_eval(str(tif['latlon_sw'][i]))
+            se = ast.literal_eval(str(tif['latlon_se'][i]))
+            ne = ast.literal_eval(str(tif['latlon_ne'][i]))
+            nw = ast.literal_eval(str(tif['latlon_nw'][i]))
+            polygon = Polygon(((sw[1], sw[0]), (se[1], se[0]), (ne[1], ne[0]), (nw[1], nw[0]), (sw[1], sw[0])))
+            if(polygon.contains(point)):
+                df['tiffile'] = [tif['file_name'][i]]
+                return df
+    except:
+        print("exception occured")
+    return 
 
 def tweets_append_tif(tweets,tif):
     num_cores = multiprocessing.cpu_count()
     print("num_cores: " + str(num_cores))
+    
     results = Parallel(n_jobs=num_cores)(delayed(add_filename)(tweets[i:i+1],tif,i,len(tweets.index)) for i in tweets.index)
+
     tweets_tif = pd.DataFrame({})
     for i in results:
         tweets_tif = tweets_tif.append(i)
-    #print(tweets_XY)
+
     return tweets_tif
 
 if __name__ == '__main__':
