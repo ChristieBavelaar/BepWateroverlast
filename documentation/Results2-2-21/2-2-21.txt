@@ -1,0 +1,46 @@
+Gedaan:
+    twitter input:
+        Probleem: Soms loopt een deel van het twitterbericht in de latlon cell dus dan kan er geen bijbehorende tif file gevonden worden.
+        Oplossing: Deze twitter berichten worden nu overgeslagen
+    Hoogte negatieve voorbeelden:
+        Probleem: negatieve voorbeelden hebben geen Hoogte
+        Oplossing: Er was wel een radar X en Y bekend.
+            Van elk radar vlak zijn de coordinaten van de hoekpunten bekend.
+            Voor elk negatief voorbeeld wordt een willekeurige coordinaat in het vlak gevonden
+            Voor alle negatieve voorbeelden wordt de bijbehorende tif-file gezocht.
+        Result:
+            Viel tegen
+
+Code problemen:
+    - Ondanks equalize toch meer negatieve dan positieve voorbeelden
+    - Sommige voorbeelden kan geen hoogte voor gevonden worden. 
+        (Deze wordt wel de pixel op de tif-file gevonden)
+    - Extra kolom: unnamed:6
+    - Warning in EqualizeFilterHeight
+        equalizeFilterHeight.py:70: SettingWithCopyWarning: 
+        A value is trying to be set on a copy of a slice from a DataFrame
+
+        See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+        neg_data['latlon'][i] = "("+str(randomPoint.y)+","+str(randomPoint.x)+")"
+        add tiff files to negative examples
+
+Sobol filter: wordt gebruikt voor edge detection
+    - Dit kan hoge en lage plekken ontdekken?
+    - Het laat niet zien of het een berg of een dal is?
+    - Geeft hoogte nog niet een attribuut
+    - Werkt dit niet alleen op kilometerschaal?
+
+Gaussion smoothing proberen?
+    - blur images, remove detail and noice.
+
+Onderzoek
+    - parameter tuning
+    - specifiek voor stedelijk gebied
+    - per 5 minuten in plaats van per dag
+    - Attribuut toevoegen van hoeveelheid regen vorig uur/vorige 5 uur
+    - 
+
+Huidige problemen:
+    - Mithril Werkt niet
+    - Git uitnodiging Thijs verlopen, geen email adress.
+    

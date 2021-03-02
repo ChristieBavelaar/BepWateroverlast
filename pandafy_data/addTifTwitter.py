@@ -63,5 +63,9 @@ if __name__ == '__main__':
         tweets= pd.read_csv('../../pandafied_data/pandafied_twitter_2017_12.csv')
         tif= pd.read_csv('../../pandafied_data/lat_lon_to_filename.csv')
         saveFile='twitter_sample_tiff.csv'
+    else:
+        tweets= pd.read_csv('../../pandafied_data/negatives.csv')
+        tif= pd.read_csv('../../pandafied_data/lat_lon_to_filename.csv')
+        saveFile='negativesTiff.csv'
     tweets_tif=tweets_append_tif(tweets=tweets, tif=tif)
     tweets_tif.to_csv('../../pandafied_data/'+saveFile, index=False)

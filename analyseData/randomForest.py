@@ -24,8 +24,8 @@ def randomForest(folder='../../pandafied_data/', inputFile='labeledSample.csv'):
     
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','labels', 'latlon', 'tiffile','Unnamed: 6' ])
-    #features = rainTweets_eq[['rain']]
+    #features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','labels', 'latlon', 'tiffile','Unnamed: 6' ])
+    features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
     feature_list = list(features.columns)
@@ -55,8 +55,8 @@ def randomForest(folder='../../pandafied_data/', inputFile='labeledSample.csv'):
         tree = rf.estimators_[5]# Export the image to a dot file
         outputFile = "tree"+str(test_index)+".dot"
         export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
-        (graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
-        graph.write_png('tree.png')
+        #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
+        #graph.write_png('tree.png')
         
     #output cross validation performance
     all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=9)
