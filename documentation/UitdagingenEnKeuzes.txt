@@ -39,3 +39,6 @@ Toekomst ideen:
     - hoeveelheid groen en bebouwing als parameter
     - riool capaciteit als parameter
     - woz waarde als parameters
+    
+GPS punten plotten
+	https://gpspointplotter.com/

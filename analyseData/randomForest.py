@@ -4,7 +4,7 @@ import sys
 import os
 
 #sklearn
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
 from sklearn import tree
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import StratifiedKFold
@@ -24,8 +24,8 @@ def randomForest(folder='../../pandafied_data/', inputFile='labeledSample.csv'):
     
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    #features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','labels', 'latlon', 'tiffile','Unnamed: 6' ])
-    features = rainTweets_eq[['rain']]
+    features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','labels', 'latlon', 'tiffile','Unnamed: 6' ])
+    #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
     feature_list = list(features.columns)
@@ -41,7 +41,7 @@ def randomForest(folder='../../pandafied_data/', inputFile='labeledSample.csv'):
         train_labels, test_labels = labels[train_index], labels[test_index]
         
         #train and test the decision tree
-        rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)        
+        rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
