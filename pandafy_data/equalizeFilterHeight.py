@@ -115,6 +115,7 @@ def addHeightKwartetSearch(data, radar):
             print("location",i, ": ", xPixel, yPixel)
         except:
             print("went wrong")
+            break
             #print(data['latlon'][i].values)
             #latlon[0], latlon[1] = data['latlon'][i].split(",")
             #xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
