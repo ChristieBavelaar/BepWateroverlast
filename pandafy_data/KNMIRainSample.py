@@ -107,6 +107,7 @@ def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',sav
     print(6)
     data.to_csv(save_name_rain,index=False)
     print(7)
+    return data
 
 if __name__ == '__main__':
     pandafy_h5()

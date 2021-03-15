@@ -115,12 +115,13 @@ def addHeightKwartetSearch(data, radar):
             print("location",i, ": ", xPixel, yPixel)
         except:
             print("went wrong")
-            break
+            
             #print(data['latlon'][i].values)
             #latlon[0], latlon[1] = data['latlon'][i].split(",")
             #xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
 
         # open tiff file
+        print("openfile")
         filepath = '../../AHN2_5m/' + data['tiffile'][i]
         dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
         width = dataset.RasterXSize
@@ -188,7 +189,7 @@ def combineDataFrames(folder='../../pandafied_data/', rainFile = "pandafied_h5_r
     #create sampleset with equal number of positive and negative examples
     #and filter out tweets without rain
     rainTweets_eq = equalize_data(data=rainTweets)
-    rainTweets_eq = filter_tweets(data=rainTweets_eq, threshold=0)
+    #rainTweets_eq = filter_tweets(data=rainTweets_eq, threshold=0)
     rainTweets_eq.to_csv("../../pandafied_data/raintweets_eq.csv", index=False)
 
     #find latlon coordiantes for negative examples

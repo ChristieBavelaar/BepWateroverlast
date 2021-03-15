@@ -41,6 +41,7 @@ def pandafy_twitter(file_name='../../Twitter_cred/full_arch_2007-2020.txt',save_
     
     pandas_data = pd.DataFrame(data_dict)
     pandas_data.to_csv(save_name,index=False)
+    return pandas_data
 
 
 if __name__ == '__main__':

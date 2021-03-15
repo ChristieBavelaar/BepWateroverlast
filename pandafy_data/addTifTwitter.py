@@ -1,4 +1,3 @@
-import pandas as pd 
 import sys
 import os
 
@@ -42,6 +41,7 @@ def add_filename(df,tif,idx,total):
     return 
 
 def tweets_append_tif(tweets,tif):
+    print("Find tif-files")
     num_cores = multiprocessing.cpu_count()
     print("num_cores: " + str(num_cores))
     

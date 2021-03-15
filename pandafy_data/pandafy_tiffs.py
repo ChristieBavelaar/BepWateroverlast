@@ -171,7 +171,7 @@ def pandafy_tiffs(data_folder='../../AHN2_5m/',save_name='../../pandafied_data/l
     parameters['print_results'] = True
     parameters['seed'] = 42
 
-    load_gdal_tiff(parameters,save_name,old_wkt=old_wkt)
+    return load_gdal_tiff(parameters,save_name,old_wkt=old_wkt)
 
 if __name__ == '__main__':
     if len(sys.argv) >= 2 and sys.argv[1] == 'grace':

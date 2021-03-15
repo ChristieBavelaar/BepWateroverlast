@@ -51,6 +51,7 @@ def pandafy_h5_make_radarXY(folder='../../KNMI/RADNL_CLIM____MFBSNL25_01H_201701
     radar = pd.DataFrame(radar)
     print(radar)
     radar.to_csv(save_name_radar,index=False)
+    return radar
 
 if __name__ == '__main__':
     if len(sys.argv) >= 2 and sys.argv[1] == 'grace':
