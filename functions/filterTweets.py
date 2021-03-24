@@ -1,6 +1,8 @@
 def filter_tweets(data, threshold):
     '''
-        filter all positive examples to have a rain > threshold
+        filter out:
+            all positive examples to have a rain > threshold
+            (redundant)
     '''
 
     print("Filter data")
@@ -17,3 +19,4 @@ def filter_tweets(data, threshold):
     data = data.append(neg_data)
     
     return data.reset_index(drop=True)
+

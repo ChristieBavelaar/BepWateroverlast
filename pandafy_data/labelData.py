@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np 
 from tqdm import tqdm
 
-def make_labels(data,label_on):
+def make_labels(data,label_on, saveFile):
     """
         Label the data set, empty examples in target column get label  0 all other 1.
         Parameters: 
@@ -23,6 +23,7 @@ def make_labels(data,label_on):
             num=1
         labels.append(num)
     data['labels'] = labels
+    data.to_csv(saveFile, index=False)
     return data
 
 
@@ -41,7 +42,4 @@ if __name__ == '__main__':
     print("Load data")
     rainTweets = pd.read_csv(folder + inputFile)
 
-    rainTweets = make_labels(rainTweets,'text')
-
-    print("Save to file")
-    rainTweets.to_csv(folder+saveFile, index=False)
+    rainTweets = make_labels(rainTweets,'text', folder+saveFile)

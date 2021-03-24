@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def combineDataFrames(tweets_XY, rain):
+def combineDataFrames(tweets_XY, rain, saveFile):
     """
         Merge twitter and rain data into one dataframe.
         Parameters: 
@@ -15,9 +15,11 @@ def combineDataFrames(tweets_XY, rain):
     #remove duplicates
     tweets_XY = tweets_XY.drop_duplicates()
     
+    rain['date'] = rain['date'].astype('object')
     print("Merge data")
     rainTweets = pd.merge(rain, tweets_XY, on=('radarX','radarY','date'), how='left')
 
+    rainTweets.to_csv(saveFile, index=False)
     return rainTweets
 
 if __name__ == '__main__':
@@ -37,7 +39,4 @@ if __name__ == '__main__':
     tweets_XY = pd.read_csv(folder + tweetFile)
     rain = pd.read_csv(folder + rainFile)
 
-    combinedData = combineDataFrames(tweets_XY, rain)
-
-    print("Save to file")
-    combinedData.to_csv(folder+saveFile, index=False)
+    combinedData = combineDataFrames(tweets_XY, rain, folder+saveFile)

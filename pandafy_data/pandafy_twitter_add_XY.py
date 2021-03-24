@@ -18,30 +18,33 @@ def give_radarXY(df,radar,idx,total):
             return df
     except:
         pass
-    latlon_point = ast.literal_eval(str(latlon))
-    point = Point(latlon_point[1], latlon_point[0])
-    for i in range(len(radar['latlon_sw'])):
-        sw = ast.literal_eval(str(radar['latlon_sw'][i]))
-        se = ast.literal_eval(str(radar['latlon_se'][i]))
-        ne = ast.literal_eval(str(radar['latlon_ne'][i]))
-        nw = ast.literal_eval(str(radar['latlon_nw'][i]))
-        polygon = Polygon(((sw[1], sw[0]), (se[1], se[0]), (ne[1], ne[0]), (nw[1], nw[0]), (sw[1], sw[0])))
-        if(polygon.contains(point)):
-            df['radarX'] = [radar['radarX'][i]]
-            df['radarY'] = [radar['radarY'][i]]
-            return df
-    df['radarX'] = [None]
-    df['radarY'] = [None]
+    try:
+        latlon_point = ast.literal_eval(str(latlon))
+        point = Point(latlon_point[1], latlon_point[0])
+        for i in range(len(radar['latlon_sw'])):
+            sw = ast.literal_eval(str(radar['latlon_sw'][i]))
+            se = ast.literal_eval(str(radar['latlon_se'][i]))
+            ne = ast.literal_eval(str(radar['latlon_ne'][i]))
+            nw = ast.literal_eval(str(radar['latlon_nw'][i]))
+            polygon = Polygon(((sw[1], sw[0]), (se[1], se[0]), (ne[1], ne[0]), (nw[1], nw[0]), (sw[1], sw[0])))
+            if(polygon.contains(point)):
+                df['radarX'] = [radar['radarX'][i]]
+                df['radarY'] = [radar['radarY'][i]]
+                return df
+    except:
+        df['radarX'] = [None]
+        df['radarY'] = [None]
     return df
 
-def tweets_append_XY(tweets,radar):
+def tweets_append_XY(tweets,radar, saveFile):
     num_cores = multiprocessing.cpu_count()
     print("num_cores: " + str(num_cores))
     results = Parallel(n_jobs=num_cores)(delayed(give_radarXY)(tweets[i:i+1],radar,i,len(tweets.index)) for i in tweets.index)
     tweets_XY = pd.DataFrame({})
     for i in results:
         tweets_XY = tweets_XY.append(i)
-    #print(tweets_XY)
+    
+    tweets_XY.to_csv(saveFile, index=False)
     return tweets_XY
 
 def pandafy_twitter_add_XY():
@@ -64,7 +67,7 @@ def pandafy_twitter_2007_2020_add_XY(tweets_file_name='../../pandafied_data/pand
     '''
     tweets = pd.read_csv(tweets_file_name)
     radar = pd.read_csv(radar_file_name)
-    tweets_XY = tweets_append_XY(tweets,radar)
+    tweets_XY = tweets_append_XY(tweets,radar,save_name)
     tweets_XY.to_csv(save_name,index=False)
 
 if __name__ == '__main__':

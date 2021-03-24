@@ -13,7 +13,7 @@ from addTifTwitter import tweets_append_tif
 sys.path.append(os.path.realpath('../functions/'))
 from findPixel import kwartetSearch
 
-def addHeightKwartetSearch(data):
+def addHeightKwartetSearch(data, saveFile):
     print("Add height")
 
     print("Load radar data")
@@ -36,9 +36,9 @@ def addHeightKwartetSearch(data):
             xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
         except:
             print("An exception occured")
+            
 
         # open tiff file
-        
         filepath = '../../AHN2_5m/' + data['tiffile'][i]
         dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
         width = dataset.RasterXSize
@@ -89,6 +89,8 @@ def addHeightKwartetSearch(data):
     # join the height data with existing data and save
     data=data.join(dfOfArr)
 
+    data.to_csv(saveFile, index=False)
+
     return data
 
 if __name__ == '__main__':
@@ -105,6 +107,4 @@ if __name__ == '__main__':
     print("load data")
     inputData = pd.read_csv(folder + inputFile)
     
-    outputData = addHeightKwartetSearch(inputData)
-
-    outputData.to_csv(folder+saveFile, index=False)
+    outputData = addHeightKwartetSearch(inputData, folder+saveFile)

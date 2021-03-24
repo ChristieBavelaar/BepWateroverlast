@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def seperateData(data):
+def seperateData(data, saveFilePos, saveFileNeg):
     """
         Seperate a labeled dataset into positive and negative examples.
         Parameters:
@@ -12,6 +12,8 @@ def seperateData(data):
     pos_data = data[data.labels == 1]
     neg_data = data[data.labels == 0]
 
+    pos_data.to_csv(saveFilePos, index = False)
+    neg_data.to_csv(saveFileNeg, index=False)
     return pos_data, neg_data
 
 if __name__ == '__main__':
@@ -30,8 +32,4 @@ if __name__ == '__main__':
     print("Load data")
     rainTweets_eq = pd.read_csv(folder + inputFile)
 
-    posData, negData = seperateData(rainTweets_eq) 
-
-    print("Save to files")
-    posData.to_csv(folder+saveFilePos, index=False)
-    negData.to_csv(folder+saveFileNeg, index=False)
+    posData, negData = seperateData(rainTweets_eq, folder+saveFilePos, folder+saveFileNeg) 

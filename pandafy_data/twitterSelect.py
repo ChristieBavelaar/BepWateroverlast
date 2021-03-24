@@ -1,22 +1,24 @@
 import pandas as pd
 
-def selectTweets(tweets):    
+def selectTweets(tweets, savefile):    
     tweets['date'] = tweets['date'].astype(str)
     tweets = tweets[~tweets['date'].str.contains('2019')]
     tweets = tweets[~tweets['date'].str.contains('2018')]
-    tweets.to_csv(savefile, index=False)
-
-    print(tweets)
-
-def selectSampleTweets(tweets):
-    tweets = pd.read_csv(tweetfile)
     
+    tweets = tweets[tweets['radarX'].notnull()]
+    tweets = tweets.reset_index(drop=True)
+
+    tweets.to_csv(savefile, index=False)
+    return tweets
+
+def selectSampleTweets(tweets, savefile):
     tweets['date'] = tweets['date'].astype(str)
     tweets = tweets[tweets['date'].str.contains('201712')]
-
+    tweets = tweets[tweets['radarX'].notnull()]
+    tweets = tweets.reset_index(drop=True)
+    
     tweets.to_csv(savefile, index=False)
-
-    print(tweets)
+    return tweets
 
 if __name__ == '__main__':
     """ 
@@ -30,10 +32,9 @@ if __name__ == '__main__':
     sample = input("Sample? y/n \n")
     if sample == "y":
         savefile = "pandafied_twitter_2017_12.csv"
-        output=selectSampleTweets(tweets)
+        output=selectSampleTweets(tweets, folder+savefile)
     elif sample == "n":
         savefile = 'twitter_2010-2017_XY.csv'
-        output=selectTweets(tweets)
+        output=selectTweets(tweets, folder+savefile)
 
-    output.to_csv(folder+savefile, index=False)
 

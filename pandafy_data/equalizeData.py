@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def equalize_data(data):
+def equalize_data(data, saveFile):
     '''
         Since there are orders of magnitude more negative samples than positive samples, this function creates an equal amount of positive and negative samples, by random sampling from the negative samples.
         Parameters: 
@@ -23,7 +23,9 @@ def equalize_data(data):
     data = data.append(neg_data.sample(n=len(pos_data),replace=False))
     
     print("     Total: " + str(len(data)))
-    return data.reset_index(drop=True)
+    data = data.reset_index(drop=True)
+    data.to_csv(saveFile, index=False)
+    return data
 
 if __name__ == '__main__':
     sample = input("Sample? y/n")
@@ -39,7 +41,4 @@ if __name__ == '__main__':
     print("Load data")
     rainTweets = pd.read_csv(folder + inputFile)
 
-    rainTweets_eq = equalize_data(data=rainTweets)
-
-    print("Save to file")
-    rainTweets_eq.to_csv(folder+saveFile, index=False)
+    rainTweets_eq = equalize_data(data=rainTweets, saveFile=folder+saveFile)

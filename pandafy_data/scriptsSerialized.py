@@ -1,9 +1,12 @@
+import pandas as pd
+import sys
 from pandafy_tiffs import pandafy_tiffs
 from pandafy_twitter import pandafy_twitter
 from pandafy_h5_make_radarXY import pandafy_h5_make_radarXY
 from pandafy_twitter_add_XY import tweets_append_XY
 from twitterSelect import selectTweets, selectSampleTweets
 from KNMIRainSample import pandafy_h5
+from pandafy_KNMI_rainFull import pandafy_h5_full
 from addTifTwitter import tweets_append_tif
 from combineData import combineDataFrames
 from labelData import make_labels
@@ -15,10 +18,7 @@ from addHeight import addHeightKwartetSearch
 from recombinePosNeg import recombinePosNeg
 
 if __name__ == '__main__':
-    folder = "../../pandafied_data/"
-    savefile = "labeledSample_eq.csv"
-
-    print("From which step would like to start? (step 1-4 are not dependent) \n \
+    """From which step would like to start? (step 1-4 are not dependent) \n \
     1 give tiff files coordinates \n \
     2 pandafy twitter data \n \
     3 give radar XY coordinates \n \
@@ -29,70 +29,152 @@ if __name__ == '__main__':
     8 give each tweet a rain attribute \n \
     9 label the dataset \n \
     10 create equal number of positive and negative examples \n \
-    11 seperate the dataset into positive and negative examples \n \
-    12 filter positive examples below a rain threshold \n \
-    13 give negative examples latlon and tif file \n \
-    14 recombine positive and negative examples \n \
-    15 add height attributes to examples\n \
-    16 equalize the data again")
+    (seperate the dataset into positive and negative examples) \n \
+    11 filter positive examples below a rain threshold \n \
+    12 give negative examples latlon and tif file \n \
+    (recombine positive and negative examples) \n \
+    13 add height attributes to examples\n \
+    14 equalize the data again 
+    sys.argv[1] = sample
+    sys.argv[2] = start"""
+    folder = "../../pandafied_data/"
+    savefile = "labeledSample_eq.csv"
 
-    startPoint = input("Give a starting number.")
-    if(startPoint < 5):
-        #1 give tiff files coordinates
-        do1 = input("Do you want to perform step 1? y/n")
-        if(do1 =="y" ):
-            latlonTif = pandafy_tiffs()
-        else:
-            latlonTif = pd.read_csv(folder+"lat_lon_to_filename.csv")
-        
-        #2 pandafy twitter data
-        do2 = input("Do you want to perform step 2? y/n")
-        if(do2 =="y"):
-            tweets = pandafy_twitter()
-        else:
-            tweets = pd.read_csv(folder+"pandafied_twitter_2007-2020.csv")
 
-        #3 give radar XY coordinates
-        do3 = input("Do you want to perform step 3? y/n")
-        if(do3 =="y"):
-            radar = pandafy_h5_make_radarXY()
-        else:
-            radar = pd.read_csv(folder+"pandafied_h5_radar.csv")
-
-        sample = input("Do you want to do a sample run?")
-        do4 = input("Do you want to perform step 4? y/n")
-        #4 give tweets a radar XY
-        if(do3 =="y"):
-            tweetsXY = tweets_append_XY(tweets,radar)
-        else:
-            tweetsXY = pd.read_csv(folder+"pandafied_twitter_2007-2020_XY.csv")
-
-    #5 select tweets that apply to rain data
-    if(startPoint < 6):
-        tweetsXY = selectSampleTweets(tweetsXY)
+    sample = sys.argv[1]
+    start = int(sys.argv[2])
+    
+    if(sample == 'y'):
+        samplename = 'Sample'
     else:
-        tweet
-    #6 pandafy twitter data
-    rain = pandafy_h5()
-    #7 give each tweet a tif file
-    tweetsXYTif = tweets_append_tif(tweetsXY, latlonTif)
-    #8 give each tweet a rain attribute
-    combinedData = combineDataFrames(tweetsXYTif, rain)
-    #9 label the dataset
-    labeledData = make_labels(combineData, 'text')
-    #10 create equal number of positive and negative examples
-    equalizedData = equalize_data(labeledData)
-    #11 seperate the dataset into positive and negative examples
-    posData, negData = seperateData(equalizedData)
-    #12 filter positive examples below a rain threshold
-    filteredTweets = filter_tweets(posData)
-    #13 give negative examples latlon and tif file
-    latlonTifNeg = addLatlonNegData(negData)
-    #14 recombine positive and negative examples
-    recombinedData = recombinePosNeg(filteredTweets, latlonTifNeg)
-    #15 add height attributes to examples
-    heightData = addHeightKwartetSearch(recombinedData)
-    #16 equalize the data again
-    sampleData = equalize_data(heightData)
+        samplename = ''
+    
+    # Files that have to be accessed by multiple steps
+    if start <= 4 or start == 6:
+        latlonTif = pd.read_csv(folder+"lat_lon_to_filename.csv") #5
 
-    sampleData.to_csv(folder+saveFile, index=False)
+    if start <= 6 or start == 8:
+        if sample == 'y':
+            rain = pd.read_csv(folder+"pandafied_h5_rain_2017_12.csv") #7
+        else:
+            rain = pd.read_csv(folder+"pandafied_h5_rain_2007-2020.csv")
+
+    if start == 1 or start == 3:
+        radar = pd.read_csv(folder+"pandafied_h5_radar.csv") #2
+
+    if start == 2 or start == 3:
+        tweets = pd.read_csv(folder+"pandafied_twitter_2007-2020.csv") #1
+        future = 3
+
+    if start == 5 or start == 6:
+        if sample == 'y':
+            data = pd.read_csv(folder+"pandafied_twitter_2017_12.csv")
+        else:
+            data = pd.read_csv(folder+"twitter_2010-2017_XY.csv") #4
+        future = 6
+
+    if start == 7 or start == 8:
+        if sample == 'y':
+            data = pd.read_csv(folder+"twitter_sample_tiff.csv") #6
+        else:
+            data = pd.read_csv(folder+"twitter_2010-2017_XY_tiff.csv")
+        future = 8
+
+    if start == 11 or start == 12:
+        posData = pd.read_csv(folder+"posData" + samplename+ ".csv") #10
+        negData = pd.read_csv(folder+"negData" + samplename +".csv") #10
+
+    # Files only to be accessed by one step
+    if start == 1:
+        tweets = pandafy_twitter() #1
+        future = 3
+    
+    if start == 2:
+        radar = pandafy_h5_make_radarXY() #2
+
+    if start == 4:
+        data = pd.read_csv(folder+"pandafied_twitter_2007-2020_XY.csv") #3
+        future = 4
+    
+    if start == 5:
+        latlonTif = pandafy_tiffs() #5
+    
+    if start == 7:
+        if sample == 'y':
+            rain = pandafy_h5()
+        else:
+            rain = pandafy_h5_full()
+    
+    if start == 9:
+        data = pd.read_csv(folder+"combinedData"+samplename +".csv") #8
+        future = 9
+    
+    if start == 10:
+        data = pd.read_csv(folder+"labeledData"+samplename +".csv") #9
+        future = 10
+    
+    if start == 11:
+        negData = pd.read_csv(folder+'latlonTifNeg'+samplename+'.csv')
+        future = 11
+    
+    if start == 12:
+        posData = pd.read_csv(folder+'filteredTweets'+samplename+'.csv')
+        future = 12
+    
+    if start == 13:
+        data = pd.read_csv(folder+"recombinedData" +samplename +".csv")
+        future = 14
+    
+    if start == 14:
+        data = pd.read_csv(folder+"heightData"+samplename+".csv") #15
+        future = 16
+    
+    # perform al steps in sequence
+    if future == 3:
+        savename = 'pandafied_twitter_2007-2020_XY.csv'
+        data = tweets_append_XY(tweets,radar, folder+savename)
+        future = 4
+
+    if future == 4:
+        if sample == 'y':
+            data = selectSampleTweets(data, folder+'pandafied_twitter_2017_12.csv')
+        else:
+            data = selectTweets(data, folder + 'twitter_2010-2017_XY.csv')
+        future = 6
+
+    if future == 6:
+        if sample == 'y':
+            savename = 'twitter_sample_tiff.csv'
+        else:
+            savename = 'twitter_2010-2017_XY_tiff.csv'
+        data = tweets_append_tif(data, latlonTif, folder+savename)
+        future = 8
+
+    if future == 8:
+        data = combineDataFrames(data, rain, folder+'combinedData'+samplename+'.csv')
+        future = 9
+
+    if future == 9:
+        data = make_labels(data, 'text', folder+'labeledData'+samplename+'.csv')
+        future = 10
+    
+    if future == 10:
+        data = equalize_data(data, folder+'equalizedData'+samplename+'.csv')
+        posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
+        posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
+        negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
+        data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
+        future =13
+    
+    if future == 11:
+        posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
+        future = 13
+    if future == 12:
+        negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
+        future = 13
+    if future == 13:
+        data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
+        data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv')
+        future = 14
+    if future == 14:
+        data = equalize_data(data, folder+'finalData'+samplename+'.csv')

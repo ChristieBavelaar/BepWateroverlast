@@ -40,8 +40,9 @@ def add_filename(df,tif,idx,total):
         print("exception occured")
     return 
 
-def tweets_append_tif(tweets,tif):
+def tweets_append_tif(tweets,tif, saveFile):
     print("Find tif-files")
+    
     num_cores = multiprocessing.cpu_count()
     print("num_cores: " + str(num_cores))
     
@@ -51,6 +52,7 @@ def tweets_append_tif(tweets,tif):
     for i in results:
         tweets_tif = tweets_tif.append(i)
 
+    tweets_tif.to_csv(saveFile, index=False)
     return tweets_tif
 
 if __name__ == '__main__':
@@ -67,5 +69,4 @@ if __name__ == '__main__':
         tweets= pd.read_csv('../../pandafied_data/negatives.csv')
         tif= pd.read_csv('../../pandafied_data/lat_lon_to_filename.csv')
         saveFile='negativesTiff.csv'
-    tweets_tif=tweets_append_tif(tweets=tweets, tif=tif)
-    tweets_tif.to_csv('../../pandafied_data/'+saveFile, index=False)
+    tweets_tif=tweets_append_tif(tweets=tweets, tif=tif, saveFile=folder+saveFile)

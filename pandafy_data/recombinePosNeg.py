@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def recombinePosNeg(pos_data, neg_data):
+def recombinePosNeg(pos_data, neg_data, saveFile):
     """
         Recombine the filtered tweets and negative examples with coordinates.
         Parameters: 
@@ -10,6 +10,7 @@ def recombinePosNeg(pos_data, neg_data):
     """
     print("Combine positive and negative data")
     data = pos_data.append(neg_data, ignore_index = True)
+    data.to_csv(saveFile, index=False)
     return data
 
 if __name__ == '__main__':
@@ -29,6 +30,6 @@ if __name__ == '__main__':
     pos_data = pd.read_csv(folder + posFile)
     neg_data = pd.read_csv(folder + negFile)
     
-    outputData = recombinePosNeg(pos_data,neg_data)
+    outputData = recombinePosNeg(pos_data,neg_data, folder+saveFile)
 
     outputData.to_csv(folder+saveFile, index=False)
