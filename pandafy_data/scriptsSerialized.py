@@ -37,7 +37,7 @@ if __name__ == '__main__':
     14 equalize the data again 
     sys.argv[1] = sample
     sys.argv[2] = start"""
-    folder = "../../pandafied_data/"
+    folder = "/home/s2155435/pandafied_data/"
     savefile = "labeledSample_eq.csv"
 
 
