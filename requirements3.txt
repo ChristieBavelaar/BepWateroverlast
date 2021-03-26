@@ -1,0 +1,16 @@
+GDAL
+pyproj
+h5py
+joblib
+plotly
+numpy
+pytz
+pandas
+Shapely
+tqdm
+geopandas
+matplotlib
+osgeo
+pydot
+scikit_learn
+scipy
