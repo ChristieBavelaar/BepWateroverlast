@@ -10,7 +10,7 @@ Shapely
 tqdm
 geopandas
 matplotlib
-osgeo
+#osgeo
 pydot
-scikit_learn
+#dscikit_learn
 scipy
