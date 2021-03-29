@@ -8,3 +8,7 @@ initialize shell:
 	conda init bash
 reload shell:
 	source ~/.bashrc
+submit job:
+	sbatch script.sh (vergeet niet eerst chmod +x)
+view jobs:
+	 squeue --start -u <username>

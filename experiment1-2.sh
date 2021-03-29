@@ -2,7 +2,7 @@
 #SBATCH --job-name=experiment1_full
 #SBATCH --partition=cpu-short
 #SBATCH -c 1
-#SBATCH --time=0:30:00
+#SBATCH --time=8:00:00
 #SBATCH --mem-per-cpu=16gb
 
 export PYTHONPATH=/home/s2155435/bep1/
