@@ -10,7 +10,7 @@ Shapely
 tqdm
 geopandas
 matplotlib
-#osgeo
+#osgeo:  conda install -c conda-forge gdal 
 pydot
-#dscikit_learn
+#scikit_learn: conda install -c conda-forge scikit-learn 
 scipy

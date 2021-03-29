@@ -1,0 +1,10 @@
+login alice:
+	ssh alice1 (of ssh alice2)
+show available modules:
+	module -d avail
+load conda:
+	module load Miniconda3/4.7.10
+initialize shell:
+	conda init bash
+reload shell:
+	source ~/.bashrc
