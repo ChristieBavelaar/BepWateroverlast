@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --job-name=experiment1_full
-#SBATCH --partition=cpu-short
+#SBATCH --partition=cpu-medium
 #SBATCH -c 1
 #SBATCH --time=8:00:00
 #SBATCH --mem-per-cpu=16gb
