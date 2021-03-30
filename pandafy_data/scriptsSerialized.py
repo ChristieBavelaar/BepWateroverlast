@@ -50,41 +50,52 @@ if __name__ == '__main__':
         samplename = ''
     
     # Files that have to be accessed by multiple steps
-    if start <= 4 or start == 6:
-        latlonTif = pd.read_csv(folder+"lat_lon_to_filename.csv") #5
+    if start>0:
+        if start <= 4 or start == 6:
+            latlonTif = pd.read_csv(folder+"lat_lon_to_filename.csv") #5
 
-    if start <= 6 or start == 8:
-        if sample == 'y':
-            rain = pd.read_csv(folder+"pandafied_h5_rain_2017_12.csv") #7
-        else:
-            rain = pd.read_csv(folder+"pandafied_h5_rain_2007-2020.csv")
+        if start <= 6 or start == 8:
+            if sample == 'y':
+                rain = pd.read_csv(folder+"pandafied_h5_rain_2017_12.csv") #7
+            else:
+                rain = pd.read_csv(folder+"pandafied_h5_rain_2007-2020.csv")
 
-    if start == 1 or start == 3:
-        radar = pd.read_csv(folder+"pandafied_h5_radar.csv") #2
+        if start == 1 or start == 3:
+            radar = pd.read_csv(folder+"pandafied_h5_radar.csv") #2
 
-    if start == 2 or start == 3:
-        tweets = pd.read_csv(folder+"pandafied_twitter_2007-2020.csv") #1
-        future = 3
+        if start == 2 or start == 3:
+            tweets = pd.read_csv(folder+"pandafied_twitter_2007-2020.csv") #1
+            future = 3
 
-    if start == 5 or start == 6:
-        if sample == 'y':
-            data = pd.read_csv(folder+"pandafied_twitter_2017_12.csv")
-        else:
-            data = pd.read_csv(folder+"twitter_2010-2017_XY.csv") #4
-        future = 6
+        if start == 5 or start == 6:
+            if sample == 'y':
+                data = pd.read_csv(folder+"pandafied_twitter_2017_12.csv")
+            else:
+                data = pd.read_csv(folder+"twitter_2010-2017_XY.csv") #4
+            future = 6
 
-    if start == 7 or start == 8:
-        if sample == 'y':
-            data = pd.read_csv(folder+"twitter_sample_tiff.csv") #6
-        else:
-            data = pd.read_csv(folder+"twitter_2010-2017_XY_tiff.csv")
-        future = 8
+        if start == 7 or start == 8:
+            if sample == 'y':
+                data = pd.read_csv(folder+"twitter_sample_tiff.csv") #6
+            else:
+                data = pd.read_csv(folder+"twitter_2010-2017_XY_tiff.csv")
+            future = 8
 
-    if start == 11 or start == 12:
-        posData = pd.read_csv(folder+"posData" + samplename+ ".csv") #10
-        negData = pd.read_csv(folder+"negData" + samplename +".csv") #10
+        if start == 11 or start == 12:
+            posData = pd.read_csv(folder+"posData" + samplename+ ".csv") #10
+            negData = pd.read_csv(folder+"negData" + samplename +".csv") #10
 
     # Files only to be accessed by one step
+    if start == 0:
+        tweets = pandafy_twitter()
+        radar = pandafy_h5_make_radarXY()
+        latlonTif = pandafy_tiffs() #5
+        if sample == 'y':
+            rain = pandafy_h5()
+        else:
+            rain = pandafy_h5_full()
+        future = 3
+
     if start == 1:
         tweets = pandafy_twitter() #1
         future = 3
