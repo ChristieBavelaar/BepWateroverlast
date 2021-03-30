@@ -1,10 +1,12 @@
 import sys
 import os
 
-#self-made functions
-sys.path.append(os.path.realpath('../tifFiles/'))
-from getTif import determineTifFile
-sys.path.append(os.path.realpath('../pandafy_data/'))
+# #self-made functions
+# #sys.path.append('/home/s2155435/bep1/tifFiles/')
+# sys.path.append('/home/christie/Bep/bep1/tifFiles/')
+# from getTif import determineTifFile
+# sys.path.append('/home/christie/Bep/bep1/pandafy_data/')
+# #sys.path.append('/home/s2155435/bep1/pandafy_data/')
 
 import pandas as pd
 import numpy as np
@@ -14,6 +16,18 @@ import ast
 from joblib import Parallel, delayed
 import multiprocessing
 import copy
+
+def determineTifFile(lat, lon, folder='../../pandafied_data/', file="lat_lon_to_filename.csv"):
+    data=pd.read_csv(folder + file)
+    point = Point(lon,lat)
+    for i in range(len(data['latlon_sw'])):
+        sw = ast.literal_eval(str(data['latlon_sw'][i]))
+        se = ast.literal_eval(str(data['latlon_se'][i]))
+        ne = ast.literal_eval(str(data['latlon_ne'][i]))
+        nw = ast.literal_eval(str(data['latlon_nw'][i]))
+        polygon = Polygon(((sw[1], sw[0]), (se[1], se[0]), (ne[1], ne[0]), (nw[1], nw[0]), (sw[1], sw[0])))
+        if(polygon.contains(point)):
+            return data['file_name'][i]
 
 def add_filename(df,tif,idx,total):
     df = copy.deepcopy(df)
@@ -57,6 +71,7 @@ def tweets_append_tif(tweets,tif, saveFile):
 
 if __name__ == '__main__':
     default = input("Sample? y/n \n")
+    folder ="../../pandafied_data/"
     if(default == "n"):
         saveFile= "twitter_2010-2017_XY_tiff.csv"
         tweets= pd.read_csv("../../pandafied_data/twitter_2010-2017_XY.csv")
