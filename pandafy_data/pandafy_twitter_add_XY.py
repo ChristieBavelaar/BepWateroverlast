@@ -61,7 +61,7 @@ def pandafy_curated_twitter_add_XY():
     tweets_XY = tweets_append_XY(tweets,radar)
     tweets_XY.to_csv('../../pandafied_data/curated_twitter_XY.csv',index=False)
 
-def pandafy_twitter_2007_2020_add_XY(tweets_file_name='../../pandafied_data/pandafied_twitter_2007-2020.csv',radar_file_name='../../pandafied_data/pandafied_h5_radar.csv',save_name='../../pandafied_data/pandafied_twitter_2007-2020_XY.csv'):
+def pandafy_twitter_2007_2020_add_XY(tweets_file_name='/home/s2155435/pandafied_data/pandafied_twitter_2007-2020.csv',radar_file_name='/home/s2155435/pandafied_data/pandafied_h5_radar.csv',save_name='/home/s2155435/pandafied_data/pandafied_twitter_2007-2020_XY.csv'):
     '''
         This function reads the longitude latitude coordinate of each tweet and checks in which radar pixel it lies.
     '''

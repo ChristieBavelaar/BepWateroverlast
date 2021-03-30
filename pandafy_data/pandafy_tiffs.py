@@ -150,7 +150,7 @@ def plot_tiffs(lon_box,lat_box,lon_point,lat_point,file_name):
                                    
     fig.write_html('../../Twitter_cred/tweets.html', auto_open=True)
 
-def pandafy_tiffs(data_folder='/data/s2155435/AHN2_5m/',save_name='../../pandafied_data/lat_lon_to_filename.csv',old_wkt=None):
+def pandafy_tiffs(data_folder='/data/s2155435/AHN2_5m/',save_name='/home/s2155435/pandafied_data/lat_lon_to_filename.csv',old_wkt=None):
     '''
         This function maps .tif files in data_folder to their longitude latitude corner points
     '''

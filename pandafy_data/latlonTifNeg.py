@@ -14,7 +14,7 @@ def addLatlonNegData(neg_data, saveFile):
         Output: pandas dataframe
     """
     print("Load data")
-    folder = '../../pandafied_data/'
+    folder = '/home/s2155435/pandafied_data/'
     tif= pd.read_csv(folder+'lat_lon_to_filename.csv')
     radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
     
