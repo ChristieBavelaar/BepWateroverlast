@@ -177,4 +177,4 @@ if __name__ == '__main__':
     if len(sys.argv) >= 2 and sys.argv[1] == 'grace':
         pandafy_tiffs(data_folder='/scratch/lamers/AHN2_5m/')
     else:
-        pandafy_tiffs()
+        pandafy_tiffs(data_folder = "../../AHN2_5m/", save_name="../../pandafied_data/lat_lon_to_filename.csv")
