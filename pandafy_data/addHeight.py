@@ -10,8 +10,55 @@ from shapely.geometry import Polygon,Point
 import random
 from addTifTwitter import tweets_append_tif
 
-sys.path.append(os.path.realpath('../functions/'))
-from findPixel import kwartetSearch
+# sys.path.append(os.path.realpath('../functions/'))
+# from findPixel import kwartetSearch
+def fillKwartet(quarter):
+    lX = quarter[0]
+    rX = quarter[1]
+    uY = quarter[2]
+    lY = quarter[3]
+
+    mX = (lX+rX)/2
+    mY = (lY+uY)/2
+    return [[lX, mX, uY, mY], [mX, rX, uY, mY], [lX, mX, mY, lY], [mX, rX, mY, lY]]
+
+def findQuater(kwartet, lat, lon, gt, transform):
+    bestDist = math.inf
+    bestI = -1
+    for i in range(4):
+        mX = (kwartet[i][0] + kwartet[i][1]) / 2
+        mY = (kwartet[i][2] + kwartet[i][3]) / 2
+        
+        coordinates = getCoords(mX, mY, gt, transform)
+        currentDist = math.dist([coordinates[0],coordinates[1]], [lat,lon])
+        if currentDist < bestDist:
+            bestDist = currentDist
+            bestI = i
+    return kwartet[bestI]
+
+def kwartetSearch(folder='../../AHN2_5m/', filename='ahn2_5_38an2.tif', lat=52.016917, lon=4.713011):
+    #open file
+    ds = gdal.Open(folder + filename)
+    width = ds.RasterXSize
+    height = ds.RasterYSize
+    gt = ds.GetGeoTransform()
+    transform = give_transform(ds,old_wkt=None) 
+    #print("width ", width)
+    #print("height ", height)
+    rX = width
+    uY = height
+    lX = 1
+    lY = 1
+    quarter = [1,width, height, 1]
+    
+
+    while(quarter[1] - quarter[0] > 0.5 or quarter[2] - quarter[3] > 0.5):
+        kwartet = fillKwartet(quarter)
+        quarter = findQuater(kwartet, lat, lon, gt, transform)
+        #print(quarter)
+        #kwartet = fillKwartet(quarter)
+    
+    return int(quarter[0]+0.5), int(quarter[3]+0.5)
 
 def addHeightKwartetSearch(data, saveFile):
     print("Add height")
