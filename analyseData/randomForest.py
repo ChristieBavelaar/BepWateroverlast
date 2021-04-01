@@ -14,7 +14,7 @@ from sklearn import metrics
 def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.csv'):
     resultFile = open ("/home/s2155435/bep1/analyseData/results/resultRFAlice.txt", "w+")
     #load data
-    rainTweets_eq = pd.read_csv(folder + sampleFile)
+    rainTweets_eq = pd.read_csv(folder + inputFile)
     print("data loaded")
     #print(rainTweets_eq)
     #rainTweets_eq = rainTweets_eq.dropna(subset=['0'])
