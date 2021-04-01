@@ -11,8 +11,8 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
-def randomForest(folder='../../pandafied_data/', inputFile='finalData.csv'):
-    resultFile = open ("./results/resultRF.txt", "w+")
+def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.csv'):
+    resultFile = open ("/home/s2155435/bep1/analyseData/results/resultRFAlice.txt", "w+")
     #load data
     rainTweets_eq = pd.read_csv(folder + sampleFile)
     print("data loaded")
@@ -63,7 +63,7 @@ def randomForest(folder='../../pandafied_data/', inputFile='finalData.csv'):
         from sklearn.tree import export_graphviz
         import pydot# Pull out one tree from the forest
         tree = rf.estimators_[5]# Export the image to a dot file
-        outputFile = "./results/tree"+str(test_index)+".dot"
+        outputFile = "/home/s2155435/bep1/analyseData/results/tree"+str(test_index)+".dot"
         export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
         #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
         #graph.write_png('tree.png')
