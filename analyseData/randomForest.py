@@ -41,7 +41,7 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
     #k-fold cross validation
     skf = StratifiedKFold(n_splits=10)
     mape = []
-    int treeNumber = 0
+    treeNumber = 0
     for train_index, test_index in skf.split(features, labels):
         #print("Train: ", train_index, " Test: ", test_index)
         train_features, test_features = features[train_index], features[test_index]
