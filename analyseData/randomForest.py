@@ -41,6 +41,7 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
     #k-fold cross validation
     skf = StratifiedKFold(n_splits=10)
     mape = []
+    int treeNumber = 0
     for train_index, test_index in skf.split(features, labels):
         #print("Train: ", train_index, " Test: ", test_index)
         train_features, test_features = features[train_index], features[test_index]
@@ -63,10 +64,11 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
         from sklearn.tree import export_graphviz
         import pydot# Pull out one tree from the forest
         tree = rf.estimators_[5]# Export the image to a dot file
-        outputFile = "/home/s2155435/bep1/analyseData/results/tree"+str(test_index)+".dot"
+        outputFile = "/home/s2155435/bep1/analyseData/results/tree"+str(treeNumber)+".dot"
         export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
         #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
         #graph.write_png('tree.png')
+        treeNumber+=1
         
     #output cross validation performance
     all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=9)
