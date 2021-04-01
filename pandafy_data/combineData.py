@@ -15,10 +15,15 @@ def combineDataFrames(tweets_XY, rain, saveFile):
     #remove duplicates
     tweets_XY = tweets_XY.drop_duplicates()
     
+    rain = rain[rain['date'].notnull()]
     rain['date'] = rain['date'].astype('object')
+    rain = rain.reset_index(drop=True)
+
     print("Merge data")
     rainTweets = pd.merge(rain, tweets_XY, on=('radarX','radarY','date'), how='left')
-
+    rainTweets=rainTweets[rainTweets['rain'].notnull()]
+    rain = rain.reset_index(drop=True)
+    
     rainTweets.to_csv(saveFile, index=False)
     return rainTweets
 
