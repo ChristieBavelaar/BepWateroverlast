@@ -71,10 +71,10 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
         treeNumber+=1
         
     #output cross validation performance
-    all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=9)
+    #all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=9)
 
-    resultFile.write(all_accuracies)
-    resultFile.close()
+    #resultFile.write(all_accuracies)
+    #resultFile.close()
     #print(cross_val_score(estimator=rf, X=features, y=labels, cv=skf, scoring="accuracy"))
    
 if __name__ == '__main__':

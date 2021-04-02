@@ -134,7 +134,7 @@ if __name__ == '__main__':
     
     if start == 13:
         data = pd.read_csv(folder+"recombinedData" +samplename +".csv")
-        future = 14
+        future = 13
     
     if start == 14:
         data = pd.read_csv(folder+"heightData"+samplename+".csv") #15
@@ -174,17 +174,21 @@ if __name__ == '__main__':
         posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
         posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
         negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
-        data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
-        future =13
+        future =12.5
     
     if future == 11:
         posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
         future = 13
+
     if future == 12:
         negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
-        future = 13
-    if future == 13:
+        future = 12.5
+
+    if future == 12.5:
         data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
+        future = 13
+    
+    if future == 13:
         data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv')
         future = 14
     if future == 14:
