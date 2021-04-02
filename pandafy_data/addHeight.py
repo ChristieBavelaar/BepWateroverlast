@@ -123,7 +123,7 @@ def addHeightKwartetSearch(data, saveFile):
             latlon = ast.literal_eval(str(data['latlon'][i]))
             #find pixel
             xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
-            print(1)
+            
             # open tiff file
             filepath = '/data/s2155435/AHN2_5m/' + data['tiffile'][i]
             dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
