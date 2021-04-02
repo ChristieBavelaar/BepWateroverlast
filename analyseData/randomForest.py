@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np 
 import sys
 import os
-
+from numpy import savetxt
 #sklearn
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import tree
@@ -18,26 +18,27 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
     print("data loaded")
     #print(rainTweets_eq)
     #rainTweets_eq = rainTweets_eq.dropna(subset=['0'])
-    print(rainTweets_eq)
     #print(rainTweets_eq)
     #print(rainTweets_eq.columns)
     #set labels
-    labels = np.array(rainTweets_eq['labels'])
+    
 
     cols = [col for col in rainTweets_eq.columns if 'Unnamed' not in col]
     rainTweets_eq = rainTweets_eq[cols]
+    rainTweets_eq= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text', 'latlon', 'tiffile'])
 
-
+    rainTweets_eq = rainTweets_eq.dropna()
+    labels = np.array(rainTweets_eq['labels'])
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','labels', 'latlon', 'tiffile'])
+    features= rainTweets_eq.drop(columns=['labels'])
     #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
     feature_list = list(features.columns)
     
     features = np.array(features)
-
+    
     #k-fold cross validation
     skf = StratifiedKFold(n_splits=10)
     mape = []
@@ -46,7 +47,7 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
         #print("Train: ", train_index, " Test: ", test_index)
         train_features, test_features = features[train_index], features[test_index]
         train_labels, test_labels = labels[train_index], labels[test_index]
-        
+
         #train and test the decision tree
         rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
         rf.fit(train_features, train_labels)
