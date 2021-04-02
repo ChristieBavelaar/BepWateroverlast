@@ -83,5 +83,5 @@ def sobolFilter(filename):
 
 if __name__ == '__main__':
     #readFile('../../AHN2_5m/' + str(sys.argv[1]))
-    #showimage(sys.argv[1])
-    sobolFilter(sys.argv[1])
+    showimage(sys.argv[1])
+    #sobolFilter(sys.argv[1])

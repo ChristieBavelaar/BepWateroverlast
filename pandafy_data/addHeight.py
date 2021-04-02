@@ -123,49 +123,51 @@ def addHeightKwartetSearch(data, saveFile):
             latlon = ast.literal_eval(str(data['latlon'][i]))
             #find pixel
             xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
+            print(1)
+            # open tiff file
+            filepath = '/data/s2155435/AHN2_5m/' + data['tiffile'][i]
+            dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
+            width = dataset.RasterXSize
+            height = dataset.RasterYSize
+            band = dataset.GetRasterBand(1)
+            arr = band.ReadAsArray()
+            
+            # If xPixel or yPixel is on the border, take a smaller square
+            if xPixel -10 <= 0:
+                minX = 1
+            else:
+                minX = xPixel-10
+            
+            if yPixel -10 <= 0:
+                minY = 1
+            else:
+                minY = yPixel-10
+            
+            if xPixel +10 > width:
+                xPixel = width
+            else:
+                maxX = xPixel +10
+
+            if yPixel +10 > height:
+                yPixel = height
+            else:
+                maxY = yPixel +10
+            
+            # find all values of the file within the square
+            arr = arr[minX: maxX, minY:maxY]
+
+            # convert to 1d array
+            arr = arr.flatten()
+            
+            # convert to dataframe with the values being the columns
+            dfArr = pd.DataFrame(arr)
+            dfArr = dfArr.transpose()
         except:
             #print(data['latlon'][i])
+            dfArr = pd.DataFrame()
             print("An exception occured")
             
-
-        # open tiff file
-        filepath = '/data/s2155435/AHN2_5m/' + data['tiffile'][i]
-        dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
-        width = dataset.RasterXSize
-        height = dataset.RasterYSize
-        band = dataset.GetRasterBand(1)
-        arr = band.ReadAsArray()
-
-        # If xPixel or yPixel is on the border, take a smaller square
-        if xPixel -10 <= 0:
-            minX = 1
-        else:
-            minX = xPixel-10
         
-        if yPixel -10 <= 0:
-            minY = 1
-        else:
-            minY = yPixel-10
-        
-        if xPixel +10 > width:
-            xPixel = width
-        else:
-            maxX = xPixel +10
-
-        if yPixel +10 > height:
-            yPixel = height
-        else:
-            maxY = yPixel +10
-        
-        # find all values of the file within the square
-        arr = arr[minX: maxX, minY:maxY]
-
-        # convert to 1d array
-        arr = arr.flatten()
-        
-        # convert to dataframe with the values being the columns
-        dfArr = pd.DataFrame(arr)
-        dfArr = dfArr.transpose()
         
         # add dataframe to list
         listOfArr.append(dfArr)
