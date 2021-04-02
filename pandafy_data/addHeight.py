@@ -64,7 +64,7 @@ def addHeightKwartetSearch(data, saveFile):
     print("Add height")
 
     print("Load radar data")
-    radar = pd.read_csv('/home/data/pandafied_data/pandafied_h5_radar.csv')
+    radar = pd.read_csv('/home/s2155435/pandafied_data/pandafied_h5_radar.csv')
 
     # I had some trouble getting the dataframe dfArr to append to dfOffArr
     # This is because you cannot append to an empty dataframe
