@@ -1,0 +1,50 @@
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/condabin/conda
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/conda
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/conda-env
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/activate
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/deactivate
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/etc/profile.d/conda.sh
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/etc/fish/conf.d/conda.fish
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/shell/condabin/Conda.psm1
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/shell/condabin/conda-hook.ps1
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/etc/profile.d/conda.csh
+no change     /home/s2155435/.bashrc
+No action taken.
+  0%|          | 0/765 [00:00<?, ?it/s] 14%|█▍        | 108/765 [00:00<00:00, 1079.14it/s] 28%|██▊       | 216/765 [00:00<00:00, 1073.70it/s] 42%|████▏     | 324/765 [00:00<00:00, 599.11it/s]  52%|█████▏    | 401/765 [00:00<00:00, 394.08it/s] 60%|█████▉    | 457/765 [00:01<00:00, 311.87it/s] 65%|██████▌   | 500/765 [00:01<00:00, 280.27it/s] 70%|██████▉   | 535/765 [00:01<00:00, 275.61it/s] 80%|████████  | 615/765 [00:01<00:00, 371.29it/s] 94%|█████████▍| 721/765 [00:01<00:00, 513.03it/s]100%|██████████| 765/765 [00:01<00:00, 450.11it/s]
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/externals/loky/process_executor.py", line 431, in _process_worker
+    r = call_item()
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/externals/loky/process_executor.py", line 285, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/_parallel_backends.py", line 595, in __call__
+    return self.func(*args, **kwargs)
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/parallel.py", line 262, in __call__
+    return [func(*args, **kwargs)
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/parallel.py", line 262, in <listcomp>
+    return [func(*args, **kwargs)
+  File "/home/s2155435/bep1/pandafy_data/KNMIRainSample.py", line 22, in parallel_data_parsing
+    onlyfiles = [f for f in listdir(folder+subfolder) if isfile(join(folder+subfolder, f))]
+FileNotFoundError: [Errno 2] No such file or directory: '/home/s2155435/KNMI/RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/2017/12/'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/s2155435/bep1/pandafy_data/scriptsSerialized.py", line 94, in <module>
+    rain = pandafy_h5()
+  File "/home/s2155435/bep1/pandafy_data/KNMIRainSample.py", line 85, in pandafy_h5
+    results.append(Parallel(n_jobs=num_cores)(delayed(parallel_data_parsing)(month_folders[i],super_folder,year_counter,total_year,i,len(month_folders)) for i in range(len(month_folders))))
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/parallel.py", line 1054, in __call__
+    self.retrieve()
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/parallel.py", line 933, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/site-packages/joblib/_parallel_backends.py", line 542, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/concurrent/futures/_base.py", line 439, in result
+    return self.__get_result()
+  File "/home/s2155435/.conda/envs/bepalice/lib/python3.8/concurrent/futures/_base.py", line 388, in __get_result
+    raise self._exception
+FileNotFoundError: [Errno 2] No such file or directory: '/home/s2155435/KNMI/RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/2017/12/'

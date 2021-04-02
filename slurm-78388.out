@@ -1,0 +1,14 @@
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/condabin/conda
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/conda
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/conda-env
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/activate
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/bin/deactivate
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/etc/profile.d/conda.sh
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/etc/fish/conf.d/conda.fish
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/shell/condabin/Conda.psm1
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/shell/condabin/conda-hook.ps1
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/lib/python3.7/site-packages/xontrib/conda.xsh
+no change     /cm/shared/easybuild/software/Miniconda3/4.7.10/etc/profile.d/conda.csh
+no change     /home/s2155435/.bashrc
+No action taken.
+slurmstepd: error: *** JOB 78388 ON node009 CANCELLED AT 2021-03-30T11:43:50 ***
