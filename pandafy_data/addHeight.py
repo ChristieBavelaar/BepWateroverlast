@@ -1,7 +1,9 @@
 import pandas as pd
-from osgeo import gdal 
+from osgeo import osr,gdal 
 import sys
 import os
+import math
+
 #import numpy as np 
 import ast
 import shapely
@@ -9,6 +11,47 @@ import shapely
 from shapely.geometry import Polygon,Point
 import random
 from addTifTwitter import tweets_append_tif
+
+def getCoords(Xpixel, Ypixel, gt, transform):
+    Xgeo = gt[0] + Xpixel*gt[1] + Ypixel*gt[2]
+    Ygeo = gt[3] + Xpixel*gt[4] + Ypixel*gt[5]
+    coordinates = transform.TransformPoint(Xgeo, Ygeo)
+    return coordinates
+
+def give_transform(ds=None,old_to_new=True,old_wkt=None):
+    #solution found at:
+    #https://stackoverflow.com/questions/2922532/obtain-latitude-and-longitude-from-a-geotiff-file
+    old_cs= osr.SpatialReference()
+    #print(ds.GetProjectionRef())
+    if not old_wkt is None:
+        print("old_wkt is not None")
+        old_cs .ImportFromWkt(old_wkt)
+    elif not ds is None:
+        old_cs.ImportFromWkt(ds.GetProjectionRef())
+    else:
+        print("missing projection information in pandafy_tiffs.give_transform()")
+        exit()
+    
+    # create the new coordinate system
+    wgs84_wkt = """
+        GEOGCS["WGS 84",
+        DATUM["WGS_1984",
+        SPHEROID["WGS 84",6378137,298.257223563,
+        AUTHORITY["EPSG","7030"]],
+        AUTHORITY["EPSG","6326"]],
+        PRIMEM["Greenwich",0,
+        AUTHORITY["EPSG","8901"]],
+        UNIT["degree",0.01745329251994328,
+        AUTHORITY["EPSG","9122"]],
+        AUTHORITY["EPSG","4326"]]"""
+    new_cs = osr.SpatialReference()
+    new_cs .ImportFromWkt(wgs84_wkt)
+    
+    # create a transform object to convert between coordinate systems
+    if old_to_new:
+        return osr.CoordinateTransformation(old_cs,new_cs) 
+    else:
+        return osr.CoordinateTransformation(new_cs,old_cs) 
 
 # sys.path.append(os.path.realpath('../functions/'))
 # from findPixel import kwartetSearch
@@ -36,7 +79,7 @@ def findQuater(kwartet, lat, lon, gt, transform):
             bestI = i
     return kwartet[bestI]
 
-def kwartetSearch(folder='/home/s2155435/AHN2_5m/', filename='ahn2_5_38an2.tif', lat=52.016917, lon=4.713011):
+def kwartetSearch(folder='/data/s2155435/AHN2_5m/', filename='ahn2_5_38an2.tif', lat=52.016917, lon=4.713011):
     #open file
     ds = gdal.Open(folder + filename)
     width = ds.RasterXSize
@@ -78,10 +121,10 @@ def addHeightKwartetSearch(data, saveFile):
     for i in range(len(data['latlon'])):
         try:
             latlon = ast.literal_eval(str(data['latlon'][i]))
-
             #find pixel
             xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
         except:
+            #print(data['latlon'][i])
             print("An exception occured")
             
 
