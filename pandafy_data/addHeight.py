@@ -181,7 +181,8 @@ def addHeightKwartetSearch(data, saveFile):
     # join the height data with existing data and save
     data=data.join(dfOfArr)
 
-    data = data[data['0'].notnull()]
+    data = data.dropna(axis='columns', how='all')
+    data = data.dropna()
     data = data.reset_index(drop=True)
     data.to_csv(saveFile, index=False)
 
