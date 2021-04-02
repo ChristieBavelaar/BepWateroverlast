@@ -86,7 +86,7 @@ def addHeightKwartetSearch(data, saveFile):
             
 
         # open tiff file
-        filepath = '/home/s2155435/AHN2_5m/' + data['tiffile'][i]
+        filepath = '/data/s2155435/AHN2_5m/' + data['tiffile'][i]
         dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
         width = dataset.RasterXSize
         height = dataset.RasterYSize
