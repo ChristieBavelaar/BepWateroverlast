@@ -9,5 +9,5 @@ Rain threshold:     0
 
 Machine Learning method
 - Random forest
-- 10-fold cross validation  
-Hyperparemeter optimization: NO
+- 10-fold cross validation
+- Hyperparemeter optimization: NO
