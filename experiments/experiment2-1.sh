@@ -4,7 +4,7 @@
 #SBATCH --error=/home/s2155435/ex2.err
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
-#SBATCH --partition=cpu-medium
+#SBATCH --partition=cpu-short
 #SBATCH -c 1
 #SBATCH --time=00:30:00
 #SBATCH --mem-per-cpu=16gb
