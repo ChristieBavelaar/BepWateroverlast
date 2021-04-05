@@ -172,12 +172,12 @@ if __name__ == '__main__':
     if future == 10:
         data = equalize_data(data, folder+'equalizedData'+samplename+'.csv')
         posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
-        posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
+        posData = filter_tweets(posData,10, folder+'filteredTweets'+samplename+'.csv')
         negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
         future =12.5
     
     if future == 11:
-        posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
+        posData = filter_tweets(posData,10, folder+'filteredTweets'+samplename+'.csv')
         future = 13
 
     if future == 12:
