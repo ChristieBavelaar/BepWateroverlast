@@ -16,6 +16,7 @@ from filterTweets import filter_tweets
 from latlonTifNeg import addLatlonNegData
 from addHeight import addHeightKwartetSearch
 from recombinePosNeg import recombinePosNeg
+from depSampling import dependent_sampling
 
 if __name__ == '__main__':
     """From which step would like to start? (step 1-4 are not dependent) \n \
@@ -28,6 +29,8 @@ if __name__ == '__main__':
     7 give each tweet a tif file \n \
     8 give each tweet a rain attribute \n \
     9 label the dataset \n \
+
+    *** random sampling ***
     10 create equal number of positive and negative examples \n \
     (seperate the dataset into positive and negative examples) \n \
     11 filter positive examples below a rain threshold \n \
@@ -35,6 +38,14 @@ if __name__ == '__main__':
     (recombine positive and negative examples) \n \
     13 add height attributes to examples\n \
     14 equalize the data again 
+
+    *** dependant sampling ***
+    (seperate the dateset into positive and negative examples)
+    11 filter positive examples below a rain threshold
+    15 equalize dataset with dependant sampling
+    (recombine positive and negative examples)
+    13 add height attributes to examples
+
     sys.argv[1] = sample
     sys.argv[2] = start"""
     folder = "/home/s2155435/pandafied_data/"
@@ -46,6 +57,7 @@ if __name__ == '__main__':
     
     if(sample == 'y'):
         samplename = 'Sample'
+        folder = '../../pandafied_data/'
     else:
         samplename = ''
     
@@ -96,50 +108,54 @@ if __name__ == '__main__':
             rain = pandafy_h5_full()
         future = 3
 
-    if start == 1:
+    elif start == 1:
         tweets = pandafy_twitter() #1
         future = 3
     
-    if start == 2:
+    elif start == 2:
         radar = pandafy_h5_make_radarXY() #2
 
-    if start == 4:
+    elif start == 4:
         data = pd.read_csv(folder+"pandafied_twitter_2007-2020_XY.csv") #3
         future = 4
     
-    if start == 5:
+    elif start == 5:
         latlonTif = pandafy_tiffs() #5
     
-    if start == 7:
+    elif start == 7:
         if sample == 'y':
             rain = pandafy_h5()
         else:
             rain = pandafy_h5_full()
     
-    if start == 9:
+    elif start == 9:
         data = pd.read_csv(folder+"combinedData"+samplename +".csv") #8
         future = 9
     
-    if start == 10:
+    elif start == 10:
         data = pd.read_csv(folder+"labeledData"+samplename +".csv") #9
         future = 10
     
-    if start == 11:
+    elif start == 11:
         negData = pd.read_csv(folder+'latlonTifNeg'+samplename+'.csv')
         future = 11
     
-    if start == 12:
+    elif start == 12:
         posData = pd.read_csv(folder+'filteredTweets'+samplename+'.csv')
         future = 12
     
-    if start == 13:
+    elif start == 13:
         data = pd.read_csv(folder+"recombinedData" +samplename +".csv")
         future = 13
     
-    if start == 14:
+    elif start == 14:
         data = pd.read_csv(folder+"heightData"+samplename+".csv") #15
-        future = 16
+        future = 14
     
+    elif start == 15:
+        data = pd.read_csv(folder+"labeledData"+samplename +".csv") #9
+        future = 15
+
     # perform al steps in sequence
     if future == 3:
         savename = 'pandafied_twitter_2007-2020_XY.csv'
@@ -191,5 +207,15 @@ if __name__ == '__main__':
     if future == 13:
         data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv')
         future = 14
+
     if future == 14:
         data = equalize_data(data, folder+'finalData'+samplename+'.csv')
+    
+    if future == 15:
+        posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
+        posData = filter_tweets(posData,10, folder+'filteredTweets'+samplename+'.csv')
+        posData, negData = dependent_sampling(posData, negData, folder+"posDep"+samplename+'.csv', folder+'negDep'+samplename+'.csv')
+        posData = addHeightKwartetSearch(posData, folder+"posHeight"+samplename+'.csv')
+        negData = addHeightKwartetSearch(negData, folder+"negHeight"+samplename+'.csv')
+        print(posData)
+        print(negData)

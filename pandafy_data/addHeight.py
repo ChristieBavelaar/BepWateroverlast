@@ -80,6 +80,7 @@ def findQuater(kwartet, lat, lon, gt, transform):
     return kwartet[bestI]
 
 def kwartetSearch(folder='/data/s2155435/AHN2_5m/', filename='ahn2_5_38an2.tif', lat=52.016917, lon=4.713011):
+    #folder = '../../AHN2_5m/'
     #open file
     ds = gdal.Open(folder + filename)
     width = ds.RasterXSize
@@ -108,6 +109,7 @@ def addHeightKwartetSearch(data, saveFile):
 
     print("Load radar data")
     radar = pd.read_csv('/home/s2155435/pandafied_data/pandafied_h5_radar.csv')
+    #radar = pd.read_csv('../../pandafied_data/pandafied_h5_radar.csv')
 
     # I had some trouble getting the dataframe dfArr to append to dfOffArr
     # This is because you cannot append to an empty dataframe
@@ -126,6 +128,8 @@ def addHeightKwartetSearch(data, saveFile):
             
             # open tiff file
             filepath = '/data/s2155435/AHN2_5m/' + data['tiffile'][i]
+            #filepath = '../../AHN2_5m/' + data['tiffile'][i]
+
             dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
             width = dataset.RasterXSize
             height = dataset.RasterYSize
