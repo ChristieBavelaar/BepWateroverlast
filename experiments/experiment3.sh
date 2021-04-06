@@ -5,9 +5,9 @@
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
 #SBATCH --partition=cpu-medium
-#SBATCH -c 1
+#SBATCH -c 2
 #SBATCH --time=02:00:00
-#SBATCH --mem-per-cpu=16gb
+#SBATCH --mem-per-cpu=32gb
 
 export PYTHONPATH=/home/s2155435/bep1/
 module load Miniconda3/4.7.10
