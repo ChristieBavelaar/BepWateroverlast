@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     sys.argv[1] = sample
     sys.argv[2] = start"""
-    folder = "/home/s2155435/pandafied_data/"
+    folder = "/data/s2155435/pandafied_data/"
     savefile = "labeledSample_eq.csv"
 
 
