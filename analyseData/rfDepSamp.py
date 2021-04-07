@@ -12,9 +12,9 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
-def randomForest(folder='/home/s2155435/pandafied_data/', inputFile1='posHeight.csv', inputFile2='negHeight.csv'):
-    #resultFolder = '/home/s2155435/bep1/analyseData/results/'
-    resultFolder = './'
+def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.csv', inputFile2='negHeight.csv'):
+    resultFolder = '/home/s2155435/bep1/analyseData/results/'
+    #resultFolder = './'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
     pos_data = pd.read_csv(folder + inputFile1)
