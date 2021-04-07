@@ -14,7 +14,7 @@ from sklearn import metrics
 
 def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.csv', inputFile2='negHeight.csv'):
     resultFolder = '/home/s2155435/bep1/analyseData/results/'
-    #resultFolder = './'
+    #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
     pos_data = pd.read_csv(folder + inputFile1)
@@ -28,6 +28,14 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
     cols = [col for col in neg_data.columns if 'Unnamed' not in col]
     neg_data = neg_data[cols]
     neg_data= neg_data.drop(columns=['radarX', 'radarY', 'date', 'latlon', 'tiffile'])
+
+    negNan = neg_data[neg_data.isna().any(axis=1)]
+    posNan = pos_data[pos_data.isna().any(axis=1)]
+    negNan.to_csv(resultFolder+'negnNan.csv')
+    posNan.to_csv(resultFolder+'posNan.csv')
+
+    neg_data = neg_data.dropna()
+    pos_data = pos_data.dropna()
 
     #rainTweets_eq = rainTweets_eq.dropna()
     labelsPos = np.array(pos_data['labels'])
