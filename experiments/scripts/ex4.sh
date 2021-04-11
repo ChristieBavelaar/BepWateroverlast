@@ -14,5 +14,5 @@ module load Miniconda3/4.7.10
 conda init bash
 source ~/.bashrc
 conda activate bepalice
-python3 /home/s2155435/bep1/pandafy_data/scriptsSerialized.py n 11 1 10
+python3 /home/s2155435/bep1/pandafy_data/scriptsSerialized.py n 8 1 10
 #python3 /home/s2155435/bep1/analyseData/randomForest.py n 
