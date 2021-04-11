@@ -1,18 +1,24 @@
 import pandas as pd 
 
-def filter_tweets(pos_data, threshold, saveFile):
+def filter_tweets(data, threshold, saveFile):
     '''
         Filter out all positive examples to have a rain > threshold
         Parameters:
             pos_data: pandas dataframe containing tweets
         Output: pandas dataframe
     '''
+    # divide in positive and negative samples
+    pos_data = data[data.labels == 1]
+    neg_data = data[data.labels == 0]
+
+    print("     nrPositive: " + str(len(pos_data)))
+    print("     nrNegative: " + str(len(neg_data)))
 
     print("Filter data")    
-    pos_data = pos_data[pos_data.rain> threshold]
+    data = data[data.rain> threshold]
 
-    pos_data = pos_data.reset_index(drop=True)
-    pos_data.to_csv(saveFile, index=False)
+    data = data.reset_index(drop=True)
+    data.to_csv(saveFile, index=False)
     return pos_data
 
 if __name__ == '__main__':
