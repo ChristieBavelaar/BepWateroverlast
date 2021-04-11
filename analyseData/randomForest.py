@@ -56,7 +56,7 @@ def randomForest(folder='/home/s2155435/pandafied_data/', inputFile='finalData.c
         train_features, test_features = features[train_index], features[test_index]
         train_labels, test_labels = labels[train_index], labels[test_index]
 
-        print(test_features[0])
+        #print(test_features[0])
         #train and test the decision tree
         rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
         rf.fit(train_features, train_labels)

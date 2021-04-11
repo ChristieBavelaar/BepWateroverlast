@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def equalize_data(data, saveFile):
+def equalize_data(data, saveFile, extra=1):
     '''
         Since there are orders of magnitude more negative samples than positive samples, this function creates an equal amount of positive and negative samples, by random sampling from the negative samples.
         Parameters: 
@@ -20,7 +20,7 @@ def equalize_data(data, saveFile):
     
     # add in an equal number of negative samples
     data=pos_data
-    data = data.append(neg_data.sample(n=len(pos_data),replace=False))
+    data = data.append(neg_data.sample(n=len(pos_data)*extra,replace=False))
     
     print("     Total: " + str(len(data)))
     data = data.reset_index(drop=True)

@@ -17,9 +17,11 @@ from latlonTifNeg import addLatlonNegData
 from addHeight import addHeightKwartetSearch
 from recombinePosNeg import recombinePosNeg
 from depSampling import dependent_sampling
+from adresSampling import adress_sampling
 
 if __name__ == '__main__':
-    """From which step would like to start? (step 1-4 are not dependent) \n \
+    """
+    From which step would like to start? (step 1-4 are not dependent) \n \
     1 give tiff files coordinates \n \
     2 pandafy twitter data \n \
     3 give radar XY coordinates \n \
@@ -29,41 +31,56 @@ if __name__ == '__main__':
     7 give each tweet a tif file \n \
     8 give each tweet a rain attribute \n \
     9 label the dataset \n \
+    10 filter data below treshold
 
-    *** random sampling ***
-    10 create equal number of positive and negative examples \n \
-    (seperate the dataset into positive and negative examples) \n \
-    11 filter positive examples below a rain threshold \n \
-    12 give negative examples latlon and tif file \n \
-    (recombine positive and negative examples) \n \
-    13 add height attributes to examples\n \
-    14 equalize the data again 
+    11 Sampling
+        *** random sampling ***
+        - equalize random \n \
+        - seperate the dataset into positive and negative examples) \n \
+        - give negative examples latlon and tif file \n \
+        - recombine positive and negative examples \n \
+        - add height attributes to examples\n \
+        - equalize the data again 
 
-    *** dependant sampling ***
-    (seperate the dateset into positive and negative examples)
-    11 filter positive examples below a rain threshold
-    15 equalize dataset with dependant sampling
-    (recombine positive and negative examples)
-    13 add height attributes to examples
+        *** address sampling ***
+        - equalize dataset with address sampling
+        - add height attributes to examples
+        - equalize the data again
 
-    sys.argv[1] = sample
-    sys.argv[2] = start"""
+        *** dependant sampling ***
+        - seperate the dateset into positive and negative examples
+        - equalize dataset with dependant sampling
+        - add height attributes to examples
+
+    sys.argv[1] = sample y/n
+    sys.argv[2] = start [1,11]
+    sys.arg[3] = sampling method
+                    1 : random
+                    2 : adress
+                    3 : dependent
+
+    sys.argv[4] = rain threshold
+    """
+
     folder = "/data/s2155435/pandafied_data/"
-    savefile = "labeledSample_eq.csv"
-
 
     sample = sys.argv[1]
     start = int(sys.argv[2])
-    
+    sampMethod = int(sys.argv[3])
+    threshold = int(sys.argv[4])
+
     if(sample == 'y'):
         samplename = 'Sample'
         folder = '../../pandafied_data/'
+        alice = False
     else:
         samplename = ''
+        folder = "/data/s2155435/pandafied_data/"
+        alice = True
     
     # Files that have to be accessed by multiple steps
     if start>0:
-        if start <= 4 or start == 6:
+        if start <= 4 or start == 6 or sampMethod == 2:
             latlonTif = pd.read_csv(folder+"lat_lon_to_filename.csv") #5
 
         if start <= 6 or start == 8:
@@ -72,7 +89,7 @@ if __name__ == '__main__':
             else:
                 rain = pd.read_csv(folder+"pandafied_h5_rain_2007-2020.csv")
 
-        if start == 1 or start == 3:
+        if start == 1 or start == 3 or sampMethod == 2:
             radar = pd.read_csv(folder+"pandafied_h5_radar.csv") #2
 
         if start == 2 or start == 3:
@@ -92,10 +109,6 @@ if __name__ == '__main__':
             else:
                 data = pd.read_csv(folder+"twitter_2010-2017_XY_tiff.csv")
             future = 8
-
-        if start == 11 or start == 12:
-            posData = pd.read_csv(folder+"posData" + samplename+ ".csv") #10
-            negData = pd.read_csv(folder+"negData" + samplename +".csv") #10
 
     # Files only to be accessed by one step
     if start == 0:
@@ -137,24 +150,11 @@ if __name__ == '__main__':
         future = 10
     
     elif start == 11:
-        negData = pd.read_csv(folder+'latlonTifNeg'+samplename+'.csv')
+        data = pd.read_csv(folder+'filteredData'+samplename+'.csv') #9
         future = 11
-    
-    elif start == 12:
-        posData = pd.read_csv(folder+'filteredTweets'+samplename+'.csv')
-        future = 12
-    
-    elif start == 13:
-        data = pd.read_csv(folder+"recombinedData" +samplename +".csv")
-        future = 13
-    
-    elif start == 14:
-        data = pd.read_csv(folder+"heightData"+samplename+".csv") #15
-        future = 14
-    
-    elif start == 15:
-        data = pd.read_csv(folder+"labeledData"+samplename +".csv") #9
-        future = 15
+
+    if sampMethod == 2:
+        adresses = pd.read_csv(folder+"verblijfplaatsen.csv")
 
     # perform al steps in sequence
     if future == 3:
@@ -185,37 +185,29 @@ if __name__ == '__main__':
         data = make_labels(data, 'text', folder+'labeledData'+samplename+'.csv')
         future = 10
     
-    if future == 10:
-        data = equalize_data(data, folder+'equalizedData'+samplename+'.csv')
-        posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
-        posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
-        negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
-        future =12.5
-    
+    if future == 10: # filter data below threshold
+        print("filter")
+        data = filter_tweets(data, threshold, folder+'filteredData'+samplename+'.csv')
+        print("next")
+        future = 11
+    print(future)
     if future == 11:
-        posData = filter_tweets(posData,10, folder+'filteredTweets'+samplename+'.csv')
-        future = 13
-
-    if future == 12:
-        negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv')
-        future = 12.5
-
-    if future == 12.5:
-        data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
-        future = 13
+        print("start sampling with method ", sampMethod)
+        if sampMethod <= 2:
+            if sampMethod == 1:
+                data = equalize_data(data, folder+'equalizedData'+samplename+'.csv', extra=2)
+                posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
+                negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv',alice)
+                data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
+                #print(data)
+            else:
+                data = adress_sampling(data, adresses, latlonTif, radar, folder+'recombinedData'+samplename+'csv')
+            data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv',alice)
+            #print(data)
+            data = equalize_data(data, folder+'finalData'+samplename+'.csv')
+        else: 
+            posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
+            posData, negData = dependent_sampling(posData, negData, folder+"posDep"+samplename+'.csv', folder+'negDep'+samplename+'.csv')
+            posData = addHeightKwartetSearch(posData, folder+"posHeight"+samplename+'.csv',alice)
+            negData = addHeightKwartetSearch(negData, folder+"negHeight"+samplename+'.csv', alice)
     
-    if future == 13:
-        data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv')
-        future = 14
-
-    if future == 14:
-        data = equalize_data(data, folder+'finalData'+samplename+'.csv')
-    
-    if future == 15:
-        posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
-        posData = filter_tweets(posData,0, folder+'filteredTweets'+samplename+'.csv')
-        posData, negData = dependent_sampling(posData, negData, folder+"posDep"+samplename+'.csv', folder+'negDep'+samplename+'.csv')
-        posData = addHeightKwartetSearch(posData, folder+"posHeight"+samplename+'.csv')
-        negData = addHeightKwartetSearch(negData, folder+"negHeight"+samplename+'.csv')
-        print(posData)
-        print(negData)

@@ -6,7 +6,7 @@ from shapely.geometry import Polygon,Point
 import random
 from addTifTwitter import tweets_append_tif
 
-def addLatlonNegData(neg_data, saveFile):
+def addLatlonNegData(neg_data, saveFile,alice):
     """
         Negative samples in the data are assigned a random point within the KNMI rain area. Then a corresponding tif-File is found.
         Parameters:
@@ -14,7 +14,11 @@ def addLatlonNegData(neg_data, saveFile):
         Output: pandas dataframe
     """
     print("Load data")
-    folder = '/home/s2155435/pandafied_data/'
+    if alice:
+        folder = '/data/s2155435/pandafied_data/'
+    else:
+        folder = '../../pandafied_data/'
+
     tif= pd.read_csv(folder+'lat_lon_to_filename.csv')
     radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
     
@@ -58,4 +62,4 @@ if __name__ == '__main__':
     print("load data")
     neg_data = pd.read_csv(folder + inputFile)
 
-    outputData = addLatlonNegData(neg_data, folder+saveFile)
+    outputData = addLatlonNegData(neg_data, folder+saveFile,False)

@@ -5,7 +5,7 @@ Height span:        20x20
 Filter:             none  
 Sampling equalizing: Dependant sampling  
 Locaton negative example: coords of positive example  
-Rain threshold:     10  
+Rain threshold:     0  
 
 Machine Learning method
 - Random forest

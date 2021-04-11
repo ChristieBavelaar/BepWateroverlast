@@ -18,6 +18,8 @@ def showimage(filename):
     print(band)
     print('arr')
     print(arr)
+    ex = arr.flatten()
+    print(ex)
     print('length: '+ str(len(arr)))
     plt.imshow(arr)
     plt.show()

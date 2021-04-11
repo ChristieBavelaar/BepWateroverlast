@@ -9,7 +9,6 @@ import copy
 
 def give_radarXY(df,radar,idx,total):
     df = copy.deepcopy(df)
-    print(idx,total)
     latlon = df['latlon'].values.tolist()[0]
     try:
         if np.isnan(latlon):
@@ -37,6 +36,7 @@ def give_radarXY(df,radar,idx,total):
     return df
 
 def tweets_append_XY(tweets,radar, saveFile):
+    print(tweets)
     num_cores = multiprocessing.cpu_count()
     print("num_cores: " + str(num_cores))
     results = Parallel(n_jobs=num_cores)(delayed(give_radarXY)(tweets[i:i+1],radar,i,len(tweets.index)) for i in tweets.index)
@@ -44,6 +44,10 @@ def tweets_append_XY(tweets,radar, saveFile):
     for i in results:
         tweets_XY = tweets_XY.append(i)
     
+    # Delete unnamed columns
+    cols = [col for col in tweets_XY.columns if 'Unnamed' not in col]
+    tweets_XY = tweets_XY[cols]
+
     tweets_XY.to_csv(saveFile, index=False)
     return tweets_XY
 
@@ -61,14 +65,16 @@ def pandafy_curated_twitter_add_XY():
     tweets_XY = tweets_append_XY(tweets,radar)
     tweets_XY.to_csv('../../pandafied_data/curated_twitter_XY.csv',index=False)
 
-def pandafy_twitter_2007_2020_add_XY(tweets_file_name='/home/s2155435/pandafied_data/pandafied_twitter_2007-2020.csv',radar_file_name='/home/s2155435/pandafied_data/pandafied_h5_radar.csv',save_name='/home/s2155435/pandafied_data/pandafied_twitter_2007-2020_XY.csv'):
+def pandafy_twitter_2007_2020_add_XY(tweets_file_name='pandafied_twitter_2007-2020.csv',radar_file_name='pandafied_h5_radar.csv',save_name='pandafied_twitter_2007-2020_XY.csv'):
     '''
         This function reads the longitude latitude coordinate of each tweet and checks in which radar pixel it lies.
     '''
-    tweets = pd.read_csv(tweets_file_name)
-    radar = pd.read_csv(radar_file_name)
-    tweets_XY = tweets_append_XY(tweets,radar,save_name)
-    tweets_XY.to_csv(save_name,index=False)
+    #folder = '/data/s2155435/pandafied_data/'
+    folder = '../../pandafied_data/'
+    tweets = pd.read_csv(folder+tweets_file_name)
+    radar = pd.read_csv(folder+radar_file_name)
+    tweets_XY = tweets_append_XY(tweets,radar,folder+save_name)
+    tweets_XY.to_csv(folder+save_name,index=False)
 
 if __name__ == '__main__':
     pandafy_twitter_2007_2020_add_XY()

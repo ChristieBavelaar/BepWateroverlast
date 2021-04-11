@@ -79,8 +79,11 @@ def findQuater(kwartet, lat, lon, gt, transform):
             bestI = i
     return kwartet[bestI]
 
-def kwartetSearch(folder='/data/s2155435/AHN2_5m/', filename='ahn2_5_38an2.tif', lat=52.016917, lon=4.713011):
-    #folder = '../../AHN2_5m/'
+def kwartetSearch(alice=False, filename='ahn2_5_38an2.tif', lat=52.016917, lon=4.713011):
+    if alice:
+        folder = '/data/s2155435/AHN2_5m/'
+    else:
+        folder = '../../AHN2_5m/'
     #open file
     ds = gdal.Open(folder + filename)
     width = ds.RasterXSize
@@ -104,12 +107,16 @@ def kwartetSearch(folder='/data/s2155435/AHN2_5m/', filename='ahn2_5_38an2.tif',
     
     return int(quarter[0]+0.5), int(quarter[3]+0.5)
 
-def addHeightKwartetSearch(data, saveFile):
+def addHeightKwartetSearch(data, saveFile, alice):
     print("Add height")
 
+    if alice:
+        folder = '/data/s2155435/'
+    else:
+        folder = '../../'
+
     print("Load radar data")
-    radar = pd.read_csv('/data/s2155435/pandafied_data/pandafied_h5_radar.csv')
-    #radar = pd.read_csv('../../pandafied_data/pandafied_h5_radar.csv')
+    radar = pd.read_csv(folder+'pandafied_data/pandafied_h5_radar.csv')
 
     # I had some trouble getting the dataframe dfArr to append to dfOffArr
     # This is because you cannot append to an empty dataframe
@@ -124,11 +131,10 @@ def addHeightKwartetSearch(data, saveFile):
         try:
             latlon = ast.literal_eval(str(data['latlon'][i]))
             #find pixel
-            xPixel, yPixel = kwartetSearch(filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
+            xPixel, yPixel = kwartetSearch(alice=alice, filename=data['tiffile'][i], lat=latlon[0], lon=latlon[1])
             
             # open tiff file
-            filepath = '/data/s2155435/AHN2_5m/' + data['tiffile'][i]
-            #filepath = '../../AHN2_5m/' + data['tiffile'][i]
+            filepath = folder+'AHN2_5m/' + data['tiffile'][i]
 
             dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
             width = dataset.RasterXSize
@@ -137,27 +143,28 @@ def addHeightKwartetSearch(data, saveFile):
             arr = band.ReadAsArray()
             
             # If xPixel or yPixel is on the border, take a smaller square
-            if xPixel -10 <= 0:
-                minX = 1
+            if xPixel -10 < 0:
+                minX = 0
+                xPixel = 10
             else:
                 minX = xPixel-10
             
-            if yPixel -10 <= 0:
-                minY = 1
+            if yPixel -10 < 0:
+                minY = 0
+                yPixel = 10
             else:
                 minY = yPixel-10
             
-            if xPixel +10 > width:
-                xPixel = width
+            if xPixel +10 >= width:
+                maxX = width-1
             else:
                 maxX = xPixel +10
 
-            if yPixel +10 > height:
-                yPixel = height
+            if yPixel +10 >= height:
+                maxY = height-1
             else:
                 maxY = yPixel +10
-            
-            # find all values of the file within the square
+
             arr = arr[minX: maxX, minY:maxY]
 
             # convert to 1d array
@@ -171,8 +178,6 @@ def addHeightKwartetSearch(data, saveFile):
             dfArr = pd.DataFrame()
             print("An exception occured")
             
-        
-        
         # add dataframe to list
         listOfArr.append(dfArr)
     
