@@ -45,6 +45,8 @@ def addLatlonNegData(neg_data, saveFile,alice):
 
     try:
         neg_data = neg_data.drop(columns=['latlon_center','latlon_ne',"latlon_nw", 'latlon_se', 'latlon_sw'])
+    except:
+        print("columns could not be dropped")
     neg_data.to_csv(saveFile, index=False)
     return neg_data
 
