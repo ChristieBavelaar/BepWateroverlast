@@ -188,11 +188,12 @@ if __name__ == '__main__':
     if future == 10: # filter data below threshold
         data = filter_tweets(data, threshold, folder+'filteredData'+samplename+'.csv')
         future = 11
-    print(future)
+
     if future == 11:
         print("start sampling with method ", sampMethod)
         if sampMethod <= 2:
             if sampMethod == 1:
+                print(data)
                 data = equalize_data(data, folder+'equalizedData'+samplename+'.csv', extra=2)
                 posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
                 negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv',alice)
