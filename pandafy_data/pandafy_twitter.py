@@ -13,7 +13,7 @@ def twit_time_to_standard(time_stamp):
     s = dt.strftime('%Y%m%d%H%M')
     return s
 
-def pandafy_twitter(file_name='/data/s2155435/Twitter_cred/full_arch_2007-2020.txt',save_name='/home/s2155435/pandafied_data/pandafied_twitter_2007-2020.csv'):
+def pandafy_twitter(file_name='/data/s2155435/Twitter_cred/full_arch_2007-2020.txt',save_name='/data/s2155435/pandafied_data/pandafied_twitter_2007-2020.csv'):
     '''
         This function extracts the relevant information from a saved twitter query and puts it into a pandas dataframe.
     '''
