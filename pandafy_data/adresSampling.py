@@ -70,7 +70,7 @@ class Converter:
 
         return round(self.GpsOriginLon + ( a / 3600 ), 9)
 
-def adress_sampling(data, adresses, tif, radar, saveFile, alice):
+def adress_sampling(data, adresses, tif, radar, saveFile, alice=False):
     '''
         
     '''
@@ -89,7 +89,7 @@ def adress_sampling(data, adresses, tif, radar, saveFile, alice):
 
     # add in an equal number of negative samples
     negativeSamples = adresses.sample(n=len(pos_data)*2,replace=False)
-
+    print(negativeSamples)
     # Convert rijksdriehoek coordinates to regular coordinates
     latlon = []
     converter = Converter()
