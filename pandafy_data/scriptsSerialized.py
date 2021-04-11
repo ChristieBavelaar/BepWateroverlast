@@ -186,9 +186,7 @@ if __name__ == '__main__':
         future = 10
     
     if future == 10: # filter data below threshold
-        print("filter")
         data = filter_tweets(data, threshold, folder+'filteredData'+samplename+'.csv')
-        print("next")
         future = 11
     print(future)
     if future == 11:
