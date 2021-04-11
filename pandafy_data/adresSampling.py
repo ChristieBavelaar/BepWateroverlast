@@ -70,11 +70,14 @@ class Converter:
 
         return round(self.GpsOriginLon + ( a / 3600 ), 9)
 
-def adress_sampling(data, adresses, tif, radar, saveFile):
+def adress_sampling(data, adresses, tif, radar, saveFile, alice):
     '''
         
     '''
-    
+    if alice:
+        folder = '/data/s2155435/'
+    else:
+        folder = '../../'
 
      # divide in positive and negative samples
     pos_data = data[data.labels == 1]
@@ -107,10 +110,10 @@ def adress_sampling(data, adresses, tif, radar, saveFile):
     negativeSamples = negativeSamples.reset_index(drop=True)
 
     # Add radar XY
-    negativeSamples = tweets_append_XY(negativeSamples,radar,"../../pandafied_data/radarNeg.csv")
+    negativeSamples = tweets_append_XY(negativeSamples,radar,folder+"pandafied_data/radarNeg.csv")
 
     # Add tiffile
-    negativeSamples = tweets_append_tif(negativeSamples,tif, "../../pandafied_data/tifNeg.csv")
+    negativeSamples = tweets_append_tif(negativeSamples,tif, folder+"pandafied_data/tifNeg.csv")
 
     # Add rain property
     rain = []

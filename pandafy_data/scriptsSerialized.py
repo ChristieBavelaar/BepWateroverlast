@@ -200,7 +200,7 @@ if __name__ == '__main__':
                 data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
                 #print(data)
             else:
-                data = adress_sampling(data, adresses, latlonTif, radar, folder+'recombinedData'+samplename+'csv')
+                data = adress_sampling(data, adresses, latlonTif, radar, folder+'recombinedData'+samplename+'csv', alice)
             data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv',alice)
             #print(data)
             data = equalize_data(data, folder+'finalData'+samplename+'.csv')
