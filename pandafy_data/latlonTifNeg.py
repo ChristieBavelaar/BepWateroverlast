@@ -22,8 +22,12 @@ def addLatlonNegData(neg_data, saveFile,alice):
     tif= pd.read_csv(folder+'lat_lon_to_filename.csv')
     radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
     
+    print("neg_data\n",neg_data)
+    print("\ntif\n", tif)
+    print("\nradar\n", radar)
     neg_data = pd.merge(neg_data, radar, on=('radarX','radarY'), how='left')
 
+    print("\nneg_data 2\n", neg_data)
     print("Determine coordinates")
     for i in range(len(neg_data['latlon_sw'])):
         sw = ast.literal_eval(str(neg_data['latlon_sw'][i]))
@@ -40,9 +44,11 @@ def addLatlonNegData(neg_data, saveFile,alice):
                 neg_data['latlon'][i] = "("+str(randomPoint.y)+","+str(randomPoint.x)+")"
                 break
     
+    print("\nneg_data 3\n", neg_data)
     print("Find tif-file")
     neg_data = tweets_append_tif(neg_data, tif, saveFile)
 
+    print('\nneg_data 4\n', neg_data)
     try:
         neg_data = neg_data.drop(columns=['latlon_center','latlon_ne',"latlon_nw", 'latlon_se', 'latlon_sw'])
     except:
