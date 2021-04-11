@@ -17,7 +17,7 @@ from joblib import Parallel, delayed
 import multiprocessing
 import copy
 
-def determineTifFile(lat, lon, folder='/home/s2155435/pandafied_data/', file="lat_lon_to_filename.csv"):
+def determineTifFile(lat, lon, folder='/data/s2155435/pandafied_data/', file="lat_lon_to_filename.csv"):
     data=pd.read_csv(folder + file)
     point = Point(lon,lat)
     for i in range(len(data['latlon_sw'])):
