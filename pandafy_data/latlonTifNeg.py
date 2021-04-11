@@ -43,8 +43,8 @@ def addLatlonNegData(neg_data, saveFile,alice):
     print("Find tif-file")
     neg_data = tweets_append_tif(neg_data, tif, saveFile)
 
-    
-    neg_data = neg_data.drop(columns=['latlon_center','latlon_ne',"latlon_nw", 'latlon_se', 'latlon_sw'])
+    try:
+        neg_data = neg_data.drop(columns=['latlon_center','latlon_ne',"latlon_nw", 'latlon_se', 'latlon_sw'])
     neg_data.to_csv(saveFile, index=False)
     return neg_data
 
