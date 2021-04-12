@@ -1,0 +1,1 @@
+# 3 Select sample of neg data, give latlon and add to pos data
