@@ -6,10 +6,12 @@ from pyproj import CRS, Transformer
 import sys
 from tqdm import tqdm
 
-def pandafy_h5_make_radarXY(folder='/data/s2155435/KNMI/RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/2017/', save_name_radar='/data/s2155435/pandafied_data/pandafied_h5_radar.csv'):
+def pandafy_h5_make_radarXY(folder='../../KNMI/RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/2017/', save_name_radar='../../csv112/pandafied_h5_radar.csv'):
     '''
         This function maps the y,x pixel coordinates of the KNMI precipitation data to boxes with a longitude latitude center and corner points.
     '''
+
+    
     radar = {}
     radar['latlon_center'] = []
     radar['latlon_sw'] = []
