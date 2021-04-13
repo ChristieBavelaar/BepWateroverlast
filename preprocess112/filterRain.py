@@ -12,9 +12,10 @@ def filterRain(data, threshold, saveFile):
     print("Filter data")    
     data = data[data.rain> threshold]
 
+    startDate = pd.Timestamp(2015,12,31)
     endDate = pd.Timestamp(2020,3,1)
     data['date'] = pd.to_datetime(data['date'], format='%Y%m%d')
-    ata = data[data['date']<endDate]
+    ata = data[(data['date']>startDate)&(data['date']<endDate)]
     data = data.reset_index(drop=True)
     data.to_csv(saveFile, index=False)
     return data
