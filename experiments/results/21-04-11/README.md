@@ -1,11 +1,11 @@
-Date:               2-4-21  
+Date:               11-4-21  
 Attributes:         Rain and Height  
 Height attribute:   seperate data points  
 Height span:        20x20  
 Filter:             none  
 Sampling equalizing: Random  
 Locaton negative example: Random point in rader (KNMI)  
-Rain threshold:     0  
+Rain threshold:     10  
 
 Machine Learning method
 - Random forest

@@ -12,33 +12,26 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
-def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.csv', inputFile2='negHeight.csv'):
-    resultFolder = '/home/s2155435/bep1/analyseData/results/'
-    #resultFolder = './results/'
+def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
+    #resultFolder = '/home/s2155435/bep1/analyse112/results/'
+    resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
+    
     #load data
-    print(data)
-    pos_data = pd.read_csv(folder + inputFile1)
-    neg_data = pd.read_csv(folder + inputFile2)
-    print("data loaded")    
+    data = pd.read_csv(folder+inputFile)
 
     # Delete unneccesary columns
-    cols = [col for col in pos_data.columns if 'Unnamed' not in col]
-    pos_data = pos_data[cols]
-    pos_data= pos_data.drop(columns=['radarX', 'radarY', 'date', 'text', 'latlon', 'tiffile'])
-    cols = [col for col in neg_data.columns if 'Unnamed' not in col]
-    neg_data = neg_data[cols]
-    neg_data= neg_data.drop(columns=['radarX', 'radarY', 'date', 'latlon', 'tiffile'])
+    data= data.drop(columns=['radarX', 'radarY', 'date','latitude', 'longitude', 'tiffile'])
+    data = data.dropna()
 
-    negNan = neg_data[neg_data.isna().any(axis=1)]
-    posNan = pos_data[pos_data.isna().any(axis=1)]
-    negNan.to_csv(resultFolder+'negnNan.csv')
-    posNan.to_csv(resultFolder+'posNan.csv')
+    # Seperate data
+    print(data)
+    pos_data = data[data.labels == 1]
+    neg_data = data[data.labels == 0]
+    neg_data = neg_data.reset_index(drop=True)
 
-    neg_data = neg_data.dropna()
-    pos_data = pos_data.dropna()
+    print("data loaded")    
 
-    #rainTweets_eq = rainTweets_eq.dropna()
     labelsPos = np.array(pos_data['labels'])
     labelsNeg = np.array(neg_data['labels'])
 
@@ -126,8 +119,7 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
 if __name__ == '__main__':
     
     if(sys.argv[1] == "y"):
-        sampleFile1="posHeightSample.csv"
-        sampleFile2="negHeightSample.csv"
-        randomForest(folder='../../pandafied_data/', inputFile1=sampleFile1, inputFile2=sampleFile2)
+        inputFile = 'finalDataSample.csv'
+        randomForest(folder='../../csv112/', inputFile=inputFile)
     elif(sys.argv[1] == "n"):
         randomForest()
