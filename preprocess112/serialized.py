@@ -36,7 +36,7 @@ if __name__ == '__main__':
         pdTif = pandafy_tiffs(data_folder=folder+'AHN2_5m/', save_name=folder+'csv112/lat_lon_to_filename.csv')
         pdRadar = pandafy_h5_make_radarXY(folder = folder + 'KNMI/RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/2017/', save_name_radar=folder+'csv112/pandafied_h5_radar.csv')
         if alice:
-            pdRain = pandafy_h5_sample(save_name_radar=folder+'csv112/pandafied_h5_radar.csv',save_name_rain=folder+'csv112/pandafied_h5_rain_2016-2020.csv',folder =folder+'KNMI/')
+            pdRain = pandafy_h5_full(save_name_radar=folder+'csv112/pandafied_h5_radar.csv',save_name_rain=folder+'csv112/pandafied_h5_rain_2016-2020.csv',folder =folder+'KNMI/')
         else:
             pdRain = pandafy_h5_sample(save_name_radar=folder+'csv112/pandafied_h5_radar.csv',save_name_rain=folder+'csv112/pandafied_h5_rain_2020.csv',folder =folder+'KNMI/')
         start = 2
