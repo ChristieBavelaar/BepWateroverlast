@@ -13,12 +13,16 @@ def combineDataFrames(pd112, pdRain, saveFile):
     
     pdRain = pdRain[pdRain['date'].notnull()]
 
+    # Normalize dates
+    pd112['date'] = pd.to_datetime(pd112['date'], format='%Y-%m-%d')
+    pdRain['date'] = pd.to_datetime(pdRain['date'], format='%Y-%m-%d')
+
     print(pd112)
     print(pdRain)
     print("Merge data")
     pd112Rain = pd.merge(pdRain, pd112, on=('radarX','radarY','date'), how='left')
     print(pd112Rain)
-    pd112Rain=pd112Rain[pd112Rain['rain'].notnull()]
+    #pd112Rain=pd112Rain[pd112Rain['rain'].notnull()]
 
     pd112Rain.to_csv(saveFile, index=False)
     return pd112Rain
