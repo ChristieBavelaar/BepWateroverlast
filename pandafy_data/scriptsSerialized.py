@@ -198,12 +198,12 @@ if __name__ == '__main__':
                 posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
                 negData = addLatlonNegData(negData, folder+'latlonTifNeg'+samplename+'.csv',alice)
                 data = recombinePosNeg(posData, negData, folder+'recombinedData'+samplename+'.csv')
-                #print(data)
+                data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv',alice)
+                data = equalize_data(data, folder+'finalDataRandom'+samplename+'.csv')
             else:
                 data = adress_sampling(data, adresses, latlonTif, radar, folder+'recombinedData'+samplename+'csv', alice)
-            data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv',alice)
-            #print(data)
-            data = equalize_data(data, folder+'finalData'+samplename+'.csv')
+                data = addHeightKwartetSearch(data, folder+'heightData'+samplename+'.csv',alice)
+                data = equalize_data(data, folder+'finalDataAdress'+samplename+'.csv')
         else: 
             posData, negData = seperateData(data, folder+'posData'+samplename+'.csv', folder+'negData'+samplename+'.csv')
             posData, negData = dependent_sampling(posData, negData, folder+"posDep"+samplename+'.csv', folder+'negDep'+samplename+'.csv')
