@@ -108,10 +108,6 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     plt.show()
    
 if __name__ == '__main__':
-    if sys.argv[2] == 1:
-        inputFile = "finalDataRandom.csv"
-    else:
-        inputFile = 'finalDataAdress.csv'
     if(sys.argv[1] == "y"):
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../csv112/",inputFile=sampleFile)

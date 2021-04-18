@@ -1,3 +1,4 @@
+Target: Twitter
 Attributes
     - Rain per day 
 Rain threshold: 10

@@ -1,7 +1,7 @@
 #!/bin/sh
-#SBATCH --job-name=ex2-1
-#SBATCH --output=/home/s2155435/ex2-1.out
-#SBATCH --error=/home/s2155435/ex2-1.err
+#SBATCH --job-name=ex1-1
+#SBATCH --output=/home/s2155435/ex1-1.out
+#SBATCH --error=/home/s2155435/ex1-1.err
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
 #SBATCH --partition=cpu-short
@@ -14,4 +14,4 @@ module load Miniconda3/4.7.10
 conda init bash
 source ~/.bashrc
 conda activate bepalice
-python3 /home/s2155435/bep1/analyseData/randomForest.py n 2
+python3 /home/s2155435/bep1/analyseData/rfDepSamp.py n 
