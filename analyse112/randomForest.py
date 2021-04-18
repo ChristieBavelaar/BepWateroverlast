@@ -31,8 +31,8 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    #features= rainTweets_eq.drop(columns=['labels'])
-    features= rainTweets_eq.drop(columns=['labels', 'rain'])
+    features= rainTweets_eq.drop(columns=['labels'])
+    #features= rainTweets_eq.drop(columns=['labels', 'rain'])
     #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
@@ -109,7 +109,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
    
 if __name__ == '__main__':
     if sys.argv[2] == 1:
-        inputFile = "finalDataRancom.csv"
+        inputFile = "finalDataRandom.csv"
     else:
         inputFile = 'finalDataAdress.csv'
     if(sys.argv[1] == "y"):

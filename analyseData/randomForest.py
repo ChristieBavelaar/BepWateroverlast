@@ -120,4 +120,4 @@ if __name__ == '__main__':
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../pandafied_data/",inputFile=sampleFile)
     elif(sys.argv[1] == "n"):
-        randomForest()
+        randomForest(inputFile = inputFile)
