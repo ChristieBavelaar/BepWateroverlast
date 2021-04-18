@@ -100,6 +100,8 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     xlabels = ["Accuracy", "Precision", "Recall"]
     ax.boxplot(data)
     ax.set_xticklabels(xlabels)
+    ax.ylim(0,1)
+
     resultFile.write("\nAverage accuracy: "+str(np.average(accuracyResult))+"\n")
     resultFile.write("Average Precision: "+str(np.average(precisionResult))+"\n")
     resultFile.write("Average Recall: "+ str(np.average(recallResult))+"\n")
@@ -110,7 +112,10 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     plt.show()
    
 if __name__ == '__main__':
-    
+    if sys.argv[2] == 1:
+        inputFile = "finalDataRancom.csv"
+    else:
+        inputFile = 'finalDataAdress.csv'
     if(sys.argv[1] == "y"):
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../pandafied_data/",inputFile=sampleFile)

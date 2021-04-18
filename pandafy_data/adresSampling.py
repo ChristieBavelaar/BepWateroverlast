@@ -89,6 +89,8 @@ def adress_sampling(data, adresses, tif, radar, saveFile, alice=False):
 
     # add in an equal number of negative samples
     negativeSamples = adresses.sample(n=len(pos_data)*2,replace=False)
+    negativeSamples = negativeSamples.reset_index(drop=True)
+    
     print(negativeSamples)
     # Convert rijksdriehoek coordinates to regular coordinates
     latlon = []
