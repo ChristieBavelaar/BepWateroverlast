@@ -1,7 +1,7 @@
 #!/bin/sh
-#SBATCH --job-name=ex1-1
-#SBATCH --output=/home/s2155435/ex1-1.out
-#SBATCH --error=/home/s2155435/ex1-1.err
+#SBATCH --job-name=ex4-1
+#SBATCH --output=/home/s2155435/ex4-1.out
+#SBATCH --error=/home/s2155435/ex4-1.err
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
 #SBATCH --partition=cpu-short
