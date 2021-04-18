@@ -1,0 +1,4 @@
+Attributes
+    - Rain per day 
+Rain threshold: 10
+Adress Sampling
