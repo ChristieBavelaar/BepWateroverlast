@@ -14,8 +14,8 @@ def combineDataFrames(pd112, pdRain, saveFile):
     pdRain = pdRain[pdRain['date'].notnull()]
 
     # Normalize dates
-    pd112['date'] = pd.to_datetime(pd112['date'], format='%Y-%m-%d')
-    pdRain['date'] = pd.to_datetime(pdRain['date'], format='%Y-%m-%d')
+    pd112['date'] = pd.to_datetime(pd112['date'], format='%Y-%m-%d').dt.date
+    pdRain['date'] = pd.to_datetime(pdRain['date'], format='%Y-%m-%d').dt.date
 
     print(pd112)
     print(pdRain)
