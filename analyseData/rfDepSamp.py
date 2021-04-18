@@ -17,7 +17,6 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
-    print(data)
     pos_data = pd.read_csv(folder + inputFile1)
     neg_data = pd.read_csv(folder + inputFile2)
     print("data loaded")    
