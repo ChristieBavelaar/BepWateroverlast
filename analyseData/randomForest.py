@@ -113,7 +113,7 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
    
 if __name__ == '__main__':
     if sys.argv[2] == 1:
-        inputFile = "finalDataRancom.csv"
+        inputFile = "finalDataRandom.csv"
     else:
         inputFile = 'finalDataAdress.csv'
     if(sys.argv[1] == "y"):
