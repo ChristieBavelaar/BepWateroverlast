@@ -1,6 +1,5 @@
 Target:Twitter
 Attributes
-    - Rain per day
     - Height (20x20)
 Rain threshold: 10
 Random Sampling
