@@ -13,6 +13,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
 def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.csv'):
+    print("open: ",inputFile)
     #resultFolder = '/home/s2155435/bep1/analyseData/results/'
     resultFolder = './'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
