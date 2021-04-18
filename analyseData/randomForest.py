@@ -35,15 +35,15 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     labels = np.array(rainTweets_eq['labels'])
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    #features= rainTweets_eq.drop(columns=['labels'])
-    features= rainTweets_eq.drop(columns=['labels', 'rain'])
+    features= rainTweets_eq.drop(columns=['labels'])
+    #features= rainTweets_eq.drop(columns=['labels', 'rain'])
     #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
     feature_list = list(features.columns)
     
     features = np.array(features)
-    
+    print(features)
     #k-fold cross validation
     skf = StratifiedKFold(n_splits=10)
     mape = []
