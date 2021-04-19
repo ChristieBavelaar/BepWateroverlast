@@ -118,6 +118,8 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
     xlabels = ["Accuracy", "Precision", "Recall"]
     ax.boxplot(data)
     ax.set_xticklabels(xlabels)
+    ax.set_ylim(0,1)
+
     resultFile.write("\nAverage accuracy: "+str(np.average(accuracyResult))+"\n")
     resultFile.write("Average Precision: "+str(np.average(precisionResult))+"\n")
     resultFile.write("Average Recall: "+ str(np.average(recallResult))+"\n")

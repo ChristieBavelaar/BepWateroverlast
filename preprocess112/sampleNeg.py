@@ -123,8 +123,11 @@ if __name__ == '__main__':
     neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
     pos_data = pd.read_csv(folder+'112LabeledSample.csv')
     adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
-    output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
-    print(output)
+    # output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
+    # print(output)
 
-    output = adressSample(adresses=adresses, posData=pos_data, negData=neg_data, radar=radar, extra=2, saveFile=folder+'adressSampledSample.csv')
+    # output = adressSample(adresses=adresses, posData=pos_data, negData=neg_data, radar=radar, extra=2, saveFile=folder+'adressSampledSample.csv')
+    # print(output)
+
+    output = dependent_sampling(pos_data, neg_data, saveFile=folder+"depsamp.csv")
     print(output)

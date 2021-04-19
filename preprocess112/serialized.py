@@ -25,8 +25,8 @@ if __name__ == '__main__':
     else:
         alice = True
         samplename = ''
-        folder = '/data/s2155435/'
-
+        #folder = '/data/s2155435/'
+        folder='../../'
     threshold = int(sys.argv[2])
     samplemethod = int(sys.argv[3])
     start = int(sys.argv[4])
@@ -97,8 +97,31 @@ if __name__ == '__main__':
         data = pd.read_csv(folder+'csv112/tif'+samplename+'.csv')
         pdRadar = pd.read_csv(folder+'csv112/pandafied_h5_radar.csv')
 
-        data = addHeightKwartetSearch(data=data, radar=pdRadar, saveFile=folder+'csv112/height'+samplename+'.csv', alice = alice)
+        if samplemethod <= 2:
+            data = addHeightKwartetSearch(data=data, radar=pdRadar, saveFile=folder+'csv112/height'+samplename+'.csv', alice = alice)
+        else:
+            # Seperate data
+            pos_data = data[data.labels == 1]
+            neg_data = data[data.labels == 0]
 
+            print('posdata',pos_data)
+            print('negdata',neg_data)
+
+            neg_data = neg_data.reset_index(drop=True)
+            pos_data = pos_data.reset_index(drop=True)
+            
+            pos_data = addHeightKwartetSearch(data=pos_data, radar=pdRadar, saveFile=folder+'csv112/height'+samplename+'.csv', alice = False)
+            print('pos with height', pos_data)
+
+            neg_data_2 = pos_data.copy()
+            neg_data_2['rain'] = neg_data['rain']
+            neg_data_2['date'] = neg_data['date']
+            neg_data_2['labels'] = neg_data['labels']
+
+            print('neg with height',neg_data_2)
+            data = pd.concat([pos_data, neg_data_2], ignore_index=True)
+
+            data.to_csv(folder+'csv112/height'+samplename+'.csv', index=False)
         start = 8
     
     if start == 8:
