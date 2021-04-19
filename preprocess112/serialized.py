@@ -25,8 +25,8 @@ if __name__ == '__main__':
     else:
         alice = True
         samplename = ''
-        #folder = '/data/s2155435/'
-        folder='../../'
+        folder = '/data/s2155435/'
+        #folder='../../'
     threshold = int(sys.argv[2])
     samplemethod = int(sys.argv[3])
     start = int(sys.argv[4])
