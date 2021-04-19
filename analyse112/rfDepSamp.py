@@ -13,8 +13,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
-    resultFolder = '/home/s2155435/bep1/experiments/scripts/'
-    #resultFolder = './results/'
+    #resultFolder = '/home/s2155435/bep1/experiments/scripts/'
+    resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     
     #load data
@@ -61,11 +61,11 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     totalConfusion = [[0,0],[0,0]]
     for train_index, test_index in skf.split(featuresPos, labelsPos):
         # Create training and test features and labels
-        train_features_pos, test_features_pos = featuresPos[train_index], featuresPos[test_index]
-        train_labels_pos, test_labels_pos = labelsPos[train_index], labelsPos[test_index]
+        train_features_pos, test_features_pos = featuresPos[train_index-1], featuresPos[test_index-1]
+        train_labels_pos, test_labels_pos = labelsPos[train_index-1], labelsPos[test_index-1]
 
-        train_features_neg, test_features_neg = featuresNeg[train_index], featuresNeg[test_index]
-        train_labels_neg, test_labels_neg = labelsNeg[train_index], labelsNeg[test_index]
+        train_features_neg, test_features_neg = featuresNeg[train_index-1], featuresNeg[test_index-1]
+        train_labels_neg, test_labels_neg = labelsNeg[train_index-1], labelsNeg[test_index-1]
 
         train_features = np.concatenate((train_features_pos, train_features_neg))
         test_features = np.concatenate((test_features_pos, test_features_neg))
