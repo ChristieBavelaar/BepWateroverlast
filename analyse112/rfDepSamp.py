@@ -29,6 +29,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     pos_data = data[data.labels == 1]
     neg_data = data[data.labels == 0]
     neg_data = neg_data.reset_index(drop=True)
+    pos_data = pos_data.reset_index(drop=True)
 
     print("data loaded")    
 
