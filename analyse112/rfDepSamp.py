@@ -47,10 +47,10 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     labelsNeg = np.array(neg_data['labels'])
 
     # Set features and convert to numpy array
-    # featuresPos= pos_data.drop(columns=['labels'])
-    # featuresNeg= neg_data.drop(columns=['labels'])
-    featuresPos= pos_data.drop(columns=['labels','rain'])
-    featuresNeg= neg_data.drop(columns=['labels','rain'])
+    featuresPos= pos_data.drop(columns=['labels'])
+    featuresNeg= neg_data.drop(columns=['labels'])
+    # featuresPos= pos_data.drop(columns=['labels','rain'])
+    # featuresNeg= neg_data.drop(columns=['labels','rain'])
     #features= rainTweets_eq.drop(columns=['labels', 'rain'])
     #features = rainTweets_eq[['rain']]
     

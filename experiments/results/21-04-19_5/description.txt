@@ -1,5 +1,5 @@
 Target: p2000
 Attributes
-    - Rain per day
+    - Height (20x20)
 Rain threshold: 10
 Dependant Sampling
