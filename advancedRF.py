@@ -493,7 +493,7 @@ def hyperparemeterOptimization(inputFile):
 	
 	# Random search of parameters, using 10 fold cross validation, 
 	# search across 100 different combinations, and use all available cores
-	rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = 10, cv = 10, verbose=2, random_state=42, n_jobs = -1)# Fit the random search model
+	rf_random = RandomizedSearchCV(estimator = rf, param_distributions = random_grid, n_iter = 100, cv = 2, verbose=2, random_state=42, n_jobs = -1)# Fit the random search model
 	# Fit the random search model
 	rf_random.fit(X_train_1, y_train_1)
 	base_model = RandomForestRegressor(n_estimators = 10, random_state = 42)

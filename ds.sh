@@ -5,7 +5,7 @@
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
 #SBATCH --partition=cpu-short
-#SBATCH -c 1
+#SBATCH -c 4
 #SBATCH --time=02:00:00
 #SBATCH --mem-per-cpu=64gb
 
