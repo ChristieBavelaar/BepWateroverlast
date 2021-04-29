@@ -34,6 +34,17 @@ def combineDataFrames(tweets_XY, rain, saveFile):
     rainTweets.to_csv(saveFile, index=False)
     return rainTweets
 
+def rainAttributes(tweets_XY, rain, saveFile):
+    print("Preprocess tweets")
+    tweets_XY['date'] = tweets_XY['date'].astype('object')
+    tweets_XY['hour'] = tweets_XY['time'].astype(str).str.slice(8,10).astype(int)
+
+    print('Preprocess rain')
+    rain['date'] = rain['dateh'].astype(str).str.slice(0,8).astype('object')
+    rain['hour'] = rain['dateh'].astype(str).str.slice(8,10).astype(int)
+    
+    print(tweets_XY,rain)
+
 if __name__ == '__main__':
     # sample = input("Sample? y/n")
     # if(sample == "y"):
@@ -48,10 +59,11 @@ if __name__ == '__main__':
     tweetFile= "twitter_sample_tiff.csv" 
     saveFile="combinedDataSample.csv"
     #folder = "../../pandafied_data/"
-    folder = "/data/s2155435/pandafied_data"
+    folder = "/data/s2155435/pandafied_data/"
 
     print("Load data")
     tweets_XY = pd.read_csv(folder + tweetFile)
     rain = pd.read_csv(folder + rainFile)
 
+    #Output=rainAttributes(tweets_XY,rain,folder+saveFile)
     combinedData = combineDataFrames(tweets_XY, rain, folder+saveFile)
