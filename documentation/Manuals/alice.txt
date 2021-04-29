@@ -12,3 +12,5 @@ submit job:
 	sbatch script.sh (vergeet niet eerst chmod +x)
 view jobs:
 	 squeue --start -u <username>
+transfer file:
+	scp [filename] alice1:/home/sSTUDENTNR

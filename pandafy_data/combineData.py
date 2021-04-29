@@ -9,18 +9,25 @@ def combineDataFrames(tweets_XY, rain, saveFile):
         Output: pandas dataframe
         Source: Christiaan
     """
+
     print("Preprocess tweets")
     #pick relevant columns from tweets_XY
-    tweets_XY = tweets_XY.drop(columns=['time'])
+    tweets_XY['dateh'] = tweets_XY['time'].astype(str).str.slice(0,10).astype('object')
+    tweets_XY = tweets_XY.drop(columns=['time','date'])
+
     #remove duplicates
     tweets_XY = tweets_XY.drop_duplicates()
     
-    rain = rain[rain['date'].notnull()]
-    rain['date'] = rain['date'].astype('object')
+    rain=rain.drop(columns='date')
+    rain = rain[rain['dateh'].notnull()]
+    rain['dateh'] = rain['dateh'].astype('object')
+    
     rain = rain.reset_index(drop=True)
 
     print("Merge data")
-    rainTweets = pd.merge(rain, tweets_XY, on=('radarX','radarY','date'), how='left')
+    print(tweets_XY)
+    print(rain)
+    rainTweets = pd.merge(rain, tweets_XY, on=('radarX','radarY','dateh'), how='left')
     rainTweets=rainTweets[rainTweets['rain'].notnull()]
     rain = rain.reset_index(drop=True)
     
@@ -28,17 +35,20 @@ def combineDataFrames(tweets_XY, rain, saveFile):
     return rainTweets
 
 if __name__ == '__main__':
-    sample = input("Sample? y/n")
-    if(sample == "y"):
-        rainFile="pandafied_h5_rain_2017_12.csv"
-        tweetFile= "twitter_sample_tiff.csv" 
-        saveFile="combinedDataSample.csv"
-    elif(sample == "n"):
-        rainFile="pandafied_h5_rain_2007-2020.csv"
-        tweetFile= "twitter_2010-2017_XY.csv"
-        saveFile="combinedData.csv"
-    
-    folder = "../../pandafied_data/"
+    # sample = input("Sample? y/n")
+    # if(sample == "y"):
+    #     rainFile="pandafied_h5_rain_2017_12.csv"
+    #     tweetFile= "twitter_sample_tiff.csv" 
+    #     saveFile="combinedDataSample.csv"
+    # elif(sample == "n"):
+    #     rainFile="pandafied_h5_rain_2007-2020.csv"
+    #     tweetFile= "twitter_2010-2017_XY.csv"
+    #     saveFile="combinedData.csv"
+    rainFile="pandafied_h5_rain_2017_12.csv"
+    tweetFile= "twitter_sample_tiff.csv" 
+    saveFile="combinedDataSample.csv"
+    #folder = "../../pandafied_data/"
+    folder = "/data/s2155435/pandafied_data"
 
     print("Load data")
     tweets_XY = pd.read_csv(folder + tweetFile)
