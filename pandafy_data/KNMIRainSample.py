@@ -14,7 +14,7 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
     data['rain'] = []
     data['radarX'] = []
     data['radarY'] = []
-    data['dateh'] = []
+    data['date'] = []
     #data['start_time'] = []
     #data['stop_time'] = []
     data = pd.DataFrame(data)
@@ -30,10 +30,8 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
     sum_data = pd.DataFrame(sum_data)
     print(len(h5_files))
     for filename_idx in range(len(h5_files)):
-        temp_date = h5_files[filename_idx][22:32]
-        print('temp_date: ', temp_date)
+        temp_date = h5_files[filename_idx][22:30]
         temp_time = h5_files[filename_idx][30:34]
-        #print('temp_time: ', temp_time)
         print("year: ",year_counter," / ",total_year," subfolder: ", subfolder_counter, " / ",subfolder_total, " file: ",filename_idx," / ", len(h5_files))
         with h5py.File(folder+subfolder+h5_files[filename_idx], 'r') as f:
             img = np.array(list(f['image1/image_data']))
@@ -42,11 +40,14 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             local_data['rain']= img.flatten().tolist()
             local_data['radarY'] = [i for i in range(len_y) for j in range(len_x)]
             local_data['radarX'] = [i for i in range(len_x)]*len_y
-            local_data['dateh']= [temp_date]*len_x*len_y
-            #local_data['hour'] = int(temp_time[0:2])
+            local_data['date']= [temp_date]*len_x*len_y
+            local_data['hour'] = [int(temp_time[0:2])]*len_x*len_y
+
             local_data = pd.DataFrame(local_data)
+
             local_data = local_data[local_data.rain < 65535]
-            # sum_data = sum_data.append(local_data,sort=False)
+            sum_data = sum_data.append(local_data,sort=False)
+            #sum_data = pd.merge(sum_data, local_data, on=('radarX', 'radarY', 'date'), how='left')
             #for i, row in enumerate(img):
             #    for j, num  in enumerate(row):
             #        if num < 65535:
@@ -57,17 +58,26 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             #            local_data['date']= [temp_date]
             #            local_data = pd.DataFrame(local_data)
             #            sum_data = sum_data.append(local_data,sort=False)
-        data = data.append(local_data,sort=False)
-        # if temp_time == '2400':
-        #     print(sum_data)
-        #     sum_data = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
-        #     data = data.append(sum_data,sort=False)
-        #     sum_data = {}
-        #     sum_data['rain'] = []
-        #     sum_data['radarX'] = []
-        #     sum_data['radarY'] = []
-        #     sum_data['date'] = []
-        #     sum_data = pd.DataFrame(sum_data)
+        if temp_time == '2400':
+            print(sum_data)
+            hourly_data = []
+            sum_data_2 = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
+            for i in range(1,24):
+                hourly_data = sum_data[sum_data['hour']== i].rename(columns={'rain':i})
+                
+                hourly_data = hourly_data.drop(columns='hour')
+                print(hourly_data)
+                sum_data_2 = pd.merge(sum_data_2, hourly_data, on=('date','radarX','radarY'), how='left')
+                print(sum_data_2)
+            print(sum_data_2)
+            data = data.append(sum_data_2,sort=False)
+            sum_data = {}
+            sum_data['rain'] = []
+            sum_data['radarX'] = []
+            sum_data['radarY'] = []
+            sum_data['date'] = []
+            sum_data = pd.DataFrame(sum_data)
+            print(data)
     return data
 
 def pandafy_h5(save_name_radar='../../pandafied_data/pandafied_h5_radar.csv',save_name_rain='../../pandafied_data/pandafied_h5_rain_2017_12.csv',folder = '../../KNMI/'):
