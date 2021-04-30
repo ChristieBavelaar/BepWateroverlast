@@ -57,7 +57,7 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             #            sum_data = sum_data.append(local_data,sort=False)
         if temp_time == '2400':
             hourly_data = []
-            sum_data_2 = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
+            sum_data_2 = sum_data.copy()
             for i in range(1,24):
                 hourly_data = sum_data[sum_data['hour']== i].rename(columns={'rain':i})
                 hourly_data = hourly_data.drop(columns='hour')
@@ -69,6 +69,7 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             sum_data['radarY'] = []
             sum_data['date'] = []
             sum_data = pd.DataFrame(sum_data)
+            print(data)
     return data
 
 def printname(name):

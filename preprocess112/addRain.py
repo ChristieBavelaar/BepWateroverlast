@@ -27,6 +27,45 @@ def combineDataFrames(pd112, pdRain, saveFile):
     pd112Rain.to_csv(saveFile, index=False)
     return pd112Rain
 
+def rainAttributes(pdInput, rain, saveFile, nrHours):
+    print("Preprocess tweets")
+    pdInput['date'] = pdInput['date'].astype('object')
+    pdInput['hour'] = pdInput['time'].astype(str).str.slice(8,10).astype(int)
+    
+    print('Preprocess rain')
+    rain['date']= pd.to_datetime(rain['date'], format='%Y%m%d')
+    #rain['hour']=rain['hour'].astype(int)
+    # rain['date'] = rain['dateh'].astype(str).str.slice(0,8).astype('object')
+    # print('step1')
+    # rain['hour'] = rain['dateh'].astype(str).str.slice(8,10).astype(int)
+    
+    totalData = pd.DataFrame()
+    print(pdInput,rain.dtypes)
+    dayRain = []
+    pastRain = []
+    for i in range(len(pdInput.index)):
+        day = pd.to_datetime(pdInput.iloc[i]['date'], format='%Y%m%d')
+        dayData = rain[(rain['date']==day) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
+        npDay = dayData.to_numpy()
+        dayRain.append(npDay[0,0])
+        if nrHours > pdInput.iloc[i]['hour']:
+            npDay = npDay[0,4:pdInput.iloc[i]['hour']+1]
+            prevday = day - pd.Timedelta('1 days')
+            prevDayData = rain[(rain['date']==prevday) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
+            npPrevday = prevDayData.to_numpy()
+            npPrevday = npPrevday[0, 4+(23 - (nrHours - pdInput.iloc[i]['hour'])):]
+
+            totalPastRain = np.concatenate((npPrevday,npDay)).sum()
+            pastRain.append(totalPastRain)
+        else:
+            npDay = npDay[0,4:nrHours+1].sum()
+            pastRain.append(npDay)
+    pdInput['rain'] = dayRain
+    pdInput['rain'+str(nrHours)] = pastRain
+ 
+    print(pdInput)
+    return pdInput
+    
 if __name__ == '__main__':
     folder = '../../csv112/'
     pd112 = pd.read_csv(folder+'112XYSample.csv')
