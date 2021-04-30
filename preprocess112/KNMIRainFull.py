@@ -41,6 +41,7 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             local_data['radarY'] = [i for i in range(len_y) for j in range(len_x)]
             local_data['radarX'] = [i for i in range(len_x)]*len_y
             local_data['date']= [temp_date]*len_x*len_y
+            local_data['hour'] = [int(temp_time[0:2])]*len_x*len_y
             local_data = pd.DataFrame(local_data)
             local_data = local_data[local_data.rain < 65535]
             sum_data = sum_data.append(local_data,sort=False)
@@ -55,8 +56,13 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             #            local_data = pd.DataFrame(local_data)
             #            sum_data = sum_data.append(local_data,sort=False)
         if temp_time == '2400':
-            sum_data = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
-            data = data.append(sum_data,sort=False)
+            hourly_data = []
+            sum_data_2 = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
+            for i in range(1,24):
+                hourly_data = sum_data[sum_data['hour']== i].rename(columns={'rain':i})
+                hourly_data = hourly_data.drop(columns='hour')
+                sum_data_2 = pd.merge(sum_data_2, hourly_data, on=('date','radarX','radarY'), how='left')
+            data = data.append(sum_data_2,sort=False)
             sum_data = {}
             sum_data['rain'] = []
             sum_data['radarX'] = []
