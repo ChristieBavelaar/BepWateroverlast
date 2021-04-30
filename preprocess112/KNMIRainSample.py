@@ -41,6 +41,7 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             local_data['radarY'] = [i for i in range(len_y) for j in range(len_x)]
             local_data['radarX'] = [i for i in range(len_x)]*len_y
             local_data['date']= [temp_date]*len_x*len_y
+            local_data['hour'] = [int(temp_time[0:2])]*len_x*len_y
             local_data = pd.DataFrame(local_data)
             local_data = local_data[local_data.rain < 65535]
             sum_data = sum_data.append(local_data,sort=False)
@@ -55,8 +56,13 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             #            local_data = pd.DataFrame(local_data)
             #            sum_data = sum_data.append(local_data,sort=False)
         if temp_time == '2400':
-            sum_data = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
-            data = data.append(sum_data,sort=False)
+            hourly_data = []
+            sum_data_2 = sum_data.groupby(['date','radarX','radarY'])['rain'].sum().reset_index(name='rain')
+            for i in range(1,24):
+                hourly_data = sum_data[sum_data['hour']== i].rename(columns={'rain':i})
+                hourly_data = hourly_data.drop(columns='hour')
+                sum_data_2 = pd.merge(sum_data_2, hourly_data, on=('date','radarX','radarY'), how='left')
+            data = data.append(sum_data_2,sort=False)
             sum_data = {}
             sum_data['rain'] = []
             sum_data['radarX'] = []
@@ -101,14 +107,11 @@ def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save
             print(len(d.index))
             data = data.append(d,sort=False)
     print(data[(data.radarX==442.0) & (data.radarY==251.0)])
-    print(5)
     print(len(data.index))
     print(data)
     print("len index: ",len(data.index))
-    print(6)
     data.to_csv(save_name_rain,index=False)
-    print(7)
     return data
 
 if __name__ == '__main__':
-    pandafy_h5_sample()
+    pandafy_h5_sample(save_name_radar='/data/s2155435/csv112/pandafied_h5_radar.csv', save_name_rain='/data/s2155435/pandafied_h5_rain_2020.csv', folder='/data/s2155435/KNMI/')
