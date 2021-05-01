@@ -69,7 +69,6 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
             sum_data['radarY'] = []
             sum_data['date'] = []
             sum_data = pd.DataFrame(sum_data)
-            print(data)
     return data
 
 def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save_name_rain='../../csv112/pandafied_h5_rain_2020.csv',folder = '../../KNMI/'):
