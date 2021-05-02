@@ -7,6 +7,10 @@ def pandafy112(folder = '../../', alice=False):
     
     # Select relevant columns
     pd112 = pd112[['date', 'latitude', 'longitude']]
+    pd112['date'] = pd.to_datetime(pd112['date'], format='%Y-%m-%d')
+    pd112['date'] = pd112['date']
+    pd112['hour'] = pd112['date'].dt.hour
+    pd112['labels'] = [1] * len(pd112.index)
     pd112.to_csv(folder+'csv112/112Relevant.csv', index=False)
     
     if not alice:

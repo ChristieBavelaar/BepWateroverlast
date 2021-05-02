@@ -1,5 +1,6 @@
 # 3 Select sample of neg data, give latlon and add to pos data
 import pandas as pd 
+import numpy as np
 import ast
 import shapely
 import shapely
@@ -117,11 +118,48 @@ def dependent_sampling(pos_data, neg_data, saveFile):
 
     return data
 
+#https://stackoverflow.com/questions/50559078/generating-random-dates-within-a-given-range-in-pandas
+def random_dates(start, end, n, unit='D', seed=None):
+    if not seed:  # from piR's answer
+        np.random.seed(0)
+
+    ndays = (end - start).days + 1
+    return pd.to_timedelta(np.random.rand(n) * ndays, unit=unit) + start
+
+def dependent_sampling_2(pos_data, saveFile):
+    negEq = pd.DataFrame()
+
+    pos_data['date'] = pd.to_datetime(pos_data['date'], format='%Y-%m-%d')
+    
+    pos_data=pos_data.sort_values(by='date', ascending=True)
+    print(pos_data)
+    start = pos_data.at[0,'date']
+    end = pos_data.at[len(pos_data.index)-1,'date']
+    print(start)
+    print(end)
+    for i in range(len(pos_data.index)):
+        pdSameRadar = pos_data[(pos_data['radarX'] == pos_data.iloc[i]['radarX']) & (pos_data['radarX'] == pos_data.iloc[i]['radarX'])]
+        randomDate = random_dates(start,end,1)
+        while(randomDate.date == pos_data.iloc[i]['date']):
+            randomDate = random_dates(start,end,1, seed=42)
+
+        negEq = negEq.append(pos_data.iloc[i])
+        negEq.at[i, 'date'] = randomDate.date 
+        negEq.at[i, 'labels'] = 0
+    print(negEq)
+    pos_data['date'] = pos_data['date'].dt.date
+    output = pos_data.append(negEq)
+    print(output)
+
 if __name__ == '__main__':
+    start = pd.to_datetime('2015-01-01')
+    end = pd.to_datetime('2020-01-01')
+    print(random_dates(start, end, 1))
     folder = '../../csv112/'
     radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
     neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
-    pos_data = pd.read_csv(folder+'112LabeledSample.csv')
+    #pos_data = pd.read_csv(folder+'112LabeledSample.csv')
+    pos_data = pd.read_csv(folder+'112XYSample.csv')
     adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
     # output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
     # print(output)
@@ -129,5 +167,7 @@ if __name__ == '__main__':
     # output = adressSample(adresses=adresses, posData=pos_data, negData=neg_data, radar=radar, extra=2, saveFile=folder+'adressSampledSample.csv')
     # print(output)
 
-    output = dependent_sampling(pos_data, neg_data, saveFile=folder+"depsamp.csv")
-    print(output)
+    # output = dependent_sampling(pos_data, neg_data, saveFile=folder+"depsamp.csv")
+    # print(output)
+
+    dependent_sampling_2(pos_data, folder+'depsamp2.csv')
