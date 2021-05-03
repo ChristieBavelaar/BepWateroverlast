@@ -75,7 +75,7 @@ def parallel_data_parsing(subfolder,folder,year_counter,total_year,subfolder_cou
 def printname(name):
     print(name)
 
-def pandafy_h5_full(save_name_radar='/data/s2155435/csv112/pandafied_h5_radar.csv',save_name_rain='/data/csv112/pandafied_data/pandafied_h5_rain_2007-2020.csv',folder = '/data/s2155435/KNMI/'):
+def pandafy_h5_full(save_name_radar='/data/s2155435/csv112/pandafied_h5_radar.csv',save_name_rain='/data/s2155435/csv112/pandafied_data/pandafied_h5_rain_2007-2020.csv',folder = '/data/s2155435/KNMI/'):
     '''
         This function reads the KNMI precipitation data, aggregates it by summing up the amount of rain per day, it puts it into a pandas dataframe and saves it to disk.
     '''
