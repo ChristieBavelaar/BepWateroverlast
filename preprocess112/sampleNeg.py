@@ -6,7 +6,7 @@ import shapely
 import shapely
 from shapely.geometry import Polygon,Point
 import random
-
+from random import randint
 from addXY import tweets_append_XY
 from latlonConverter import Converter
 
@@ -132,35 +132,31 @@ def dependent_sampling_2(pos_data, saveFile):
     pos_data['date'] = pd.to_datetime(pos_data['date'], format='%Y-%m-%d')
     
     pos_data=pos_data.sort_values(by='date', ascending=True)
-    print(pos_data)
     start = pos_data.at[0,'date']
     end = pos_data.at[len(pos_data.index)-1,'date']
-    print(start)
-    print(end)
+    nrDates = len(pos_data.index)
+    randomDates = random_dates(start, end, nrDates, seed=42)
     for i in range(len(pos_data.index)):
         pdSameRadar = pos_data[(pos_data['radarX'] == pos_data.iloc[i]['radarX']) & (pos_data['radarX'] == pos_data.iloc[i]['radarX'])]
-        randomDate = random_dates(start,end,1)
-        while(randomDate.date == pos_data.iloc[i]['date']):
-            randomDate = random_dates(start,end,1, seed=42)
+        
+        while(randomDates[i].date == pos_data.iloc[i]['date']):
+            randomDates = random_dates(start,end,nrDates, seed=randint(0,42))
 
         negEq = negEq.append(pos_data.iloc[i])
-        negEq.at[i, 'date'] = randomDate.date 
+        negEq.at[i, 'date'] = randomDates[i].date()
         negEq.at[i, 'labels'] = 0
-    print(negEq)
     pos_data['date'] = pos_data['date'].dt.date
     output = pos_data.append(negEq)
+    output.to_csv(saveFile, index=False)
     print(output)
 
 if __name__ == '__main__':
-    start = pd.to_datetime('2015-01-01')
-    end = pd.to_datetime('2020-01-01')
-    print(random_dates(start, end, 1))
-    folder = '../../csv112/'
-    radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
-    neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
-    #pos_data = pd.read_csv(folder+'112LabeledSample.csv')
+    folder = '/data/s2155435/csv112/'
+    # radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
+    # neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
+    # #pos_data = pd.read_csv(folder+'112LabeledSample.csv')
     pos_data = pd.read_csv(folder+'112XYSample.csv')
-    adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
+    # adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
     # output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
     # print(output)
 
