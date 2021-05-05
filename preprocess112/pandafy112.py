@@ -2,6 +2,7 @@ import pandas as pd
 
 def pandafy112(folder = '../../', alice=False):
      # Write to csv file
+    folder = '/data/s2155435/'
     pd112 = pd.read_json(folder+'parsed_w_precise_coords.json')
     pd112.to_csv(folder+'csv112/112Full.csv', index=False)
     
