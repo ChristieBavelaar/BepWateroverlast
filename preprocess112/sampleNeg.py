@@ -155,7 +155,7 @@ def dependent_sampling_2(pos_data, rain, saveFile):
             print(pos_data.iloc[i])
             print(rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ])
     output = pos_data.append(negEq)
-    output['date'] = output['date'].date
+    #output['date'] = output['date'].date
     output.to_csv(saveFile, index=False)
     print(output)
 
