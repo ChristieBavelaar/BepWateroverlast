@@ -126,7 +126,7 @@ def random_dates(start, end, n, unit='D', seed=None):
     ndays = (end - start).days + 1
     return pd.to_timedelta(np.random.rand(n) * ndays, unit=unit) + start
 
-def dependent_sampling_2(pos_data, saveFile):
+def dependent_sampling_2(pos_data, rain, saveFile):
     negEq = pd.DataFrame()
 
     pos_data['date'] = pd.to_datetime(pos_data['date'], format='%Y-%m-%d')
@@ -137,16 +137,19 @@ def dependent_sampling_2(pos_data, saveFile):
     nrDates = len(pos_data.index)
     randomDates = random_dates(start, end, nrDates, seed=42)
     for i in range(len(pos_data.index)):
-        pdSameRadar = pos_data[(pos_data['radarX'] == pos_data.iloc[i]['radarX']) & (pos_data['radarX'] == pos_data.iloc[i]['radarX'])]
-        
-        while(randomDates[i].date == pos_data.iloc[i]['date']):
-            randomDates = random_dates(start,end,nrDates, seed=randint(0,42))
+        temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
+
+        newDate = temp.sample().iloc[0]['date']
+
+        while newDate == pos_data.iloc[i]['date']:
+            print("different date")
+            newDate = temp.sample()['date']
 
         negEq = negEq.append(pos_data.iloc[i])
-        negEq.at[i, 'date'] = randomDates[i].date()
+        negEq.at[i, 'date'] = newDate
         negEq.at[i, 'labels'] = 0
-    pos_data['date'] = pos_data['date'].dt.date
     output = pos_data.append(negEq)
+    output['date'] = output['date'].dt.date
     output.to_csv(saveFile, index=False)
     print(output)
 
@@ -156,6 +159,8 @@ if __name__ == '__main__':
     # neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
     # #pos_data = pd.read_csv(folder+'112LabeledSample.csv')
     pos_data = pd.read_csv(folder+'112XY.csv')
+    rain = pd.read_csv(folder+'rainFiltered.csv')
+
     # adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
     # output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
     # print(output)
@@ -166,4 +171,4 @@ if __name__ == '__main__':
     # output = dependent_sampling(pos_data, neg_data, saveFile=folder+"depsamp.csv")
     # print(output)
 
-    dependent_sampling_2(pos_data, folder+'depsamp2.csv')
+    dependent_sampling_2(pos_data, rain, folder+'depsamp2.csv')
