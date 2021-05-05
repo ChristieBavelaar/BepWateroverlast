@@ -132,6 +132,7 @@ def dependent_sampling_2(pos_data, rain, saveFile):
     negEq = pd.DataFrame()
 
     pos_data = pos_data.dropna()
+    pos_data['labels'] = [1] * len(pos_data.index)
     pos_data['date'] = pd.to_datetime(pos_data['date'], format='%Y-%m-%d')
     
     pos_data=pos_data.sort_values(by='date', ascending=True)
@@ -155,6 +156,7 @@ def dependent_sampling_2(pos_data, rain, saveFile):
             print(pos_data.iloc[i])
             print(rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ])
     output = pos_data.append(negEq)
+    print(output.dtypes)
     #output['date'] = output['date'].date
     output.to_csv(saveFile, index=False)
     print(output)
