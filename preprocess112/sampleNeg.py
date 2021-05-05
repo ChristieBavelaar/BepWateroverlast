@@ -139,17 +139,20 @@ def dependent_sampling_2(pos_data, rain, saveFile):
     nrDates = len(pos_data.index)
     randomDates = random_dates(start, end, nrDates, seed=42)
     for i in range(len(pos_data.index)):
-        temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
+        try:
+            temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
+            newDate = temp.sample().iloc[0]['date']
 
-        newDate = temp.sample().iloc[0]['date']
+            while newDate == pos_data.iloc[i]['date']:
+                print("different date")
+                newDate = temp.sample()['date']
 
-        while newDate == pos_data.iloc[i]['date']:
-            print("different date")
-            newDate = temp.sample()['date']
-
-        negEq = negEq.append(pos_data.iloc[i])
-        negEq.at[i, 'date'] = newDate
-        negEq.at[i, 'labels'] = 0
+            negEq = negEq.append(pos_data.iloc[i])
+            negEq.at[i, 'date'] = newDate
+            negEq.at[i, 'labels'] = 0
+        except:
+            print(pos_data.iloc[i])
+            print(rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ])
     output = pos_data.append(negEq)
     output['date'] = output['date'].dt.date
     output.to_csv(saveFile, index=False)
