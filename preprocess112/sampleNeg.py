@@ -98,10 +98,10 @@ def dependent_sampling(pos_data, neg_data, saveFile):
         try:
             temp = neg_data.loc[(neg_data['radarX'] == pos_data.iloc[i]['radarX']) & (neg_data['radarY'] == pos_data.iloc[i]['radarY']) ]
             newRow = temp.sample()
-                # When to positive examples in the same radar space occur it is possible to add in a duplicate. Check that the sample is not allready contained in negEq
-                while not negEq.loc[(negEq['radarX'] == newRow.iloc[0]['radarX']) & (negEq['radarY'] == newRow.iloc[0]['radarY']) & (negEq['date'] == newRow.iloc[0]['date'])].empty:
-                    newRow = temp.sample()
-                negEq = negEq.append(newRow)
+            # When to positive examples in the same radar space occur it is possible to add in a duplicate. Check that the sample is not allready contained in negEq
+            while not negEq.loc[(negEq['radarX'] == newRow.iloc[0]['radarX']) & (negEq['radarY'] == newRow.iloc[0]['radarY']) & (negEq['date'] == newRow.iloc[0]['date'])].empty:
+                newRow = temp.sample()
+            negEq = negEq.append(newRow)
         except:
             print("radarX",pos_data.iloc[i]['radarX'])
             print("radarY",pos_data.iloc[i]['radarY'])
@@ -113,7 +113,7 @@ def dependent_sampling(pos_data, neg_data, saveFile):
     pos_data = pos_data.reset_index(drop=True)
     negEq['latitude'] = pos_data['latitude']
     negEq['longitude'] = pos_data['longitude']
-    
+
     # Save to file
     data = pd.concat([pos_data, negEq], ignore_index=True)
     data.to_csv(saveFile, index=False)
