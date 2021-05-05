@@ -155,7 +155,7 @@ if __name__ == '__main__':
     # radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
     # neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
     # #pos_data = pd.read_csv(folder+'112LabeledSample.csv')
-    pos_data = pd.read_csv(folder+'112XYSample.csv')
+    pos_data = pd.read_csv(folder+'112XY.csv')
     # adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
     # output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
     # print(output)
