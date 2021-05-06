@@ -4,9 +4,9 @@
 #SBATCH --error=/home/s2155435/hourlyRain.err
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
-#SBATCH --partition=cpu-medium
+#SBATCH --partition=testing
 #SBATCH -c 1
-#SBATCH --time=10:00:00
+#SBATCH --time=01:00:00
 #SBATCH --mem-per-cpu=32gb
 
 export PYTHONPATH=/home/s2155435/bep1/

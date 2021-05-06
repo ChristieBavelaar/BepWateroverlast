@@ -56,6 +56,14 @@ def dayRain(pdInput,rain):
             npDay = dayData.to_numpy()
             dayRain.append(npDay[0,0])
         except:
+            print("Same date")
+            print(rain[rain['date']==day])
+            print("Same Y")
+            print(rain[rain['radarY']==pdInput.iloc[i]['radarY']])
+            print("Same X")
+            print(rain[rain['radarX']==pdInput.iloc[i]['radarX']])
+            print("Same radar")
+            print(rain[(rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])])
             print(dayData, day)
             dayRain.append(None)
     pdInput['rain'] = dayRain
@@ -63,10 +71,12 @@ def dayRain(pdInput,rain):
 
 def rainAttributes(pdInput, rain, saveFile):
     print("Preprocess tweets")
-    # pdInput['date'] = pdInput['date'].astype('object')
-    pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
+    pdInput['date'] = pdInput['date'].astype('object')
+    rain['date'] = rain['date'].astype('object')
+
+    # pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
     print('Preprocess rain')
-    rain['date']= pd.to_datetime(rain['date'], format='%Y-%m-%d')
+    # rain['date']= pd.to_datetime(rain['date'], format='%Y-%m-%d')
     #rain['hour']=rain['hour'].astype(int)
     # rain['date'] = rain['dateh'].astype(str).str.slice(0,8).astype('object')
     # print('step1')
