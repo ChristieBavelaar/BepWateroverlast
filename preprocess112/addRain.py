@@ -50,10 +50,14 @@ def addHourlyRain(pdInput, rain, nrHours):
 def dayRain(pdInput,rain):
     dayRain = []
     for i in range(len(pdInput.index)):
-        day = pd.to_datetime(pdInput.iloc[i]['date'], format='%Y%m%d')
+        day = pdInput.iloc[i]['date']
         dayData = rain[(rain['date']==day) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
-        npDay = dayData.to_numpy()
-        dayRain.append(npDay[0,0])
+        try:
+            npDay = dayData.to_numpy()
+            dayRain.append(npDay[0,0])
+        except:
+            print(dayData, day)
+            dayRain.append(None)
     pdInput['rain'] = dayRain
     return pdInput
 
