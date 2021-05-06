@@ -62,7 +62,7 @@ def rainAttributes(pdInput, rain, saveFile):
     # pdInput['date'] = pdInput['date'].astype('object')
     pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
     print('Preprocess rain')
-    rain['date']= pd.to_datetime(rain['date'], format='%Y%m%d')
+    rain['date']= pd.to_datetime(rain['date'], format='%Y-%m-%d')
     #rain['hour']=rain['hour'].astype(int)
     # rain['date'] = rain['dateh'].astype(str).str.slice(0,8).astype('object')
     # print('step1')
