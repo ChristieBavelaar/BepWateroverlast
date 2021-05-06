@@ -59,9 +59,8 @@ def dayRain(pdInput,rain):
 
 def rainAttributes(pdInput, rain, saveFile):
     print("Preprocess tweets")
-    pdInput['date'] = pdInput['date'].astype('object')
-    pdInput['hour'] = pdInput['time'].astype(str).str.slice(8,10).astype(int)
-    
+    # pdInput['date'] = pdInput['date'].astype('object')
+    pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
     print('Preprocess rain')
     rain['date']= pd.to_datetime(rain['date'], format='%Y%m%d')
     #rain['hour']=rain['hour'].astype(int)
@@ -71,6 +70,28 @@ def rainAttributes(pdInput, rain, saveFile):
     pdInput = dayRain(pdInput,rain)
     for i in range(1,24):
         pdInput=addHourlyRain(pdInput,rain,i)
+    
+
+    try:
+        pd112['hour'] = pd112['date'].dt.hour
+    except:
+        print("not pd112['hour'] = pd112['date'].dt.hour")
+        
+    try:
+        pd112['date'] = pd112['date'].date
+    except:
+        print('not pd112[date].date')
+
+    try:
+        pd112['date'] = pd112['date'].dt.date
+    except:
+        print("not pd112['date'] = pd112['date'].dt.date")
+
+    try:
+        pd112['date'] = pd112['date'].date()
+    except:
+        print("not pd112['date'] = pd112['date'].date()")
+
     print(pdInput)
     pdInput.to_csv(saveFile, index=False)
     return pdInput
