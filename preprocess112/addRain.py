@@ -72,26 +72,6 @@ def rainAttributes(pdInput, rain, saveFile):
         pdInput=addHourlyRain(pdInput,rain,i)
     
 
-    try:
-        pd112['hour'] = pd112['date'].dt.hour
-    except:
-        print("not pd112['hour'] = pd112['date'].dt.hour")
-        
-    try:
-        pd112['date'] = pd112['date'].date
-    except:
-        print('not pd112[date].date')
-
-    try:
-        pd112['date'] = pd112['date'].dt.date
-    except:
-        print("not pd112['date'] = pd112['date'].dt.date")
-
-    try:
-        pd112['date'] = pd112['date'].date()
-    except:
-        print("not pd112['date'] = pd112['date'].date()")
-
     print(pdInput)
     pdInput.to_csv(saveFile, index=False)
     return pdInput
@@ -100,5 +80,6 @@ if __name__ == '__main__':
     folder = '/data/s2155435/csv112/'
     pd112 = pd.read_csv(folder+'depsamp2.csv')
     rain = pd.read_csv(folder+'rainFiltered.csv')
-    output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
+    #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
+    output = rainAttributes(pd112, rain, folder+"112RainDepSamp.csv")
     print(output)
