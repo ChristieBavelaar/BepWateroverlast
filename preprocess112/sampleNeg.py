@@ -133,7 +133,7 @@ def dependent_sampling_2(pos_data, rain, saveFile):
 
     pos_data = pos_data.dropna()
     pos_data = pos_data.reset_index(drop=True)
-    
+
     pos_data['date'] = pd.to_datetime(pos_data['date'], format='%Y-%m-%d')
     
     pos_data=pos_data.sort_values(by='date', ascending=True)
@@ -153,6 +153,7 @@ def dependent_sampling_2(pos_data, rain, saveFile):
 
             negEq = negEq.append(pos_data.iloc[i])
             negEq.at[i, 'date'] = newDate
+            negEq.at[i, 'hour'] = randint(1,24)
             negEq.at[i, 'labels'] = 0
         except:
             print(pos_data.iloc[i])
