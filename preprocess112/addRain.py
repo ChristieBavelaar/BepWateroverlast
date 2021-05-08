@@ -30,7 +30,8 @@ def combineDataFrames(pd112, pdRain, saveFile):
 def addHourlyRain(pdInput, rain, nrHours):
     pastRain = []
     for i in range(len(pdInput.index)):
-        day = pd.to_datetime(pdInput.iloc[i]['date'], format='%Y%m%d')
+        #day = pd.to_datetime(pdInput.iloc[i]['date'], format='%Y%m%d')
+        day = pdInput.iloc[i]['date']
         dayData = rain[(rain['date']==day) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
         npDay = dayData.to_numpy()
         if nrHours > pdInput.iloc[i]['hour']:
