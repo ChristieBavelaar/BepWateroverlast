@@ -1,4 +1,5 @@
 import pandas as pd 
+import numpy as np
 from tqdm import tqdm
 
 def combineDataFrames(pd112, pdRain, saveFile):
@@ -34,21 +35,33 @@ def addHourlyRain(pdInput, rain, nrHours):
         day = pdInput.iloc[i]['date']
         dayData = rain[(rain['date']==day) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
         npDay = dayData.to_numpy()
+        #print(npDay)
         if nrHours > pdInput.iloc[i]['hour']:
             npDay = npDay[0,4:pdInput.iloc[i]['hour']+1]
             prevday = day - pd.Timedelta('1 days')
             prevDayData = rain[(rain['date']==prevday) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
+            
             npPrevday = prevDayData.to_numpy()
-            npPrevday = npPrevday[0, 4+(23 - (nrHours - pdInput.iloc[i]['hour'])):]
+            npPrevday = npPrevday[0, 4+(24 - (nrHours - pdInput.iloc[i]['hour'])):]
 
             totalPastRain = np.concatenate((npPrevday,npDay)).sum()
             pastRain.append(totalPastRain)
         else:
             npDay = npDay[0,4:nrHours+1].sum()
             pastRain.append(npDay)
+
     pdInput['rain'+str(nrHours)] = pastRain
 
-def dayRain(pdInput,rain):
+    print(nrHours,'/ 24')
+    return pdInput
+
+def dayRain(pdInput,rain, saveFile):
+    print("Preprocess tweets")
+    pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
+
+    print('Preprocess rain')
+    rain['date']= pd.to_datetime(rain['date'], format='%Y-%m-%d')
+
     dayRain = []
     for i in range(len(pdInput.index)):
         day = pdInput.iloc[i]['date']
@@ -57,33 +70,31 @@ def dayRain(pdInput,rain):
             npDay = dayData.to_numpy()
             dayRain.append(npDay[0,0])
         except:
-            print("Same date")
-            print(rain[rain['date']==day])
-            print("Same Y")
-            print(rain[rain['radarY']==pdInput.iloc[i]['radarY']])
-            print("Same X")
-            print(rain[rain['radarX']==pdInput.iloc[i]['radarX']])
-            print("Same radar")
-            print(rain[(rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])])
-            print(dayData, day)
+            print('No rain for that alert')
             dayRain.append(None)
     pdInput['rain'] = dayRain
+
+    print(pdInput)
+    pdInput = pdInput.dropna()
+    pdInput.to_csv(saveFile, index=False)
     return pdInput
 
 def rainAttributes(pdInput, rain, saveFile):
     print("Preprocess tweets")
-    pdInput['date'] = pdInput['date'].astype('object')
-    rain['date'] = rain['date'].astype('object')
+    # pdInput['date'] = pdInput['date'].astype('object')
+    # rain['date'] = rain['date'].astype('object')
+    pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
+    pdInput['hour'] = pdInput['hour'].astype(int)
 
-    # pdInput['date'] = pd.to_datetime(pdInput['date'], format='%Y-%m-%d')
     print('Preprocess rain')
-    # rain['date']= pd.to_datetime(rain['date'], format='%Y-%m-%d')
+    rain['date']= pd.to_datetime(rain['date'], format='%Y%m%d')
+
     #rain['hour']=rain['hour'].astype(int)
     # rain['date'] = rain['dateh'].astype(str).str.slice(0,8).astype('object')
     # print('step1')
     # rain['hour'] = rain['dateh'].astype(str).str.slice(8,10).astype(int)
-    pdInput = dayRain(pdInput,rain)
-    for i in range(1,24):
+    # pdInput = dayRain(pdInput,rain)
+    for i in range(1,25):
         pdInput=addHourlyRain(pdInput,rain,i)
     
 
@@ -92,9 +103,19 @@ def rainAttributes(pdInput, rain, saveFile):
     return pdInput
     
 if __name__ == '__main__':
-    folder = '/data/s2155435/csv112/'
-    pd112 = pd.read_csv(folder+'depsamp2.csv')
-    rain = pd.read_csv(folder+'rainFiltered.csv')
+    # folder = '/data/s2155435/csv112/'
+    # pd112 = pd.read_csv(folder+'depsamp2.csv')
+    # rain = pd.read_csv(folder+'rainFiltered.csv')
+    # #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
+    # output = rainAttributes(pd112, rain, folder+"112RainDepSamp.csv")
+
+    folder = '../../csv112/'
+    pd112 = pd.read_csv(folder+'112SampledSample.csv')
+    pd112_2 = pd.read_csv(folder+'112XYSample.csv')
+    rain = pd.read_csv(folder+'rainFilteredSample.csv')
+    rain_2 = pd.read_csv(folder+'pandafied_h5_rain_2017_12.csv')
     #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
-    output = rainAttributes(pd112, rain, folder+"112RainDepSamp.csv")
+    output = rainAttributes(pd112, rain_2, folder+"112RainSumSample.csv")
+    # output = dayRain(pd112_2, rain, folder+'112DayRainSample.csv')
+
     print(output)

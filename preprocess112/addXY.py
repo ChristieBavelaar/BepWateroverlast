@@ -44,13 +44,13 @@ def tweets_append_XY(tweets,radar, saveFile):
     return tweets_XY
 
 if __name__ == '__main__':
-    # folder = "../../csv112/"    
-    # radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
-    # pd112 = pd.read_csv(folder+'112RelevantSample.csv')
-    # output = tweets_append_XY(tweets=pd112, radar=radar, saveFile=folder+'112XYSample.csv')
-    
-    folder = "/data/s2155435/csv112/"    
+    folder = "../../csv112/"    
     radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
-    pd112 = pd.read_csv(folder+'112Relevant.csv')
-    output = tweets_append_XY(tweets=pd112, radar=radar, saveFile=folder+'112XY.csv')
+    pd112 = pd.read_csv(folder+'112RelevantSample.csv')
+    output = tweets_append_XY(tweets=pd112, radar=radar, saveFile=folder+'112XYSample.csv')
+    
+    # folder = "/data/s2155435/csv112/"    
+    # radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
+    # pd112 = pd.read_csv(folder+'112RelevantS.csv')
+    # output = tweets_append_XY(tweets=pd112, radar=radar, saveFile=folder+'112XY.csv')
     

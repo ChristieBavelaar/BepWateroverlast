@@ -197,15 +197,19 @@ def addHeightKwartetSearch(data, radar, saveFile, alice):
 if __name__ == '__main__':
     folder = '../../csv112/'
     radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
-    pdRandom = pd.read_csv(folder+'randomTifSample.csv')
-    pdAdress = pd.read_csv(folder+'adressTifSample.csv')
-    pdDep = pd.read_csv(folder+'depTifSample.csv')
+    # pdRandom = pd.read_csv(folder+'randomTifSample.csv')
+    # pdAdress = pd.read_csv(folder+'adressTifSample.csv')
+    # pdDep = pd.read_csv(folder+'depTifSample.csv')
+    pdDep2 = pd.read_csv(folder+'112TifSample.csv')
 
-    outputRandom = addHeightKwartetSearch(data=pdRandom, radar=radar, saveFile=folder+'randomHeightSample.csv', alice=False)
-    print(outputRandom)
+    # outputRandom = addHeightKwartetSearch(data=pdRandom, radar=radar, saveFile=folder+'randomHeightSample.csv', alice=False)
+    # print(outputRandom)
     
-    outputAdress = addHeightKwartetSearch(data=pdAdress, radar=radar, saveFile=folder+'adressHeightSample.csv', alice=False)
-    print(outputAdress)
+    # outputAdress = addHeightKwartetSearch(data=pdAdress, radar=radar, saveFile=folder+'adressHeightSample.csv', alice=False)
+    # print(outputAdress)
 
-    outputDep = addHeightKwartetSearch(data=pdDep, radar=radar, saveFile=folder+'depHeightSample.csv', alice=False)
-    print(outputDep)
+    # outputDep = addHeightKwartetSearch(data=pdDep, radar=radar, saveFile=folder+'depHeightSample.csv', alice=False)
+    # print(outputDep)
+
+    outputDep2 = addHeightKwartetSearch(data=pdDep2, radar=radar, saveFile=folder+'depHeightSample.csv', alice=False)
+    print(outputDep2)

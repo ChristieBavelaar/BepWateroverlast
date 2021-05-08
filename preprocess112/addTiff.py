@@ -61,15 +61,19 @@ def tweets_append_tif(tweets,tif, saveFile):
 if __name__ == '__main__':
     folder = '../../csv112/'
     tif = pd.read_csv(folder+'lat_lon_to_filename.csv')
-    pdRandom = pd.read_csv(folder+'randomSampledSample.csv')
-    pdAdress = pd.read_csv(folder +'adressSampledSample.csv')
-    pdDep = pd.read_csv(folder+'112LabeledSample.csv')
+    # pdRandom = pd.read_csv(folder+'randomSampledSample.csv')
+    # pdAdress = pd.read_csv(folder +'adressSampledSample.csv')
+    # pdDep = pd.read_csv(folder+'112LabeledSample.csv')
+    pdDep2 = pd.read_csv(folder+'112DayRainSample.csv')
 
-    outputRandom = tweets_append_tif(tweets=pdRandom, tif=tif, saveFile=folder+'randomTifSample.csv')
-    print(outputRandom)
+    # outputRandom = tweets_append_tif(tweets=pdRandom, tif=tif, saveFile=folder+'randomTifSample.csv')
+    # print(outputRandom)
 
-    outputAdress = tweets_append_tif(tweets=pdAdress, tif=tif, saveFile=folder+'adressTifSample.csv')
-    print(outputAdress) 
+    # outputAdress = tweets_append_tif(tweets=pdAdress, tif=tif, saveFile=folder+'adressTifSample.csv')
+    # print(outputAdress) 
 
-    outputDep = tweets_append_tif(tweets=pdDep, tif=tif, saveFile=folder+'depTifSample.csv')
-    print(outputDep)
+    # outputDep = tweets_append_tif(tweets=pdDep, tif=tif, saveFile=folder+'depTifSample.csv')
+    # print(outputDep)
+
+    outputDep2 = tweets_append_tif(tweets=pdDep2, tif=tif, saveFile=folder+'112TifSample.csv')
+    print(outputDep2)

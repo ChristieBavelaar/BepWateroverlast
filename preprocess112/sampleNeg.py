@@ -135,59 +135,49 @@ def dependent_sampling_2(pos_data, rain, saveFile):
     pos_data = pos_data.reset_index(drop=True)
 
     pos_data['date'] = pd.to_datetime(pos_data['date'], format='%Y-%m-%d')
-    
-    pos_data=pos_data.sort_values(by='date', ascending=True)
+    rain['date'] = pd.to_datetime(rain['date'], format='%Y-%m-%d')
+
     start = pos_data.at[0,'date']
     end = pos_data.at[len(pos_data.index)-1,'date']
     nrDates = len(pos_data.index)
     randomDates = random_dates(start, end, nrDates, seed=42)
-    print(randomDates)
+
     for i in range(len(pos_data.index)):
-        try:
-            temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
-            newDate = temp.sample().iloc[0]['date']
+        temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
+        newDate = temp.sample().iloc[0]['date']
 
-            while newDate == pos_data.iloc[i]['date']:
-                print("different date")
-                newDate = temp.sample()['date']
+        while newDate == pos_data.iloc[i]['date']:
+            print("different date")
+            newDate = temp.sample()
+            newDate = newDate.iloc[0]['date']
 
-            negEq = negEq.append(pos_data.iloc[i])
-            negEq.at[i, 'date'] = newDate
-            negEq.at[i, 'hour'] = randint(1,24)
-            negEq.at[i, 'labels'] = 0
-        except:
-            print(pos_data.iloc[i])
-            print(rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ])
-    print(negEq)
+        negEq = negEq.append(pos_data.iloc[i])
+        negEq.at[i, 'date'] = newDate
+        negEq.at[i, 'hour'] = randint(1,24)
+        negEq.at[i, 'labels'] = 0
+
     output = pos_data.append(negEq)
-    print(output.dtypes)
+    output['date'] = output['date'].dt.date
 
-    try:
-        output['date'] = output['date'].date
-    except:
-        print('not pd112[date].date')
-
-    try:
-        output['date'] = output['date'].dt.date
-    except:
-        print("not pd112['date'] = pd112['date'].dt.date")
-
-    try:
-        output['date'] = output['date'].date()
-    except:
-        print("not pd112['date'] = pd112['date'].date()")
-
-    #output['date'] = output['date'].date
     output.to_csv(saveFile, index=False)
+
     print(output)
 
 if __name__ == '__main__':
-    folder = '/data/s2155435/csv112/'
+    # folder = '/data/s2155435/csv112/'
+    # pos_data = pd.read_csv(folder+'112XY.csv')
+    # rain = pd.read_csv(folder+'rainFiltered.csv')
+    # dependent_sampling_2(pos_data, rain, folder+'depsamp2.csv')
+
+    folder = '../../csv112/'
+    pos_data = pd.read_csv(folder+'depHeightSample.csv')
+    rain = pd.read_csv(folder+'rainFilteredSample.csv')
+    dependent_sampling_2(pos_data, rain, folder+'112SampledSample.csv')
+
     # radar = pd.read_csv(folder+'pandafied_h5_radar.csv')
     # neg_data = pd.read_csv(folder+'rainLabeledSample.csv')
     # #pos_data = pd.read_csv(folder+'112LabeledSample.csv')
-    pos_data = pd.read_csv(folder+'112XY.csv')
-    rain = pd.read_csv(folder+'rainFiltered.csv')
+
 
     # adresses = pd.read_csv('../../pandafied_data/verblijfplaatsen.csv')
     # output = randomSample(data=neg_data, posData=pos_data, radar=radar, extra=2, saveFile=folder+'randomSampledSample.csv')
@@ -199,4 +189,4 @@ if __name__ == '__main__':
     # output = dependent_sampling(pos_data, neg_data, saveFile=folder+"depsamp.csv")
     # print(output)
 
-    dependent_sampling_2(pos_data, rain, folder+'depsamp2.csv')
+    

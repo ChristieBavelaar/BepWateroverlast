@@ -77,15 +77,16 @@ def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save
     '''
 
     results = []
-    year_counter = 2020
+    year_counter = 2021
     total_year = 1
     
-    super_folder = folder+ 'RADNL_CLIM____MFBSNL25_01H_20200101T000000_20210101T000000_0002/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
-    month_folders = [f for f in listdir(super_folder)]
-    month_folders.sort()
-    for i in range(len(month_folders)):
-        month_folders[i] += '/'
-        print(month_folders[i])
+    super_folder = folder+ 'RADNL_CLIM____MFBSNL25_01H_20210101T000000_20220101T000000_0002/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
+    # month_folders = [f for f in listdir(super_folder)]
+    # month_folders.sort()
+    # for i in range(len(month_folders)):
+    #     month_folders[i] += '/'
+    #     print(month_folders[i])
+    month_folders = ['02/']
     num_cores = multiprocessing.cpu_count()
     print("num_cores: " + str(num_cores))
 
@@ -114,4 +115,4 @@ def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save
     return data
 
 if __name__ == '__main__':
-    pandafy_h5_sample(save_name_radar='/data/s2155435/csv112/pandafied_h5_radar.csv', save_name_rain='/data/s2155435/pandafied_h5_rain_2020.csv', folder='/data/s2155435/KNMI/')
+    pandafy_h5_sample()
