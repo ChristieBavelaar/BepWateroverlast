@@ -32,7 +32,7 @@ if __name__ == '__main__':
         folder = '/data/s2155435/'
         #folder='../../'
     threshold = int(sys.argv[2])
-    start = int(sys.argv[3])
+    start = float(sys.argv[3])
 
     if start == 1:
         pdTif = pandafy_tiffs(data_folder=folder+'AHN2_5m/', save_name=folder+'csv112/lat_lon_to_filename.csv')
@@ -41,6 +41,9 @@ if __name__ == '__main__':
 
     if start == 2:
         pd112 = pandafy112(folder=folder, alice=alice)
+        start = 3
+
+    if start == 2.2:
         if alice:
             pdRain = pandafy_h5_full(save_name_radar=folder+'csv112/pandafied_h5_radar.csv',save_name_rain=folder+'csv112/pandafied_h5_rain_2016-2021.csv',folder =folder+'KNMI/')
         else:
