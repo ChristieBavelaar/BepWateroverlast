@@ -129,6 +129,7 @@ def random_dates(start, end, n, unit='D', seed=None):
     return pd.to_timedelta(np.random.rand(n) * ndays, unit=unit) + start
 
 def dependent_sampling_2(pos_data, rain, saveFile):
+    print("dependant sampling 2")
     negEq = pd.DataFrame()
 
     pos_data = pos_data.dropna()

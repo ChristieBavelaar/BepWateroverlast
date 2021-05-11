@@ -80,6 +80,7 @@ def dayRain(pdInput,rain, saveFile):
     return pdInput
 
 def rainAttributes(pdInput, rain, saveFile):
+    print("add daily rain")
     print("Preprocess tweets")
     # pdInput['date'] = pdInput['date'].astype('object')
     # rain['date'] = rain['date'].astype('object')
@@ -95,6 +96,7 @@ def rainAttributes(pdInput, rain, saveFile):
     # rain['hour'] = rain['dateh'].astype(str).str.slice(8,10).astype(int)
     # pdInput = dayRain(pdInput,rain)
     for i in range(1,25):
+        print(i, "/ 24")
         pdInput=addHourlyRain(pdInput,rain,i)
     
 
