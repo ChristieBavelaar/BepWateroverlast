@@ -27,7 +27,32 @@ def combineDataFrames(pd112, pdRain, saveFile):
 
     pd112Rain.to_csv(saveFile, index=False)
     return pd112Rain
+def addPastRain(pdInput,rain):
+    pastRain = []
+    for i in range(len(pdInput.index)):
+        day = pdInput.iloc[i]['date']
+        dayData = rain[(rain['date']==day) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
+        npDay = dayData.to_numpy()
 
+        npDay = npDay[0,4:pdInput.iloc[i]['hour']+4]
+        prevday = day - pd.Timedelta('1 days')
+        prevDayData = rain[(rain['date']==prevday) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
+        
+        npPrevday = prevDayData.to_numpy()
+        npPrevday = npPrevday[0, 4 + pdInput.iloc[i]['hour']:]
+        print('date', day, 'hour', pdInput.iloc[i]['hour'])
+        print('dayData', dayData)
+        print('npDay', npDay)
+        print('prevdaydata', prevDayData)
+        print('npPrev', npPrevday)
+        totalPastRain = np.concatenate((npPrevday,npDay)).sum()
+        pastRain.append(totalPastRain)
+
+
+    pdInput['rain'+str(nrHours)] = pastRain
+
+    print(nrHours,'/ 24')
+    return pdInput
 def addHourlyRain(pdInput, rain, nrHours):
     pastRain = []
     for i in range(len(pdInput.index)):
@@ -90,14 +115,15 @@ def rainAttributes(pdInput, rain, saveFile):
     print('Preprocess rain')
     rain['date']= pd.to_datetime(rain['date'], format='%Y%m%d')
 
+    addPastRain(pdInput, rain)
     #rain['hour']=rain['hour'].astype(int)
     # rain['date'] = rain['dateh'].astype(str).str.slice(0,8).astype('object')
     # print('step1')
     # rain['hour'] = rain['dateh'].astype(str).str.slice(8,10).astype(int)
     # pdInput = dayRain(pdInput,rain)
-    for i in range(1,25):
-        print(i, "/ 24")
-        pdInput=addHourlyRain(pdInput,rain,i)
+    # for i in range(1,25):
+    #     print(i, "/ 24")
+    #     pdInput=addHourlyRain(pdInput,rain,i)
     
 
     print(pdInput)
