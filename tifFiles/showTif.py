@@ -10,6 +10,10 @@ def showimage(filename):
     filepath = '../../AHN2_5m/' + str(filename)
     print(filepath)
     dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
+    width = dataset.RasterXSize
+    height = dataset.RasterYSize
+    print("width:", width)
+    print("height:",height)
     band = dataset.GetRasterBand(1)
     arr = band.ReadAsArray()
     print('dataset')
@@ -38,6 +42,7 @@ def sobolFilter(filename):
     filepath = '../../AHN2_5m/' + str(filename)
     print(filepath)
     dataset = gdal.Open(filepath, gdal.GA_ReadOnly) # Note GetRasterBand() takes band no. starting from 1 not 0
+
     band = dataset.GetRasterBand(1)
     arr = band.ReadAsArray()
 
