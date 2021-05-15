@@ -80,7 +80,7 @@ def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save
     year_counter = 2017
     total_year = 1
     
-    super_folder = folder+ 'RADNL_CLIM____MFBSNL25_01H_20210101T000000_20220101T000000_0002/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
+    super_folder = folder+ 'RADNL_CLIM____MFBSNL25_01H_20170101T000000_20180101T000000_0002/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
     # month_folders = [f for f in listdir(super_folder)]
     # month_folders.sort()
     # for i in range(len(month_folders)):
