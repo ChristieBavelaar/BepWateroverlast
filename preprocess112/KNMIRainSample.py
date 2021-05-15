@@ -115,4 +115,4 @@ def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save
     return data
 
 if __name__ == '__main__':
-    pandafy_h5_sample()
+    pandafy_h5_sample(save_name_radar='/data/s2155435/csv112/pandafied_h5_radar.csv',save_name_rain='/data/s2155435/csv112/pandafied_h5_rain_2020.csv',folder = '/data/s2155435/KNMI/')
