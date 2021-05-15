@@ -77,7 +77,7 @@ def pandafy_h5_sample(save_name_radar='../../csv112/pandafied_h5_radar.csv',save
     '''
 
     results = []
-    year_counter = 2021
+    year_counter = 2017
     total_year = 1
     
     super_folder = folder+ 'RADNL_CLIM____MFBSNL25_01H_20210101T000000_20220101T000000_0002/RAD_NL25_RAC_MFBS_01H/' + str(year_counter) +'/'
