@@ -137,11 +137,16 @@ if __name__ == '__main__':
     # #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
     # output = rainAttributes(pd112, rain, folder+"112RainDepSamp.csv")
 
+    print("load files")
     folder = '../../csv112/'
     pd112 = pd.read_csv(folder+'112SampledSample.csv')
+    print("1/4")
     pd112_2 = pd.read_csv(folder+'112XYSample.csv')
+    print("2/4")
     rain = pd.read_csv(folder+'rainFilteredSample.csv')
+    print("3/4")
     rain_2 = pd.read_csv(folder+'pandafied_h5_rain_2017_12.csv')
+    print("4/4")
     #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
     output = rainAttributes(pd112, rain_2, folder+"112RainSumSample.csv")
     # output = dayRain(pd112_2, rain, folder+'112DayRainSample.csv')
