@@ -13,9 +13,8 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
-def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.csv'):
+def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.csv', resultFolder='/home/s2155435/bep1/analyseData/results/'):
     print("open: ",inputFile)
-    resultFolder = '/home/s2155435/bep1/analyseData/results/'
     #resultFolder = './'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
@@ -118,11 +117,11 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     plt.show()
    
 if __name__ == '__main__':
-    inputFile1 = 'Adress/finalDataAdress.csv'
-    inputFile2 = 'Random/finalDataRandom.csv'
+    inputFile1 = 'finalDataAdress.csv'
+    inputFile2 = 'finalDataRandom.csv'
     if(sys.argv[1] == "y"):
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../pandafied_data/",inputFile=sampleFile)
     elif(sys.argv[1] == "n"):
-        randomForest(inputFile = inputFile1)
-        randomForest(inputFile = inputFile2)
+        randomForest(inputFile = inputFile1, resultFolder='/home/s2155435/bep1/analyseData/results/Adress')
+        randomForest(inputFile = inputFile2, resultFolder='/home/s2155435/bep1/analyseData/results/Random')
