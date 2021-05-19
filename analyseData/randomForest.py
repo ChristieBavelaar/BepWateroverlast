@@ -65,7 +65,7 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
         label_prediction = rf.predict(test_features)
 
         autosklResults = pd.DataFrame(rf.cv_results_)
-        autosklResults.to_csv("autosklearn.csv")
+        autosklResults.to_csv(resultFolder+ "autosklearn"+treeNumber+".csv")
         print(autosklResults)
         #output performance subtree
         #errors = abs(label_prediction - test_labels)
@@ -95,7 +95,7 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
         # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
         # #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
         # #graph.write_png('tree.png')
-        # treeNumber+=1
+        treeNumber+=1
         
     #output cross validation performance
     #all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=10)
