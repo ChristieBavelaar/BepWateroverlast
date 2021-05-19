@@ -11,11 +11,12 @@ from sklearn.metrics import classification_report, confusion_matrix, precision_s
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
+from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.csv'):
     print("open: ",inputFile)
-    #resultFolder = '/home/s2155435/bep1/analyseData/results/'
-    resultFolder = './'
+    resultFolder = '/home/s2155435/bep1/analyseData/results/'
+    #resultFolder = './'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
     rainTweets_eq = pd.read_csv(folder + inputFile)
@@ -59,10 +60,14 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
 
         #print(test_features[0])
         #train and test the decision tree
-        rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
+        # rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
+        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
+        autosklResults = pd.DataFrame(rf.cv_results_)
+        autosklResults.to_csv("autosklearn.csv")
+        print(autosklResults)
         #output performance subtree
         #errors = abs(label_prediction - test_labels)
         #print('Mean Absolute Error:', round(np.mean(errors), 2))
@@ -83,15 +88,15 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
         resultFile.write("Precision: "+str(precision_score(test_labels, label_prediction))+"\n")
         resultFile.write("Recall: "+str(recall_score(test_labels, label_prediction)) + "\n\n")
         
-        tree = rf.estimators_[4]# Import tools needed for visualization
-        from sklearn.tree import export_graphviz
-        import pydot# Pull out one tree from the forest
-        tree = rf.estimators_[5]# Export the image to a dot file
-        outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
-        export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
-        #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
-        #graph.write_png('tree.png')
-        treeNumber+=1
+        # tree = rf.estimators_[4]# Import tools needed for visualization
+        # from sklearn.tree import export_graphviz
+        # import pydot# Pull out one tree from the forest
+        # tree = rf.estimators_[5]# Export the image to a dot file
+        # outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
+        # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
+        # #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
+        # #graph.write_png('tree.png')
+        # treeNumber+=1
         
     #output cross validation performance
     #all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=10)
@@ -113,9 +118,11 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     plt.show()
    
 if __name__ == '__main__':
-    inputFile = 'finalDataRandom.csv'
+    inputFile1 = 'Adress/finalDataAdress.csv'
+    inputFile2 = 'Random/finalDataRandom.csv'
     if(sys.argv[1] == "y"):
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../pandafied_data/",inputFile=sampleFile)
     elif(sys.argv[1] == "n"):
-        randomForest(inputFile = inputFile)
+        randomForest(inputFile = inputFile1)
+        randomForest(inputFile = inputFile2)

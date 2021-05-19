@@ -11,9 +11,10 @@ from sklearn.metrics import classification_report, confusion_matrix, precision_s
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
+from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.csv', inputFile2='negHeight.csv'):
-    resultFolder = '/home/s2155435/bep1/analyseData/results/'
+    resultFolder = '/home/s2155435/bep1/analyseData/results/Dep/'
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
@@ -84,7 +85,9 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
         test_labels = np.concatenate((test_labels_pos, test_labels_neg))
 
         #train and test the decision tree
-        rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
+        #rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)  
+        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+      
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
@@ -105,13 +108,13 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
         resultFile.write("Precision: "+str(precision_score(test_labels, label_prediction))+"\n")
         resultFile.write("Recall: "+str(recall_score(test_labels, label_prediction)) + "\n\n")
         
-        tree = rf.estimators_[4]# Import tools needed for visualization
-        from sklearn.tree import export_graphviz
-        import pydot# Pull out one tree from the forest
-        tree = rf.estimators_[5]# Export the image to a dot file
-        outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
-        export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# 
-        treeNumber+=1
+        # tree = rf.estimators_[4]# Import tools needed for visualization
+        # from sklearn.tree import export_graphviz
+        # import pydot# Pull out one tree from the forest
+        # tree = rf.estimators_[5]# Export the image to a dot file
+        # outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
+        # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# 
+        # treeNumber+=1
 
     fig, ax = plt.subplots()
     data = [accuracyResult, precisionResult, recallResult]
