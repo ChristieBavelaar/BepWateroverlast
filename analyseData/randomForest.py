@@ -65,7 +65,7 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
         label_prediction = rf.predict(test_features)
 
         autosklResults = pd.DataFrame(rf.cv_results_)
-        autosklResults.to_csv(resultFolder+ "autosklearn"+treeNumber+".csv")
+        autosklResults.to_csv(resultFolder+ "autosklearn"+str(treeNumber)+".csv")
         print(autosklResults)
         #output performance subtree
         #errors = abs(label_prediction - test_labels)

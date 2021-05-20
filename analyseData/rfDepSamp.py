@@ -91,6 +91,9 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
+        autosklResults = pd.DataFrame(rf.cv_results_)
+        autosklResults.to_csv(resultFolder+ "autosklearn"+str(treeNumber)+".csv")
+
         # Save performance
         confusion = confusion_matrix(test_labels,label_prediction)
         totalConfusion[0][0] += confusion[0][0]
