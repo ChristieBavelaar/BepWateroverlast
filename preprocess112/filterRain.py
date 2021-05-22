@@ -15,7 +15,7 @@ def filterRain(data, threshold, saveFile, alice):
         startDate = pd.Timestamp(2015,12,31)
         endDate = pd.Timestamp(2021,3,1)
     else:
-        startDate = pd.Timestamp(2017,12,1)
+        startDate = pd.Timestamp(2017,1,2)
         endDate = pd.Timestamp(2021,3,1)
         
     print("set proper date format")
@@ -35,5 +35,5 @@ if __name__ == '__main__':
     folder = "../../csv112/"
     print("load data")
     rain = pd.read_csv(folder + 'pandafied_h5_rain_2017_12.csv')
-    output = filterRain(rain, 10, folder+'rainFilteredSample.csv')
+    output = filterRain(rain, 10, folder+'rainFilteredSample.csv', alice=False)
     print(output)

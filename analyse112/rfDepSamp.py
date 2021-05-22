@@ -21,7 +21,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     data = pd.read_csv(folder+inputFile)
 
     # Delete unneccesary columns
-    data= data.drop(columns=['radarX', 'radarY', 'date','latitude', 'longitude', 'tiffile'])
+    data= data.drop(columns=['hour','radarX', 'radarY', 'date','latitude', 'longitude', 'tiffile'])
     
     data = data.dropna()
 
@@ -137,7 +137,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
 if __name__ == '__main__':
     
     if(sys.argv[1] == "y"):
-        inputFile = 'finalData.csv'
+        inputFile = '112RainSumSample.csv'
         randomForest(folder='../../csv112/', inputFile=inputFile)
     elif(sys.argv[1] == "n"):
         randomForest()

@@ -140,18 +140,16 @@ def dependent_sampling_2(pos_data, rain, saveFile):
 
     start = pos_data.at[0,'date']
     end = pos_data.at[len(pos_data.index)-1,'date']
-    nrDates = len(pos_data.index)
-    randomDates = random_dates(start, end, nrDates, seed=42)
 
     for i in range(len(pos_data.index)):
         temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
         newDate = temp.sample().iloc[0]['date']
 
-        while newDate == pos_data.iloc[i]['date']:
-            print("different date")
+        while newDate == pos_data.iloc[i]['date'] or newDate < start or newDate>end:
             newDate = temp.sample()
             newDate = newDate.iloc[0]['date']
 
+        print(newDate)
         negEq = negEq.append(pos_data.iloc[i])
         negEq.at[i, 'date'] = newDate
         negEq.at[i, 'hour'] = randint(1,24)

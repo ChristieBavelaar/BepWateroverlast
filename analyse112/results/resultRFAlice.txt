@@ -1,77 +1,77 @@
 Fold 0
-[[198 100]
- [186 112]]
-Accuracy: 0.5201342281879194
-Precision: 0.5283018867924528
-Recall: 0.37583892617449666
+[[3 5]
+ [3 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.625
 
 Fold 1
-[[205  93]
- [101 197]]
-Accuracy: 0.674496644295302
-Precision: 0.6793103448275862
-Recall: 0.6610738255033557
+[[4 4]
+ [4 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5
 
 Fold 2
-[[194 104]
- [ 88 210]]
-Accuracy: 0.6778523489932886
-Precision: 0.6687898089171974
-Recall: 0.7046979865771812
+[[6 2]
+ [6 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.25
 
 Fold 3
-[[192 105]
- [ 97 200]]
-Accuracy: 0.6599326599326599
-Precision: 0.6557377049180327
-Recall: 0.6734006734006734
+[[0 7]
+ [0 7]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
 
 Fold 4
-[[187 110]
- [171 126]]
-Accuracy: 0.5269360269360269
-Precision: 0.5338983050847458
-Recall: 0.42424242424242425
+[[6 1]
+ [6 1]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.14285714285714285
 
 Fold 5
-[[182 115]
- [199  98]]
-Accuracy: 0.4713804713804714
-Precision: 0.460093896713615
-Recall: 0.32996632996632996
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
 
 Fold 6
-[[187 110]
- [158 139]]
-Accuracy: 0.5488215488215489
-Precision: 0.5582329317269076
-Recall: 0.468013468013468
+[[5 2]
+ [5 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.2857142857142857
 
 Fold 7
-[[178 119]
- [ 97 200]]
-Accuracy: 0.6363636363636364
-Precision: 0.6269592476489029
-Recall: 0.6734006734006734
+[[7 0]
+ [7 0]]
+Accuracy: 0.5
+Precision: 0.0
+Recall: 0.0
 
 Fold 8
-[[204  93]
- [193 104]]
-Accuracy: 0.5185185185185185
-Precision: 0.5279187817258884
-Recall: 0.3501683501683502
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
 
 Fold 9
-[[193 104]
- [176 121]]
-Accuracy: 0.5286195286195287
-Precision: 0.5377777777777778
-Recall: 0.4074074074074074
+[[1 6]
+ [1 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8571428571428571
 
 
-Average accuracy: 0.57630556120489
-Average Precision: 0.5777020686133106
-Average Recall: 0.506821006485436
+Average accuracy: 0.5
+Average Precision: 0.45
+Average Recall: 0.4660714285714286
 Total Confusion matrix: 
-[1920,1053] 
-[1466,1507] 
+[39,34] 
+[39,34] 

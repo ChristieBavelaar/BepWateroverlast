@@ -27,32 +27,28 @@ def combineDataFrames(pd112, pdRain, saveFile):
 
     pd112Rain.to_csv(saveFile, index=False)
     return pd112Rain
+
 def addPastRain(pdInput,rain):
-    pastRain = []
+    print("Add hour sums")
     for i in range(len(pdInput.index)):
+        print( i, " / ", len(pdInput.index))
         day = pdInput.iloc[i]['date']
         dayData = rain[(rain['date']==day) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
         npDay = dayData.to_numpy()
-
         npDay = npDay[0,4:pdInput.iloc[i]['hour']+4]
         prevday = day - pd.Timedelta('1 days')
         prevDayData = rain[(rain['date']==prevday) & (rain['radarY']==pdInput.iloc[i]['radarY']) & (rain['radarX']==pdInput.iloc[i]['radarX'])]
         
         npPrevday = prevDayData.to_numpy()
         npPrevday = npPrevday[0, 4 + pdInput.iloc[i]['hour']:]
-        print('date', day, 'hour', pdInput.iloc[i]['hour'])
-        print('dayData', dayData)
-        print('npDay', npDay)
-        print('prevdaydata', prevDayData)
-        print('npPrev', npPrevday)
-        totalPastRain = np.concatenate((npPrevday,npDay)).sum()
-        pastRain.append(totalPastRain)
 
+        totalPastRain = np.concatenate((npPrevday,npDay))
+        for j in range(1,23):
+            totalPastRain[j] = totalPastRain[j-1] + totalPastRain[j]
+            pdInput.at[i,'rain'+str(j)] = totalPastRain[j]
 
-    pdInput['rain'+str(nrHours)] = pastRain
-
-    print(nrHours,'/ 24')
     return pdInput
+
 def addHourlyRain(pdInput, rain, nrHours):
     pastRain = []
     for i in range(len(pdInput.index)):
@@ -141,7 +137,7 @@ if __name__ == '__main__':
     folder = '../../csv112/'
     pd112 = pd.read_csv(folder+'112SampledSample.csv')
     print("1/4")
-    pd112_2 = pd.read_csv(folder+'112XYSample.csv')
+    pd112_2 = pd.read_csv(folder+'112RelevantSample2020.csv')
     print("2/4")
     rain = pd.read_csv(folder+'rainFilteredSample.csv')
     print("3/4")

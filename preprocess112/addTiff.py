@@ -64,7 +64,7 @@ if __name__ == '__main__':
     # pdRandom = pd.read_csv(folder+'randomSampledSample.csv')
     # pdAdress = pd.read_csv(folder +'adressSampledSample.csv')
     # pdDep = pd.read_csv(folder+'112LabeledSample.csv')
-    pdDep2 = pd.read_csv(folder+'112DayRainSample.csv')
+    pdDep2 = pd.read_csv(folder+'112RainSample2.csv')
 
     # outputRandom = tweets_append_tif(tweets=pdRandom, tif=tif, saveFile=folder+'randomTifSample.csv')
     # print(outputRandom)

@@ -105,19 +105,19 @@ def rainAttributes(pdInput, rain, saveFile):
     return pdInput
     
 if __name__ == '__main__':
-    # folder = '/data/s2155435/csv112/'
-    # pd112 = pd.read_csv(folder+'depsamp2.csv')
-    # rain = pd.read_csv(folder+'rainFiltered.csv')
-    # #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
+    folder = '../../csv112/'
+    pd112 = pd.read_csv(folder+'112XYSample2020.csv')
+    rain = pd.read_csv(folder+'rainFilteredSample.csv')
+    output = dayRain(pdInput = pd112, rain=rain, saveFile=folder+'112RainSample2.csv')
     # output = rainAttributes(pd112, rain, folder+"112RainDepSamp.csv")
 
-    folder = '../../csv112/'
-    pd112 = pd.read_csv(folder+'112SampledSample.csv')
-    pd112_2 = pd.read_csv(folder+'112XYSample.csv')
-    rain = pd.read_csv(folder+'rainFilteredSample.csv')
-    rain_2 = pd.read_csv(folder+'pandafied_h5_rain_2017_12.csv')
-    #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
-    output = rainAttributes(pd112, rain_2, folder+"112RainSumSample.csv")
-    # output = dayRain(pd112_2, rain, folder+'112DayRainSample.csv')
+    # folder = '../../csv112/'
+    # pd112 = pd.read_csv(folder+'112SampledSample.csv')
+    # pd112_2 = pd.read_csv(folder+'112XYSample.csv')
+    # rain = pd.read_csv(folder+'rainFilteredSample.csv')
+    # rain_2 = pd.read_csv(folder+'pandafied_h5_rain_2017_12.csv')
+    # #output = combineDataFrames(pd112 = pd112, pdRain=rain, saveFile=folder+'112RainSample2.csv')
+    # output = rainAttributes(pd112, rain_2, folder+"112RainSumSample.csv")
+    # # output = dayRain(pd112_2, rain, folder+'112DayRainSample.csv')
 
     print(output)

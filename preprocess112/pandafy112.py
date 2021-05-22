@@ -16,8 +16,8 @@ def pandafy112(folder = '../../', alice=False):
     
     if not alice:
         # Select sample
-        startDate = pd.Timestamp(2017,12,1)
-        endDate = pd.Timestamp(2018,1,1)
+        startDate = pd.Timestamp(2017,2,1)
+        endDate = pd.Timestamp(2017,3,1)
         pd112Sample = pd112[(pd112['date'] > startDate) & (pd112['date']<endDate)]
         pd112Sample.to_csv(folder+'csv112/112RelevantSample2020.csv', index=False, date_format='%Y-%m-%d')
         return pd112Sample

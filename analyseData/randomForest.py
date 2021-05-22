@@ -36,8 +36,8 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
     #features= rainTweets_eq.drop(columns=['labels'])
-    #features= rainTweets_eq.drop(columns=['labels', 'rain'])
-    features = rainTweets_eq[['rain']]
+    features= rainTweets_eq.drop(columns=['labels', 'rain'])
+    #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
     feature_list = list(features.columns)
