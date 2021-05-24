@@ -1,0 +1,77 @@
+Fold 0
+[[ 30 261]
+ [ 30 261]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8969072164948454
+
+Fold 0
+[[ 97 194]
+ [ 97 194]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 0
+[[ 56 235]
+ [ 56 235]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8075601374570447
+
+Fold 0
+[[ 92 199]
+ [ 92 199]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6838487972508591
+
+Fold 0
+[[160 131]
+ [160 131]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.45017182130584193
+
+Fold 0
+[[116 175]
+ [116 175]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6013745704467354
+
+Fold 0
+[[140 150]
+ [140 150]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5172413793103449
+
+Fold 0
+[[  6 284]
+ [  6 284]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.9793103448275862
+
+Fold 0
+[[ 42 248]
+ [ 42 248]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8551724137931035
+
+Fold 0
+[[111 179]
+ [111 179]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6172413793103448
+
+
+Average accuracy: 0.5
+Average Precision: 0.5
+Average Recall: 0.7075494726863372
+Total Confusion matrix: 
+[850,2056] 
+[850,2056] 
