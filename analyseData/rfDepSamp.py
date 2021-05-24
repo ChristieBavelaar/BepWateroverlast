@@ -46,11 +46,11 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
     # featuresPos= pos_data.drop(columns=['labels'])
     # featuresNeg= neg_data.drop(columns=['labels'])
     
-    featuresPos= pos_data.drop(columns=['labels','rain'])
-    featuresNeg= neg_data.drop(columns=['labels','rain'])
+    # featuresPos= pos_data.drop(columns=['labels','rain'])
+    # featuresNeg= neg_data.drop(columns=['labels','rain'])
     
-    # featuresPos= pos_data[['rain']]
-    # featuresNeg= neg_data[['rain']]
+    featuresPos= pos_data[['rain']]
+    featuresNeg= neg_data[['rain']]
 
     
     # Saving feature names for later use
@@ -117,7 +117,7 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.
         # tree = rf.estimators_[5]# Export the image to a dot file
         # outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
         # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# 
-        # treeNumber+=1
+        treeNumber+=1
 
     fig, ax = plt.subplots()
     data = [accuracyResult, precisionResult, recallResult]
