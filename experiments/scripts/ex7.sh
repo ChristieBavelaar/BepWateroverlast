@@ -14,4 +14,4 @@ module load Miniconda3/4.7.10
 conda init bash
 source ~/.bashrc
 conda activate bepalice
-python3 /home/s2155435/bep1/preprocess112/serialized2.py n 10 8
+python3 /home/s2155435/bep1/preprocess112/serialized2.py n 10 3

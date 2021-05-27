@@ -17,7 +17,8 @@ from filterRain import filterRain
 
 from sampleNeg import dependent_sampling_2 
 
-from addRain import dayRain, rainAttributes
+from addRain import dayRain
+from addRain2 import rainAttributes
 
 
 if __name__ == '__main__':
@@ -52,7 +53,7 @@ if __name__ == '__main__':
 
     if start == 3:
         if alice:
-            pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2016-2021.csv')
+            pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2010-2021.csv')
         else:
             pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2017_12.csv')
 
