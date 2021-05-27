@@ -98,7 +98,7 @@ if __name__ == '__main__':
     if start == 9:
         pdData = pd.read_csv(folder+'csv112/depSamp' + samplename+'.csv')
         if alice:
-            pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2016-2021.csv')
+            pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2010-2021.csv')
         else:
             pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2017_12.csv')
 
