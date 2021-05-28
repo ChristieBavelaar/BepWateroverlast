@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
         data = tweets_append_XY(tweets=pd112, radar=pdRadar, saveFile=folder+'csv112/112XY'+samplename+'.csv')
         
-        pdRain = filterRain(data=pdRain, threshold=threshold, saveFile=folder+'csv112/rainFiltered'+samplename+'.csv')
+        pdRain = filterRain(data=pdRain, threshold=threshold, saveFile=folder+'csv112/rainFiltered'+samplename+'.csv', alice=alice)
 
         start = 3
 
