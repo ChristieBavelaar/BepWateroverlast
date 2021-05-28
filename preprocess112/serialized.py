@@ -45,7 +45,7 @@ if __name__ == '__main__':
         pd112 = pd.read_csv(folder+'csv112/112Relevant'+samplename+'.csv')
         pdRadar = pd.read_csv(folder+'csv112/pandafied_h5_radar.csv')
         if alice:
-            pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2016-2020.csv')
+            pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2016-2021.csv')
         else:
             pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2020.csv')
 
@@ -127,7 +127,7 @@ if __name__ == '__main__':
     if start == 8:
         data = pd.read_csv(folder+'csv112/height'+samplename+'.csv')
         if samplemethod <=2:
-            data = equalize(data=data, saveFile=folder+'csv112/finalData'+samplename+'.csv')
+            data = equalize(data=data, saveFile=folder+'csv112/finalData'+str(samplemethod)+samplename+'.csv')
         else:
             data.to_csv(folder+'csv112/finalData'+samplename+'.csv')
         

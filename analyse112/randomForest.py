@@ -13,9 +13,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
-    #resultFolder = '/home/s2155435/bep1/analyse112/results/'
-    resultFolder = './results/'
-    resultFolder = './'
+    resultFolder = '/home/s2155435/bep1/analyse112/results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     
     #load data
@@ -56,10 +54,14 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
 
         #print(test_features[0])
         #train and test the decision tree
-        rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
+        # rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
+        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
+        autosklResults = pd.DataFrame(rf.cv_results_)
+        autosklResults.to_csv(resultFolder+ "autosklearn"+str(treeNumber)+".csv")
+        print(autosklResults)
         #output performance subtree
         #errors = abs(label_prediction - test_labels)
         #print('Mean Absolute Error:', round(np.mean(errors), 2))
@@ -80,14 +82,14 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
         resultFile.write("Precision: "+str(precision_score(test_labels, label_prediction))+"\n")
         resultFile.write("Recall: "+str(recall_score(test_labels, label_prediction)) + "\n\n")
         
-        tree = rf.estimators_[4]# Import tools needed for visualization
-        from sklearn.tree import export_graphviz
-        import pydot# Pull out one tree from the forest
-        tree = rf.estimators_[5]# Export the image to a dot file
-        outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
-        export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
-        #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
-        #graph.write_png('tree.png')
+        # tree = rf.estimators_[4]# Import tools needed for visualization
+        # from sklearn.tree import export_graphviz
+        # import pydot# Pull out one tree from the forest
+        # tree = rf.estimators_[5]# Export the image to a dot file
+        # outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
+        # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
+        # #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
+        # #graph.write_png('tree.png')
         treeNumber+=1
         
     #output cross validation performance
@@ -99,6 +101,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv'):
     ax.boxplot(data)
     ax.set_xticklabels(xlabels)
     ax.set_ylim(0,1)
+
     resultFile.write("\nAverage accuracy: "+str(np.average(accuracyResult))+"\n")
     resultFile.write("Average Precision: "+str(np.average(precisionResult))+"\n")
     resultFile.write("Average Recall: "+ str(np.average(recallResult))+"\n")

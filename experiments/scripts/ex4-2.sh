@@ -4,9 +4,9 @@
 #SBATCH --error=/home/s2155435/ex4-2.err
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
-#SBATCH --partition=cpu-short
+#SBATCH --partition=cpu-medium
 #SBATCH -c 1
-#SBATCH --time=01:00:00
+#SBATCH --time=1-00:00:00
 #SBATCH --mem-per-cpu=16gb
 
 export PYTHONPATH=/home/s2155435/bep1/

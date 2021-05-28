@@ -1,77 +1,1794 @@
 Fold 0
-[[3 5]
- [3 5]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 0.625
-
-Fold 1
-[[4 4]
- [4 4]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 0.5
-
-Fold 2
-[[6 2]
- [6 2]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 0.25
-
-Fold 3
-[[0 7]
- [0 7]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 1.0
-
-Fold 4
-[[6 1]
- [6 1]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 0.14285714285714285
-
-Fold 5
-[[3 4]
- [3 4]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 0.5714285714285714
-
-Fold 6
-[[5 2]
- [5 2]]
-Accuracy: 0.5
-Precision: 0.5
-Recall: 0.2857142857142857
-
-Fold 7
-[[7 0]
- [7 0]]
-Accuracy: 0.5
-Precision: 0.0
-Recall: 0.0
-
-Fold 8
 [[4 3]
  [4 3]]
 Accuracy: 0.5
 Precision: 0.5
 Recall: 0.42857142857142855
 
+Fold 1
+[[5 2]
+ [5 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.2857142857142857
+
+Fold 2
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
+
+Fold 3
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
+
+Fold 4
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
+
+Fold 5
+[[3 3]
+ [3 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5
+
+Fold 6
+[[6 0]
+ [6 0]]
+Accuracy: 0.5
+Precision: 0.0
+Recall: 0.0
+
+Fold 7
+[[4 2]
+ [4 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.3333333333333333
+
+Fold 8
+[[5 1]
+ [5 1]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.16666666666666666
+
 Fold 9
+[[5 1]
+ [5 1]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.16666666666666666
+
+
+Feature: rain
+Average accuracy: 0.5
+Average Precision: 0.45
+Average Recall: 0.3166666666666666
+Total Confusion matrix: 
+[44,21] 
+[44,21] 
+Fold 0
+[[2 5]
+ [0 7]]
+Accuracy: 0.6428571428571429
+Precision: 0.5833333333333334
+Recall: 1.0
+
+Fold 1
+[[1 6]
+ [0 7]]
+Accuracy: 0.5714285714285714
+Precision: 0.5384615384615384
+Recall: 1.0
+
+Fold 2
+[[0 7]
+ [2 5]]
+Accuracy: 0.35714285714285715
+Precision: 0.4166666666666667
+Recall: 0.7142857142857143
+
+Fold 3
 [[1 6]
  [1 6]]
 Accuracy: 0.5
 Precision: 0.5
 Recall: 0.8571428571428571
 
+Fold 4
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
 
-Average accuracy: 0.5
-Average Precision: 0.45
-Average Recall: 0.4660714285714286
+Fold 5
+[[0 6]
+ [0 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
+
+Fold 6
+[[0 6]
+ [0 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
+
+Fold 7
+[[1 5]
+ [0 6]]
+Accuracy: 0.5833333333333334
+Precision: 0.5454545454545454
+Recall: 1.0
+
+Fold 8
+[[0 6]
+ [0 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
+
+Fold 9
+[[0 6]
+ [2 4]]
+Accuracy: 0.3333333333333333
+Precision: 0.4
+Recall: 0.6666666666666666
+
+
+Feature: rain1
+Average accuracy: 0.4988095238095238
+Average Precision: 0.49839160839160834
+Average Recall: 0.895238095238095
 Total Confusion matrix: 
-[39,34] 
-[39,34] 
+[7,58] 
+[7,58] 
+Fold 0
+[[2 5]
+ [0 7]]
+Accuracy: 0.6428571428571429
+Precision: 0.5833333333333334
+Recall: 1.0
+
+Fold 1
+[[1 6]
+ [0 7]]
+Accuracy: 0.5714285714285714
+Precision: 0.5384615384615384
+Recall: 1.0
+
+Fold 2
+[[1 6]
+ [1 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8571428571428571
+
+Fold 3
+[[1 6]
+ [2 5]]
+Accuracy: 0.42857142857142855
+Precision: 0.45454545454545453
+Recall: 0.7142857142857143
+
+Fold 4
+[[3 4]
+ [1 6]]
+Accuracy: 0.6428571428571429
+Precision: 0.6
+Recall: 0.8571428571428571
+
+Fold 5
+[[0 6]
+ [0 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
+
+Fold 6
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+Fold 7
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+Fold 8
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 9
+[[1 5]
+ [2 4]]
+Accuracy: 0.4166666666666667
+Precision: 0.4444444444444444
+Recall: 0.6666666666666666
+
+
+Feature: rain2
+Average accuracy: 0.5285714285714287
+Average Precision: 0.5176340326340327
+Average Recall: 0.8595238095238095
+Total Confusion matrix: 
+[13,52] 
+[9,56] 
+Fold 0
+[[3 4]
+ [0 7]]
+Accuracy: 0.7142857142857143
+Precision: 0.6363636363636364
+Recall: 1.0
+
+Fold 1
+[[5 2]
+ [6 1]]
+Accuracy: 0.42857142857142855
+Precision: 0.3333333333333333
+Recall: 0.14285714285714285
+
+Fold 2
+[[1 6]
+ [2 5]]
+Accuracy: 0.42857142857142855
+Precision: 0.45454545454545453
+Recall: 0.7142857142857143
+
+Fold 3
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 4
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 5
+[[0 6]
+ [1 5]]
+Accuracy: 0.4166666666666667
+Precision: 0.45454545454545453
+Recall: 0.8333333333333334
+
+Fold 6
+[[0 6]
+ [1 5]]
+Accuracy: 0.4166666666666667
+Precision: 0.45454545454545453
+Recall: 0.8333333333333334
+
+Fold 7
+[[0 6]
+ [2 4]]
+Accuracy: 0.3333333333333333
+Precision: 0.4
+Recall: 0.6666666666666666
+
+Fold 8
+[[0 6]
+ [1 5]]
+Accuracy: 0.4166666666666667
+Precision: 0.45454545454545453
+Recall: 0.8333333333333334
+
+Fold 9
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+
+Feature: rain3
+Average accuracy: 0.4654761904761905
+Average Precision: 0.46777777777777774
+Average Recall: 0.7285714285714284
+Total Confusion matrix: 
+[14,51] 
+[18,47] 
+Fold 0
+[[3 4]
+ [0 7]]
+Accuracy: 0.7142857142857143
+Precision: 0.6363636363636364
+Recall: 1.0
+
+Fold 1
+[[3 4]
+ [0 7]]
+Accuracy: 0.7142857142857143
+Precision: 0.6363636363636364
+Recall: 1.0
+
+Fold 2
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
+
+Fold 3
+[[3 4]
+ [1 6]]
+Accuracy: 0.6428571428571429
+Precision: 0.6
+Recall: 0.8571428571428571
+
+Fold 4
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
+
+Fold 5
+[[2 4]
+ [0 6]]
+Accuracy: 0.6666666666666666
+Precision: 0.6
+Recall: 1.0
+
+Fold 6
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+Fold 7
+[[0 6]
+ [1 5]]
+Accuracy: 0.4166666666666667
+Precision: 0.45454545454545453
+Recall: 0.8333333333333334
+
+Fold 8
+[[2 4]
+ [0 6]]
+Accuracy: 0.6666666666666666
+Precision: 0.6
+Recall: 1.0
+
+Fold 9
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+
+Feature: rain4
+Average accuracy: 0.5821428571428571
+Average Precision: 0.5527272727272727
+Average Recall: 0.8785714285714287
+Total Confusion matrix: 
+[19,46] 
+[8,57] 
+Fold 0
+[[3 4]
+ [1 6]]
+Accuracy: 0.6428571428571429
+Precision: 0.6
+Recall: 0.8571428571428571
+
+Fold 1
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 2
+[[1 6]
+ [2 5]]
+Accuracy: 0.42857142857142855
+Precision: 0.45454545454545453
+Recall: 0.7142857142857143
+
+Fold 3
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 4
+[[3 4]
+ [2 5]]
+Accuracy: 0.5714285714285714
+Precision: 0.5555555555555556
+Recall: 0.7142857142857143
+
+Fold 5
+[[0 6]
+ [0 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 1.0
+
+Fold 6
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 7
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 8
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 9
+[[1 5]
+ [4 2]]
+Accuracy: 0.25
+Precision: 0.2857142857142857
+Recall: 0.3333333333333333
+
+
+Feature: rain5
+Average accuracy: 0.5285714285714286
+Average Precision: 0.5153391053391053
+Average Recall: 0.7833333333333333
+Total Confusion matrix: 
+[18,47] 
+[14,51] 
+Fold 0
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 1
+[[2 5]
+ [0 7]]
+Accuracy: 0.6428571428571429
+Precision: 0.5833333333333334
+Recall: 1.0
+
+Fold 2
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 3
+[[0 7]
+ [1 6]]
+Accuracy: 0.42857142857142855
+Precision: 0.46153846153846156
+Recall: 0.8571428571428571
+
+Fold 4
+[[4 3]
+ [1 6]]
+Accuracy: 0.7142857142857143
+Precision: 0.6666666666666666
+Recall: 0.8571428571428571
+
+Fold 5
+[[3 3]
+ [1 5]]
+Accuracy: 0.6666666666666666
+Precision: 0.625
+Recall: 0.8333333333333334
+
+Fold 6
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 7
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 8
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 9
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+
+Feature: rain6
+Average accuracy: 0.5785714285714285
+Average Precision: 0.5548659673659673
+Average Recall: 0.8309523809523809
+Total Confusion matrix: 
+[21,44] 
+[11,54] 
+Fold 0
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 1
+[[3 4]
+ [1 6]]
+Accuracy: 0.6428571428571429
+Precision: 0.6
+Recall: 0.8571428571428571
+
+Fold 2
+[[3 4]
+ [2 5]]
+Accuracy: 0.5714285714285714
+Precision: 0.5555555555555556
+Recall: 0.7142857142857143
+
+Fold 3
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 4
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 5
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 6
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+Fold 7
+[[2 4]
+ [2 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 8
+[[3 3]
+ [0 6]]
+Accuracy: 0.75
+Precision: 0.6666666666666666
+Recall: 1.0
+
+Fold 9
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+
+Feature: rain7
+Average accuracy: 0.5845238095238094
+Average Precision: 0.556969696969697
+Average Recall: 0.830952380952381
+Total Confusion matrix: 
+[22,43] 
+[11,54] 
+Fold 0
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 1
+[[5 2]
+ [0 7]]
+Accuracy: 0.8571428571428571
+Precision: 0.7777777777777778
+Recall: 1.0
+
+Fold 2
+[[1 6]
+ [2 5]]
+Accuracy: 0.42857142857142855
+Precision: 0.45454545454545453
+Recall: 0.7142857142857143
+
+Fold 3
+[[1 6]
+ [1 6]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8571428571428571
+
+Fold 4
+[[2 5]
+ [1 6]]
+Accuracy: 0.5714285714285714
+Precision: 0.5454545454545454
+Recall: 0.8571428571428571
+
+Fold 5
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 6
+[[0 6]
+ [1 5]]
+Accuracy: 0.4166666666666667
+Precision: 0.45454545454545453
+Recall: 0.8333333333333334
+
+Fold 7
+[[2 4]
+ [2 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 8
+[[2 4]
+ [0 6]]
+Accuracy: 0.6666666666666666
+Precision: 0.6
+Recall: 1.0
+
+Fold 9
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+
+Feature: rain8
+Average accuracy: 0.5452380952380953
+Average Precision: 0.5332323232323232
+Average Recall: 0.8166666666666668
+Total Confusion matrix: 
+[18,47] 
+[12,53] 
+Fold 0
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
+
+Fold 1
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 2
+[[1 6]
+ [2 5]]
+Accuracy: 0.42857142857142855
+Precision: 0.45454545454545453
+Recall: 0.7142857142857143
+
+Fold 3
+[[4 3]
+ [6 1]]
+Accuracy: 0.35714285714285715
+Precision: 0.25
+Recall: 0.14285714285714285
+
+Fold 4
+[[3 4]
+ [1 6]]
+Accuracy: 0.6428571428571429
+Precision: 0.6
+Recall: 0.8571428571428571
+
+Fold 5
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+Fold 6
+[[2 4]
+ [4 2]]
+Accuracy: 0.3333333333333333
+Precision: 0.3333333333333333
+Recall: 0.3333333333333333
+
+Fold 7
+[[0 6]
+ [1 5]]
+Accuracy: 0.4166666666666667
+Precision: 0.45454545454545453
+Recall: 0.8333333333333334
+
+Fold 8
+[[5 1]
+ [5 1]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.16666666666666666
+
+Fold 9
+[[1 5]
+ [2 4]]
+Accuracy: 0.4166666666666667
+Precision: 0.4444444444444444
+Recall: 0.6666666666666666
+
+
+Feature: rain9
+Average accuracy: 0.4511904761904762
+Average Precision: 0.4436868686868687
+Average Recall: 0.5333333333333334
+Total Confusion matrix: 
+[24,41] 
+[30,35] 
+Fold 0
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
+
+Fold 1
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
+
+Fold 2
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 3
+[[4 3]
+ [7 0]]
+Accuracy: 0.2857142857142857
+Precision: 0.0
+Recall: 0.0
+
+Fold 4
+[[3 4]
+ [2 5]]
+Accuracy: 0.5714285714285714
+Precision: 0.5555555555555556
+Recall: 0.7142857142857143
+
+Fold 5
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+Fold 6
+[[4 2]
+ [4 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.3333333333333333
+
+Fold 7
+[[0 6]
+ [2 4]]
+Accuracy: 0.3333333333333333
+Precision: 0.4
+Recall: 0.6666666666666666
+
+Fold 8
+[[4 2]
+ [6 0]]
+Accuracy: 0.3333333333333333
+Precision: 0.0
+Recall: 0.0
+
+Fold 9
+[[1 5]
+ [0 6]]
+Accuracy: 0.5833333333333334
+Precision: 0.5454545454545454
+Recall: 1.0
+
+
+Feature: rain10
+Average accuracy: 0.44523809523809527
+Average Precision: 0.3845454545454545
+Average Recall: 0.47619047619047616
+Total Confusion matrix: 
+[27,38] 
+[34,31] 
+Fold 0
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
+
+Fold 1
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 2
+[[2 5]
+ [4 3]]
+Accuracy: 0.35714285714285715
+Precision: 0.375
+Recall: 0.42857142857142855
+
+Fold 3
+[[4 3]
+ [6 1]]
+Accuracy: 0.35714285714285715
+Precision: 0.25
+Recall: 0.14285714285714285
+
+Fold 4
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 5
+[[5 1]
+ [4 2]]
+Accuracy: 0.5833333333333334
+Precision: 0.6666666666666666
+Recall: 0.3333333333333333
+
+Fold 6
+[[4 2]
+ [4 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.3333333333333333
+
+Fold 7
+[[2 4]
+ [2 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 8
+[[4 2]
+ [6 0]]
+Accuracy: 0.3333333333333333
+Precision: 0.0
+Recall: 0.0
+
+Fold 9
+[[1 5]
+ [0 6]]
+Accuracy: 0.5833333333333334
+Precision: 0.5454545454545454
+Recall: 1.0
+
+
+Feature: rain11
+Average accuracy: 0.46428571428571425
+Average Precision: 0.426569264069264
+Average Recall: 0.4619047619047619
+Total Confusion matrix: 
+[30,35] 
+[35,30] 
+Fold 0
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 1
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 2
+[[0 7]
+ [3 4]]
+Accuracy: 0.2857142857142857
+Precision: 0.36363636363636365
+Recall: 0.5714285714285714
+
+Fold 3
+[[4 3]
+ [7 0]]
+Accuracy: 0.2857142857142857
+Precision: 0.0
+Recall: 0.0
+
+Fold 4
+[[2 5]
+ [4 3]]
+Accuracy: 0.35714285714285715
+Precision: 0.375
+Recall: 0.42857142857142855
+
+Fold 5
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 6
+[[2 4]
+ [5 1]]
+Accuracy: 0.25
+Precision: 0.2
+Recall: 0.16666666666666666
+
+Fold 7
+[[2 4]
+ [2 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 8
+[[4 2]
+ [5 1]]
+Accuracy: 0.4166666666666667
+Precision: 0.3333333333333333
+Recall: 0.16666666666666666
+
+Fold 9
+[[1 5]
+ [1 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.8333333333333334
+
+
+Feature: rain12
+Average accuracy: 0.41071428571428575
+Average Precision: 0.3816414141414141
+Average Recall: 0.44761904761904764
+Total Confusion matrix: 
+[24,41] 
+[36,29] 
+Fold 0
+[[1 6]
+ [3 4]]
+Accuracy: 0.35714285714285715
+Precision: 0.4
+Recall: 0.5714285714285714
+
+Fold 1
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 2
+[[3 4]
+ [5 2]]
+Accuracy: 0.35714285714285715
+Precision: 0.3333333333333333
+Recall: 0.2857142857142857
+
+Fold 3
+[[4 3]
+ [5 2]]
+Accuracy: 0.42857142857142855
+Precision: 0.4
+Recall: 0.2857142857142857
+
+Fold 4
+[[2 5]
+ [4 3]]
+Accuracy: 0.35714285714285715
+Precision: 0.375
+Recall: 0.42857142857142855
+
+Fold 5
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+Fold 6
+[[2 4]
+ [3 3]]
+Accuracy: 0.4166666666666667
+Precision: 0.42857142857142855
+Recall: 0.5
+
+Fold 7
+[[0 6]
+ [2 4]]
+Accuracy: 0.3333333333333333
+Precision: 0.4
+Recall: 0.6666666666666666
+
+Fold 8
+[[4 2]
+ [4 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.3333333333333333
+
+Fold 9
+[[5 1]
+ [5 1]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.16666666666666666
+
+
+Feature: rain13
+Average accuracy: 0.4095238095238095
+Average Precision: 0.41654761904761906
+Average Recall: 0.4
+Total Confusion matrix: 
+[27,38] 
+[39,26] 
+Fold 0
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 1
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 2
+[[4 3]
+ [3 4]]
+Accuracy: 0.5714285714285714
+Precision: 0.5714285714285714
+Recall: 0.5714285714285714
+
+Fold 3
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 4
+[[5 2]
+ [4 3]]
+Accuracy: 0.5714285714285714
+Precision: 0.6
+Recall: 0.42857142857142855
+
+Fold 5
+[[2 4]
+ [2 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 6
+[[2 4]
+ [2 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.6666666666666666
+
+Fold 7
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 8
+[[4 2]
+ [4 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.3333333333333333
+
+Fold 9
+[[5 1]
+ [5 1]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.16666666666666666
+
+
+Feature: rain14
+Average accuracy: 0.5154761904761905
+Average Precision: 0.52
+Average Recall: 0.4904761904761905
+Total Confusion matrix: 
+[35,30] 
+[33,32] 
+Fold 0
+[[4 3]
+ [5 2]]
+Accuracy: 0.42857142857142855
+Precision: 0.4
+Recall: 0.2857142857142857
+
+Fold 1
+[[4 3]
+ [2 5]]
+Accuracy: 0.6428571428571429
+Precision: 0.625
+Recall: 0.7142857142857143
+
+Fold 2
+[[1 6]
+ [4 3]]
+Accuracy: 0.2857142857142857
+Precision: 0.3333333333333333
+Recall: 0.42857142857142855
+
+Fold 3
+[[6 1]
+ [4 3]]
+Accuracy: 0.6428571428571429
+Precision: 0.75
+Recall: 0.42857142857142855
+
+Fold 4
+[[4 3]
+ [6 1]]
+Accuracy: 0.35714285714285715
+Precision: 0.25
+Recall: 0.14285714285714285
+
+Fold 5
+[[2 4]
+ [5 1]]
+Accuracy: 0.25
+Precision: 0.2
+Recall: 0.16666666666666666
+
+Fold 6
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 7
+[[6 0]
+ [4 2]]
+Accuracy: 0.6666666666666666
+Precision: 1.0
+Recall: 0.3333333333333333
+
+Fold 8
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+Fold 9
+[[4 2]
+ [5 1]]
+Accuracy: 0.4166666666666667
+Precision: 0.3333333333333333
+Recall: 0.16666666666666666
+
+
+Feature: rain15
+Average accuracy: 0.46904761904761905
+Average Precision: 0.48916666666666664
+Average Recall: 0.35
+Total Confusion matrix: 
+[38,27] 
+[42,23] 
+Fold 0
+[[5 2]
+ [5 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.2857142857142857
+
+Fold 1
+[[4 3]
+ [2 5]]
+Accuracy: 0.6428571428571429
+Precision: 0.625
+Recall: 0.7142857142857143
+
+Fold 2
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
+
+Fold 3
+[[4 3]
+ [5 2]]
+Accuracy: 0.42857142857142855
+Precision: 0.4
+Recall: 0.2857142857142857
+
+Fold 4
+[[6 1]
+ [5 2]]
+Accuracy: 0.5714285714285714
+Precision: 0.6666666666666666
+Recall: 0.2857142857142857
+
+Fold 5
+[[4 2]
+ [2 4]]
+Accuracy: 0.6666666666666666
+Precision: 0.6666666666666666
+Recall: 0.6666666666666666
+
+Fold 6
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 7
+[[6 0]
+ [3 3]]
+Accuracy: 0.75
+Precision: 1.0
+Recall: 0.5
+
+Fold 8
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 9
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+
+Feature: rain16
+Average accuracy: 0.5642857142857143
+Average Precision: 0.5958333333333334
+Average Recall: 0.4499999999999999
+Total Confusion matrix: 
+[44,21] 
+[36,29] 
+Fold 0
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 1
+[[3 4]
+ [2 5]]
+Accuracy: 0.5714285714285714
+Precision: 0.5555555555555556
+Recall: 0.7142857142857143
+
+Fold 2
+[[3 4]
+ [5 2]]
+Accuracy: 0.35714285714285715
+Precision: 0.3333333333333333
+Recall: 0.2857142857142857
+
+Fold 3
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 4
+[[7 0]
+ [5 2]]
+Accuracy: 0.6428571428571429
+Precision: 1.0
+Recall: 0.2857142857142857
+
+Fold 5
+[[4 2]
+ [2 4]]
+Accuracy: 0.6666666666666666
+Precision: 0.6666666666666666
+Recall: 0.6666666666666666
+
+Fold 6
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+Fold 7
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 8
+[[6 0]
+ [4 2]]
+Accuracy: 0.6666666666666666
+Precision: 1.0
+Recall: 0.3333333333333333
+
+Fold 9
+[[2 4]
+ [6 0]]
+Accuracy: 0.16666666666666666
+Precision: 0.0
+Recall: 0.0
+
+
+Feature: rain17
+Average accuracy: 0.4928571428571429
+Average Precision: 0.5384126984126985
+Average Recall: 0.44523809523809516
+Total Confusion matrix: 
+[35,30] 
+[36,29] 
+Fold 0
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 1
+[[3 4]
+ [2 5]]
+Accuracy: 0.5714285714285714
+Precision: 0.5555555555555556
+Recall: 0.7142857142857143
+
+Fold 2
+[[5 2]
+ [4 3]]
+Accuracy: 0.5714285714285714
+Precision: 0.6
+Recall: 0.42857142857142855
+
+Fold 3
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 4
+[[6 1]
+ [5 2]]
+Accuracy: 0.5714285714285714
+Precision: 0.6666666666666666
+Recall: 0.2857142857142857
+
+Fold 5
+[[3 3]
+ [2 4]]
+Accuracy: 0.5833333333333334
+Precision: 0.5714285714285714
+Recall: 0.6666666666666666
+
+Fold 6
+[[3 3]
+ [2 4]]
+Accuracy: 0.5833333333333334
+Precision: 0.5714285714285714
+Recall: 0.6666666666666666
+
+Fold 7
+[[6 0]
+ [1 5]]
+Accuracy: 0.9166666666666666
+Precision: 1.0
+Recall: 0.8333333333333334
+
+Fold 8
+[[3 3]
+ [3 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5
+
+Fold 9
+[[2 4]
+ [6 0]]
+Accuracy: 0.16666666666666666
+Precision: 0.0
+Recall: 0.0
+
+
+Feature: rain18
+Average accuracy: 0.5321428571428573
+Average Precision: 0.5322222222222222
+Average Recall: 0.49523809523809526
+Total Confusion matrix: 
+[37,28] 
+[33,32] 
+Fold 0
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 1
+[[5 2]
+ [3 4]]
+Accuracy: 0.6428571428571429
+Precision: 0.6666666666666666
+Recall: 0.5714285714285714
+
+Fold 2
+[[5 2]
+ [4 3]]
+Accuracy: 0.5714285714285714
+Precision: 0.6
+Recall: 0.42857142857142855
+
+Fold 3
+[[2 5]
+ [2 5]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.7142857142857143
+
+Fold 4
+[[6 1]
+ [5 2]]
+Accuracy: 0.5714285714285714
+Precision: 0.6666666666666666
+Recall: 0.2857142857142857
+
+Fold 5
+[[3 3]
+ [2 4]]
+Accuracy: 0.5833333333333334
+Precision: 0.5714285714285714
+Recall: 0.6666666666666666
+
+Fold 6
+[[5 1]
+ [4 2]]
+Accuracy: 0.5833333333333334
+Precision: 0.6666666666666666
+Recall: 0.3333333333333333
+
+Fold 7
+[[0 6]
+ [2 4]]
+Accuracy: 0.3333333333333333
+Precision: 0.4
+Recall: 0.6666666666666666
+
+Fold 8
+[[2 4]
+ [4 2]]
+Accuracy: 0.3333333333333333
+Precision: 0.3333333333333333
+Recall: 0.3333333333333333
+
+Fold 9
+[[4 2]
+ [5 1]]
+Accuracy: 0.4166666666666667
+Precision: 0.3333333333333333
+Recall: 0.16666666666666666
+
+
+Feature: rain19
+Average accuracy: 0.5035714285714286
+Average Precision: 0.5238095238095237
+Average Recall: 0.4738095238095238
+Total Confusion matrix: 
+[35,30] 
+[34,31] 
+Fold 0
+[[4 3]
+ [4 3]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.42857142857142855
+
+Fold 1
+[[5 2]
+ [3 4]]
+Accuracy: 0.6428571428571429
+Precision: 0.6666666666666666
+Recall: 0.5714285714285714
+
+Fold 2
+[[4 3]
+ [3 4]]
+Accuracy: 0.5714285714285714
+Precision: 0.5714285714285714
+Recall: 0.5714285714285714
+
+Fold 3
+[[1 6]
+ [3 4]]
+Accuracy: 0.35714285714285715
+Precision: 0.4
+Recall: 0.5714285714285714
+
+Fold 4
+[[7 0]
+ [4 3]]
+Accuracy: 0.7142857142857143
+Precision: 1.0
+Recall: 0.42857142857142855
+
+Fold 5
+[[4 2]
+ [1 5]]
+Accuracy: 0.75
+Precision: 0.7142857142857143
+Recall: 0.8333333333333334
+
+Fold 6
+[[5 1]
+ [3 3]]
+Accuracy: 0.6666666666666666
+Precision: 0.75
+Recall: 0.5
+
+Fold 7
+[[4 2]
+ [2 4]]
+Accuracy: 0.6666666666666666
+Precision: 0.6666666666666666
+Recall: 0.6666666666666666
+
+Fold 8
+[[4 2]
+ [4 2]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.3333333333333333
+
+Fold 9
+[[4 2]
+ [5 1]]
+Accuracy: 0.4166666666666667
+Precision: 0.3333333333333333
+Recall: 0.16666666666666666
+
+
+Feature: rain20
+Average accuracy: 0.5785714285714285
+Average Precision: 0.6102380952380952
+Average Recall: 0.5071428571428571
+Total Confusion matrix: 
+[42,23] 
+[32,33] 
+Fold 0
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 1
+[[4 3]
+ [3 4]]
+Accuracy: 0.5714285714285714
+Precision: 0.5714285714285714
+Recall: 0.5714285714285714
+
+Fold 2
+[[4 3]
+ [5 2]]
+Accuracy: 0.42857142857142855
+Precision: 0.4
+Recall: 0.2857142857142857
+
+Fold 3
+[[2 5]
+ [3 4]]
+Accuracy: 0.42857142857142855
+Precision: 0.4444444444444444
+Recall: 0.5714285714285714
+
+Fold 4
+[[7 0]
+ [4 3]]
+Accuracy: 0.7142857142857143
+Precision: 1.0
+Recall: 0.42857142857142855
+
+Fold 5
+[[2 4]
+ [1 5]]
+Accuracy: 0.5833333333333334
+Precision: 0.5555555555555556
+Recall: 0.8333333333333334
+
+Fold 6
+[[5 1]
+ [2 4]]
+Accuracy: 0.75
+Precision: 0.8
+Recall: 0.6666666666666666
+
+Fold 7
+[[2 4]
+ [3 3]]
+Accuracy: 0.4166666666666667
+Precision: 0.42857142857142855
+Recall: 0.5
+
+Fold 8
+[[3 3]
+ [4 2]]
+Accuracy: 0.4166666666666667
+Precision: 0.4
+Recall: 0.3333333333333333
+
+Fold 9
+[[3 3]
+ [5 1]]
+Accuracy: 0.3333333333333333
+Precision: 0.25
+Recall: 0.16666666666666666
+
+
+Feature: rain21
+Average accuracy: 0.5142857142857142
+Average Precision: 0.5349999999999999
+Average Recall: 0.4928571428571429
+Total Confusion matrix: 
+[35,30] 
+[33,32] 
+Fold 0
+[[3 4]
+ [4 3]]
+Accuracy: 0.42857142857142855
+Precision: 0.42857142857142855
+Recall: 0.42857142857142855
+
+Fold 1
+[[3 4]
+ [3 4]]
+Accuracy: 0.5
+Precision: 0.5
+Recall: 0.5714285714285714
+
+Fold 2
+[[5 2]
+ [4 3]]
+Accuracy: 0.5714285714285714
+Precision: 0.6
+Recall: 0.42857142857142855
+
+Fold 3
+[[2 5]
+ [4 3]]
+Accuracy: 0.35714285714285715
+Precision: 0.375
+Recall: 0.42857142857142855
+
+Fold 4
+[[7 0]
+ [6 1]]
+Accuracy: 0.5714285714285714
+Precision: 1.0
+Recall: 0.14285714285714285
+
+Fold 5
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 6
+[[5 1]
+ [3 3]]
+Accuracy: 0.6666666666666666
+Precision: 0.75
+Recall: 0.5
+
+Fold 7
+[[4 2]
+ [1 5]]
+Accuracy: 0.75
+Precision: 0.7142857142857143
+Recall: 0.8333333333333334
+
+Fold 8
+[[4 2]
+ [3 3]]
+Accuracy: 0.5833333333333334
+Precision: 0.6
+Recall: 0.5
+
+Fold 9
+[[3 3]
+ [5 1]]
+Accuracy: 0.3333333333333333
+Precision: 0.25
+Recall: 0.16666666666666666
+
+
+Feature: rain22
+Average accuracy: 0.5345238095238095
+Average Precision: 0.5817857142857144
+Average Recall: 0.45000000000000007
+Total Confusion matrix: 
+[40,25] 
+[36,29] 
