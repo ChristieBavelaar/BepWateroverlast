@@ -45,6 +45,7 @@ def adressSample(adresses, posData, negData, radar, extra, saveFile, alice=False
     # add in an equal number of negative samples
     negativeSamples = adresses.sample(n=len(posData)*2,replace=False)
     
+    print(negativeSamples)
     # Convert rijksdriehoek coordinates to regular coordinates
     lat = []
     lon = []
@@ -52,7 +53,7 @@ def adressSample(adresses, posData, negData, radar, extra, saveFile, alice=False
     for i in range(len(negativeSamples['pos'])):
         # Split on space and save in list
         coords = str(negativeSamples.iloc[i]['pos']).split()
-
+        print(coords)
         # Convert into regular coordinates and save to string format used with tweets
         lat.append(converter.toLat(float(coords[0]),float(coords[1])))
         lon.append(converter.toLon(float(coords[0]),float(coords[1])))
