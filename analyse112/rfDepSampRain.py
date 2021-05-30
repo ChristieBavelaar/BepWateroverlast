@@ -147,5 +147,4 @@ if __name__ == '__main__':
         sampleFile2="negHeightSample.csv"
         randomForest(folder='../../csv112/', inputFile1=sampleFile1, inputFile2=sampleFile2)
     elif(sys.argv[1] == "n"):
-        randomForest(inputFile = inputFile1, resultFolder='/home/s2155435/bep1/analyse112/results/Adress/')
-        randomForest(inputFile = inputFile2, resultFolder='/home/s2155435/bep1/analyse112/results/Random/')
+        randomForest()
