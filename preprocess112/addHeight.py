@@ -200,7 +200,7 @@ if __name__ == '__main__':
     # pdRandom = pd.read_csv(folder+'randomTifSample.csv')
     # pdAdress = pd.read_csv(folder+'adressTifSample.csv')
     # pdDep = pd.read_csv(folder+'depTifSample.csv')
-    pdDep2 = pd.read_csv(folder+'112TifSample.csv')
+    pdDep2 = pd.read_csv(folder+'tif.csv')
 
     # outputRandom = addHeightKwartetSearch(data=pdRandom, radar=radar, saveFile=folder+'randomHeightSample.csv', alice=False)
     # print(outputRandom)

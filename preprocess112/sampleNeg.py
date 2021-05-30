@@ -30,6 +30,7 @@ def randomSample(data, posData, radar, extra, saveFile):
             if(polygon.contains(randomPoint)):
                 data['latitude'][i] = randomPoint.y
                 data['longitude'][i] = randomPoint.x
+                data['hour'][i] = randint(1,24)
                 break
     data=data.drop(columns=['latlon_sw','latlon_se','latlon_ne','latlon_nw','latlon_center'])
     data = pd.concat([data,posData], ignore_index=True)
@@ -78,6 +79,8 @@ def adressSample(adresses, posData, negData, radar, extra, saveFile, alice=False
             print("no instance of rain found")
             rain.append(None)
     negativeSamples['rain'] = rain
+    
+    negativeSamples['hour'] = randint(1,24, size=len(negativeSamples['rain']))
     
     # Add labels
     labels = [0] * len(negativeSamples.index)
