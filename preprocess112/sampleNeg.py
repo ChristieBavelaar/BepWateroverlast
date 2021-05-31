@@ -81,7 +81,7 @@ def adressSample(adresses, posData, negData, radar, extra, saveFile, alice=False
             rain.append(None)
     negativeSamples['rain'] = rain
     
-    negativeSamples['hour'] = randint(1,24, size=len(negativeSamples['rain']))
+    negativeSamples['hour'] = np.random.randint(1,24, size=len(negativeSamples['rain']))
     
     # Add labels
     labels = [0] * len(negativeSamples.index)
