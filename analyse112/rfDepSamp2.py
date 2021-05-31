@@ -13,7 +13,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='112RainSumSample.csv'):
-    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainHourly/'
+    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainHourly/RF/'
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
@@ -110,14 +110,14 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='112RainSumSample.cs
             test_labels = np.concatenate((test_labels_pos, test_labels_neg))
 
             #train and test the decision tree
-            #rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)     
-            rf = AutoSklearnClassifier(time_left_for_this_task=30*60, per_run_time_limit=2*60)
+            rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)     
+            #rf = AutoSklearnClassifier(time_left_for_this_task=30*60, per_run_time_limit=2*60)
    
             rf.fit(train_features, train_labels)
             label_prediction = rf.predict(test_features)
 
-            autosklResults = pd.DataFrame(rf.cv_results_)
-            autosklResults.to_csv(resultFolder+ "autosklearn"+str(feature)+str(treeNumber)+".csv")
+            # autosklResults = pd.DataFrame(rf.cv_results_)
+            # autosklResults.to_csv(resultFolder+ "autosklearn"+str(feature)+str(treeNumber)+".csv")
             # Save performance
             confusion = confusion_matrix(test_labels,label_prediction)
             totalConfusion[0][0] += confusion[0][0]

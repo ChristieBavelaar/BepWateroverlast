@@ -30,8 +30,8 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', res
     
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    #features= rainTweets_eq.drop(columns=['labels'])
-    features= rainTweets_eq.drop(columns=['labels', 'rain'])
+    features= rainTweets_eq.drop(columns=['labels'])
+    #features= rainTweets_eq.drop(columns=['labels', 'rain'])
     #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
