@@ -77,14 +77,10 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv'):
         featuresPos= pos_data[[feature]]
         featuresNeg= neg_data[[feature]]
 
-        print(featuresPos)
         # Convert to numpy array
         featuresPos = np.array(featuresPos)
         featuresNeg = np.array(featuresNeg)
 
-        print("lengte")
-        print(len(featuresNeg))
-        print(len(labelsNeg))
         # k-fold cross validation
         skf = StratifiedKFold(n_splits=10)
         mape = []
@@ -95,7 +91,6 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv'):
         totalConfusion = [[0,0],[0,0]]
 
         for train_index, val_index in skf.split(featuresPos, labelsPos):
-            print(train_index, val_index)
             # Create training and test features and labels
             train_features_pos, test_features_pos = featuresPos[train_index], featuresPos[val_index]
             train_labels_pos, test_labels_pos = labelsPos[train_index], labelsPos[val_index]
