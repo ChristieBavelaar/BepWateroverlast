@@ -12,7 +12,7 @@ from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 
-def randomForest(folder='/data/s2155435/csv112/', inputFile='112RainSumSample.csv'):
+def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv'):
     resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainHourly/RF/'
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
