@@ -11,6 +11,7 @@ from sklearn.metrics import classification_report, confusion_matrix, precision_s
 from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
+from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv'):
     resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainHourly/'
