@@ -42,9 +42,12 @@ def adressSample(adresses, posData, negData, radar, extra, saveFile, alice=False
         folder = '/data/s2155435/csv112/'
     else:
         folder='../../csv112/'
+
+    posData=posData.dropna()
     # add in an equal number of negative samples
     negativeSamples = adresses.sample(n=len(posData)*2,replace=False)
     
+
     print(negativeSamples)
     # Convert rijksdriehoek coordinates to regular coordinates
     lat = []
