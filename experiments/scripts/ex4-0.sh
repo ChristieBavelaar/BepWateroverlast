@@ -5,7 +5,7 @@
 #SBATCH --mail-user="christie@ziggo.nl"
 #SBATCH --mail-type="ALL"
 #SBATCH --partition=cpu-long
-#SBATCH -c 2
+#SBATCH -c 1
 #SBATCH --time=1-00:00:00
 #SBATCH --mem-per-cpu=32gb
 
@@ -14,4 +14,4 @@ module load Miniconda3/4.7.10
 conda init bash
 source ~/.bashrc
 conda activate bepalice
-python3 /home/s2155435/bep1/preprocess112/serialized.py n 10 2 5
+python3 /home/s2155435/bep1/preprocess112/serialized.py n 10 3 7
