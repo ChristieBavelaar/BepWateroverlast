@@ -149,15 +149,26 @@ def dependent_sampling_2(pos_data, rain, saveFile):
     end = pos_data.at[len(pos_data.index)-1,'date']
 
     for i in range(len(pos_data.index)):
+        print(i, "/" , len(pos_data.index))
         temp = rain.loc[(rain['radarX'] == pos_data.iloc[i]['radarX']) & (rain['radarY'] == pos_data.iloc[i]['radarY']) ]
-        newDate = temp.sample().iloc[0]['date']
+        newSample = temp.sample()
+        newDate = newSample.iloc[0]['date']
 
-        while newDate == pos_data.iloc[i]['date'] or newDate < start or newDate>end:
-            newDate = temp.sample()
-            newDate = newDate.iloc[0]['date']
+        # try:
+        #     while newSample['date'] == pos_data.iloc[i]['date'] or newSample['date'] < start or newSample['date']>end:
+        #         newSample['date'] = temp.sample().iloc[0]
+        # except:
+        #     print("new sample",newSample)
+        #     print("newSample['date']", newSample.iloc[0]['date'])
+        #     print("pos_data.iloc[i]['date']", pos_data.iloc[i]['date'])
+        #     print("temp",temp)
 
-        print(newDate)
+        while newDate == pos_data.iloc[0]['date'] or newDate < start or newDate>end:
+            newSample['date'] = temp.sample().iloc[0]
+        
+
         negEq = negEq.append(pos_data.iloc[i])
+        negEq.at[i, 'rain'] = newSample['rain']
         negEq.at[i, 'date'] = newDate
         negEq.at[i, 'hour'] = randint(1,24)
         negEq.at[i, 'labels'] = 0
