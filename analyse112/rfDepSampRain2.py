@@ -45,8 +45,10 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
     # Set features and convert to numpy array
     # Delete unneccesary columns
     cols = [col for col in pos_data.columns if 'rain' not in col]
-    posRain = pos_data['rain']
-    negRain = neg_data['rain']
+    posRain = pd.DataFrame()
+    negRain = pd.DataFrame()
+    posRain['rain'] = pos_data['rain']
+    negRain['rain'] = neg_data['rain']
     pos_data = pos_data[cols]
     neg_data = neg_data[cols]
     pos_data['rain'] = posRain['rain']
