@@ -13,7 +13,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
-def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/'):
+def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Random/Height/'):
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     
     #load data

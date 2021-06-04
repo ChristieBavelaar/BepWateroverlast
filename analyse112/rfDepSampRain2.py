@@ -14,7 +14,7 @@ from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
-    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/'):
+    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/'):
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
 
@@ -49,8 +49,8 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
     negRain = neg_data['rain']
     pos_data = pos_data[cols]
     neg_data = neg_data[cols]
-    pos_data['rain'] = posRain
-    neg_data['rain'] = negRain
+    pos_data['rain'] = posRain['rain']
+    neg_data['rain'] = negRain['rain']
 
     featuresPos= pos_data.drop(columns=['labels'])
     featuresNeg= neg_data.drop(columns=['labels'])
