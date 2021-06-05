@@ -18,7 +18,7 @@ from filterRain import filterRain
 from sampleNeg import dependent_sampling_2 
 
 from addRain import dayRain
-from addRain3 import rainAttributes
+from addRain3 import rainAttributes2
 
 
 if __name__ == '__main__':

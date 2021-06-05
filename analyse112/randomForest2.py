@@ -116,4 +116,4 @@ if __name__ == '__main__':
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../csv112/",inputFile=sampleFile)
     elif(sys.argv[1] == "n"):
-        randomForest(inputFile='finalData1.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Random')
+        randomForest(inputFile='finalData1.csv')
