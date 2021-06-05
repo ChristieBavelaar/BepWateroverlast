@@ -102,7 +102,7 @@ if __name__ == '__main__':
         else:
             pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2017_12.csv')
 
-        pdData = rainAttributes(pdInput=pdData, rain=pdRain, saveFile=folder+'csv112/hourlyRain'+samplename+'.csv')
+        pdData = rainAttributes(pdInput=pdData, rain=pdRain, saveFile=folder+'csv112/hourlyAverageRain'+samplename+'.csv')
 
     
         
