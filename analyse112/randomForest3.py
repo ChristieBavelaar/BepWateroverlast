@@ -58,7 +58,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', res
         #print(test_features[0])
         #train and test the decision tree
         # rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
-        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+        rf = AutoSklearnClassifier(time_left_for_this_task=240*60, per_run_time_limit=7*60)
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
@@ -120,7 +120,7 @@ if __name__ == '__main__':
         randomForest(folder="../../csv112/",inputFile=sampleFile)
     elif(sys.argv[1] == "n"):
         randomForest(inputFile='finalData2.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Adress/RainPerDay/', featureIndex=2)
-        randomForest(inputFile='finalData2.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Adress/Height/', featureIndex=1)
         randomForest(inputFile='finalData2.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Adress/RainAndHeight/', featureIndex=0)
+        randomForest(inputFile='finalData2.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Adress/Height/', featureIndex=1)
 
 

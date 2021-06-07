@@ -13,7 +13,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
-def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Random/RainAndHeight/'):
+def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/', featureIndex=0):
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     
     #load data
@@ -30,9 +30,12 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', res
     
     #set features and convert to numpy array
     #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    features= rainTweets_eq.drop(columns=['labels'])
-    #features= rainTweets_eq.drop(columns=['labels', 'rain'])
-    #features = rainTweets_eq[['rain']]
+    if featureIndex == 0: 
+        features= rainTweets_eq.drop(columns=['labels'])
+    elif featureIndex == 1:
+        features= rainTweets_eq.drop(columns=['labels', 'rain'])
+    else:
+        features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
     feature_list = list(features.columns)
@@ -55,7 +58,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='finalData.csv', res
         #print(test_features[0])
         #train and test the decision tree
         # rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
-        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+        rf = AutoSklearnClassifier(time_left_for_this_task=240*60, per_run_time_limit=7*60)
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
@@ -116,4 +119,8 @@ if __name__ == '__main__':
         sampleFile="finalDataSample.csv"
         randomForest(folder="../../csv112/",inputFile=sampleFile)
     elif(sys.argv[1] == "n"):
-        randomForest(inputFile='finalData1.csv')
+        randomForest(inputFile='finalData1.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Random/RainPerDay/', featureIndex=2)
+        randomForest(inputFile='finalData1.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Random/RainAndHeight/', featureIndex=0)
+        randomForest(inputFile='finalData1.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Random/Height/', featureIndex=1)
+
+
