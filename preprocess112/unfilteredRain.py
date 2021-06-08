@@ -1,6 +1,7 @@
 import pandas as pd 
 from addRain import combineDataFrames
 from labelData import make_labels
+from filterRain import filterRain
 
 samplename = ''
 folder = '/data/s2155435/'    
