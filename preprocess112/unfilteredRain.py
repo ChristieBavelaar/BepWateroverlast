@@ -6,7 +6,7 @@ from filterRain import filterRain
 samplename = ''
 folder = '/data/s2155435/' 
 alice = True   
-pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2020.csv')
+pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2007-2020.csv')
 data = pd.read_csv(folder+'csv112/112XY'+samplename+'.csv')
 
 pdRain = filterRain(data=pdRain, threshold=0, saveFile=folder+'csv112/rainUnFiltered'+samplename+'.csv', alice=alice)
