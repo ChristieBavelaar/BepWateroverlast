@@ -4,7 +4,8 @@ from labelData import make_labels
 from filterRain import filterRain
 
 samplename = ''
-folder = '/data/s2155435/'    
+folder = '/data/s2155435/' 
+alice = True   
 pdRain = pd.read_csv(folder+'csv112/pandafied_h5_rain_2020.csv')
 data = pd.read_csv(folder+'csv112/112XY'+samplename+'.csv')
 
