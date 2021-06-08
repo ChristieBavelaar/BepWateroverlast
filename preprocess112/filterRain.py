@@ -15,7 +15,7 @@ def filterRain(data, threshold, saveFile, alice):
         startDate = pd.Timestamp(2015,12,31)
         endDate = pd.Timestamp(2021,3,1)
     else:
-        startDate = pd.Timestamp(2017,1,2)
+        startDate = pd.Timestamp(2016,1,6)
         endDate = pd.Timestamp(2021,3,1)
         
     print("set proper date format")
