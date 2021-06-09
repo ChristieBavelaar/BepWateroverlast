@@ -1,7 +1,7 @@
 import pandas as pd 
 import numpy as np
 
-def combineDataFrames(tweets_XY, rain, saveFile):
+def combineDataFrames1(tweets_XY, rain, saveFile):
     """
         Merge twitter and rain data into one dataframe.
         Parameters: 
@@ -35,6 +35,39 @@ def combineDataFrames(tweets_XY, rain, saveFile):
     rainTweets.to_csv(saveFile, index=False)
     return rainTweets
 
+def combineDataFrames(tweets_XY, rain, saveFile):
+    """
+        Merge twitter and rain data into one dataframe.
+        Parameters: 
+            tweets_XY: pandas dataframe containing twitter messages
+            rain: pandas dataframe containing rain data
+        Output: pandas dataframe
+        Source: Christiaan
+    """
+
+    print("Preprocess tweets")
+    #pick relevant columns from tweets_XY
+    tweets_XY['date'] = tweets_XY['date'].astype('object')
+    tweets_XY = tweets_XY.drop(columns=['time'])
+
+    #remove duplicates
+    tweets_XY = tweets_XY.drop_duplicates()
+    
+    rain = rain[rain['date'].notnull()]
+    rain['date'] = rain['date'].astype('object')
+    
+    rain = rain.reset_index(drop=True)
+
+    print("Merge data")
+    print(tweets_XY)
+    print(rain)
+    rainTweets = pd.merge(rain, tweets_XY, on=('radarX','radarY','date'), how='left')
+    rainTweets=rainTweets[rainTweets['rain'].notnull()]
+    rain = rain.reset_index(drop=True)
+    
+    rainTweets.to_csv(saveFile, index=False)
+    return rainTweets
+    
 def rainAttributes(tweets_XY, rain, saveFile, nrHours):
     print("Preprocess tweets")
     tweets_XY['date'] = tweets_XY['date'].astype('object')
