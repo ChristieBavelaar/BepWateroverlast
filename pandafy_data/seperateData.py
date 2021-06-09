@@ -11,7 +11,7 @@ def seperateData(data, saveFilePos, saveFileNeg):
     """
     data['labels'] = data['labels'].astype(int)
     pos_data = data[data.labels == 1]
-    neg_data = data[data.labels == 0]
+    neg_data = data[data.labels != 1]
 
     pos_data.to_csv(saveFilePos, index = False)
     neg_data.to_csv(saveFileNeg, index=False)
