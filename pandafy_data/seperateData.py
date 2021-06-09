@@ -9,6 +9,7 @@ def seperateData(data, saveFilePos, saveFileNeg):
             pandas data frame positive examples
             pandas data frame negative examples
     """
+    data['labels'] = data['labels'].astype(int)
     pos_data = data[data.labels == 1]
     neg_data = data[data.labels == 0]
 
