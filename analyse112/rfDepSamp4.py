@@ -13,7 +13,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
-def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainHourly/', featureIndex = 1):
+def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAverage/', featureIndex = 1):
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
@@ -70,7 +70,19 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', re
     cols = [col for col in pos_data.columns if 'rain' in col]
     pos_data = pos_data[cols]
     neg_data = neg_data[cols]
+    nrDays = 1
 
+    pos_data = pos_data.astype(int)
+    neg_data = neg_data.astype(int)
+
+    for col in cols:
+        pos_data[col] = pos_data[col]/nrDays
+        neg_data[col] = neg_data[col]/nrDays
+        nrDays +=1
+    
+    pos_data.to_csv(resultFolder+'averageRainPos.csv')
+    neg_data.to_csv(resultFolder+'averageRainNeg.csv')
+    
     # Saving feature names for later use
     feature_list = list(pos_data.columns)
 
