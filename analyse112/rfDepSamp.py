@@ -55,16 +55,16 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', re
     labelsPos = np.array(pos_data['labels'])
     labelsNeg = np.array(neg_data['labels'])
 
-    # Set features Regular
-    if featureindex == 1:
-        featuresPos= pos_data.drop(columns=['labels'])
-        featuresNeg= neg_data.drop(columns=['labels'])
-    elif featureindex == 2:
-        featuresPos= pos_data.drop(columns=['labels','rain'])
-        featuresNeg= neg_data.drop(columns=['labels','rain'])
-    elif featureindex == 3:
-        featuresPos= pos_data[['rain']]
-        featuresNeg= neg_data[['rain']]
+    # # Set features Regular
+    # if featureindex == 1:
+    #     featuresPos= pos_data.drop(columns=['labels'])
+    #     featuresNeg= neg_data.drop(columns=['labels'])
+    # elif featureindex == 2:
+    #     featuresPos= pos_data.drop(columns=['labels','rain'])
+    #     featuresNeg= neg_data.drop(columns=['labels','rain'])
+    # elif featureindex == 3:
+    #     featuresPos= pos_data[['rain']]
+    #     featuresNeg= neg_data[['rain']]
     
     # Set features Hourly Rain
     cols = [col for col in pos_data.columns if 'rain' in col]
