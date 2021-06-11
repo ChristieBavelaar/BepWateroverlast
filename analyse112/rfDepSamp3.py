@@ -110,7 +110,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', re
 
             #train and test the decision tree
             #rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)     
-            rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+            rf = AutoSklearnClassifier(time_left_for_this_task=240*60, per_run_time_limit=7*60)
    
             rf.fit(train_features, train_labels)
             label_prediction = rf.predict(test_features)
