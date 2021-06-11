@@ -15,7 +15,7 @@ from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/', featureindex = 1):
     #resultFolder = './results/'
-    resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
+    resultFile = open (resultFolder+"resultRFAlice2.txt", "w+")
     #load data
     data = pd.read_csv(folder+inputFile)
 
@@ -116,7 +116,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv', re
             label_prediction = rf.predict(test_features)
 
             autosklResults = pd.DataFrame(rf.cv_results_)
-            autosklResults.to_csv(resultFolder+ "autosklearn"+str(feature)+str(treeNumber)+".csv")
+            autosklResults.to_csv(resultFolder+ "autosklearn2"+str(feature)+str(treeNumber)+".csv")
             # Save performance
             confusion = confusion_matrix(test_labels,label_prediction)
             totalConfusion[0][0] += confusion[0][0]
