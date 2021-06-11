@@ -14,7 +14,7 @@ from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
-    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainPerDay/'):
+    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainPerDay/', featureIndex = 1):
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
 
@@ -48,14 +48,15 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
     pos_data = pos_data[cols]
     neg_data = neg_data[cols]
 
-    featuresPos= pos_data.drop(columns=['labels'])
-    featuresNeg= neg_data.drop(columns=['labels'])
-    
-    # featuresPos= pos_data.drop(columns=['labels','rain'])
-    # featuresNeg= neg_data.drop(columns=['labels','rain'])
-    
-    # featuresPos= pos_data[['rain']]
-    # featuresNeg= neg_data[['rain']]
+    if featureIndex == 1:
+        featuresPos= pos_data.drop(columns=['labels'])
+        featuresNeg= neg_data.drop(columns=['labels'])
+    elif featureIndex == 2:
+        featuresPos= pos_data.drop(columns=['labels','rain'])
+        featuresNeg= neg_data.drop(columns=['labels','rain'])
+    else:
+        featuresPos= pos_data[['rain']]
+        featuresNeg= neg_data[['rain']]
 
     # Saving feature names for later use
     feature_list = list(featuresPos.columns)
@@ -148,4 +149,6 @@ if __name__ == '__main__':
         sampleFile2="negHeightSample.csv"
         randomForest(folder='../../csv112/', inputFile1=sampleFile1, inputFile2=sampleFile2)
     elif(sys.argv[1] == "n"):
-        randomForest()
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/', featureIndex=1)
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/Height/', featureIndex=2)
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainPerDay/', featureIndex=3)

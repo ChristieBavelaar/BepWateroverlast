@@ -14,7 +14,7 @@ from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
 def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
-    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/'):
+    resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/', featureIndex = 1):
     #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
 
@@ -44,24 +44,25 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
 
     # Set features and convert to numpy array
     # Delete unneccesary columns
-    cols = [col for col in pos_data.columns if 'rain' not in col]
-    posRain = pd.DataFrame()
-    negRain = pd.DataFrame()
-    posRain['rain'] = pos_data['rain']
-    negRain['rain'] = neg_data['rain']
-    pos_data = pos_data[cols]
-    neg_data = neg_data[cols]
-    pos_data['rain'] = posRain['rain']
-    neg_data['rain'] = negRain['rain']
+    # cols = [col for col in pos_data.columns if 'rain' not in col]
+    # posRain = pd.DataFrame()
+    # negRain = pd.DataFrame()
+    # posRain['rain'] = pos_data['rain']
+    # negRain['rain'] = neg_data['rain']
+    # pos_data = pos_data[cols]
+    # neg_data = neg_data[cols]
+    # pos_data['rain'] = posRain['rain']
+    # neg_data['rain'] = negRain['rain']
 
-    featuresPos= pos_data.drop(columns=['labels'])
-    featuresNeg= neg_data.drop(columns=['labels'])
-    
-    # featuresPos= pos_data.drop(columns=['labels','rain'])
-    # featuresNeg= neg_data.drop(columns=['labels','rain'])
-    
-    # featuresPos= pos_data[['rain']]
-    # featuresNeg= neg_data[['rain']]
+    if featureIndex == 1:
+        featuresPos= pos_data.drop(columns=['labels'])
+        featuresNeg= neg_data.drop(columns=['labels'])
+    elif featureIndex == 2:
+        featuresPos= pos_data.drop(columns=['labels','rain'])
+        featuresNeg= neg_data.drop(columns=['labels','rain'])
+    else:
+        featuresPos= pos_data[['rain']]
+        featuresNeg= neg_data[['rain']]
 
     # Saving feature names for later use
     feature_list = list(featuresPos.columns)
@@ -97,7 +98,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
 
         #train and test the decision tree
         #rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)  
-        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+        rf = AutoSklearnClassifier(time_left_for_this_task=240*60, per_run_time_limit=5*60)
       
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
@@ -154,4 +155,6 @@ if __name__ == '__main__':
         sampleFile2="negHeightSample.csv"
         randomForest(folder='../../csv112/', inputFile1=sampleFile1, inputFile2=sampleFile2)
     elif(sys.argv[1] == "n"):
-        randomForest()
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/', featureIndex=1)
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/Height/', featureIndex=2)
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainPerDay/', featureIndex=3)
