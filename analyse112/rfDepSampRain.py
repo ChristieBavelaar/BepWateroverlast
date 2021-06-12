@@ -150,5 +150,6 @@ if __name__ == '__main__':
         randomForest(folder='../../csv112/', inputFile1=sampleFile1, inputFile2=sampleFile2)
     elif(sys.argv[1] == "n"):
         randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainAndHeight/', featureIndex=1)
-        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/Height/', featureIndex=2)
         randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/RainPerDay/', featureIndex=3)
+        randomForest(inputFile='depSamp.csv', resultFolder = '/home/s2155435/bep1/analyse112/results/Dep/Height/', featureIndex=2)
+        
