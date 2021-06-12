@@ -44,9 +44,9 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
 
     # Set features and convert to numpy array
     # Delete unneccesary columns
-    cols = [col for col in pos_data.columns if 'rain' not in col]
-    pos_data = pos_data[cols]
-    neg_data = neg_data[cols]
+    # cols = [col for col in pos_data.columns if 'rain' not in col]
+    # pos_data = pos_data[cols]
+    # neg_data = neg_data[cols]
 
     if featureIndex == 1:
         featuresPos= pos_data.drop(columns=['labels'])
@@ -92,7 +92,7 @@ def randomForest(folder='/data/s2155435/csv112/', inputFile='hourlyRain.csv',
 
         #train and test the decision tree
         #rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)  
-        rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+        rf = AutoSklearnClassifier(time_left_for_this_task=30*60, per_run_time_limit=3*60)
       
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
