@@ -1,10 +1,12 @@
+# Use this script to train a random forest or autosklearn on a dataset generated with dependent sampling
+
 import pandas as pd 
 import numpy as np 
 import sys
 import os
 from numpy import savetxt
 import matplotlib.pyplot as plt
-#sklearn
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import tree
 from sklearn.metrics import classification_report, confusion_matrix, precision_score, recall_score
@@ -13,38 +15,56 @@ from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from autosklearn.classification import AutoSklearnClassifier
 
-def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.csv', resultFolder='/home/s2155435/bep1/analyseData/results/'):
-    print("open: ",inputFile)
-    #resultFolder = './'
+def trainModel(folder='/data/s2155435/pandafied_data/', inputFile1='posHeight.csv', inputFile2='negHeight.csv'):
+    resultFolder = '/home/s2155435/bep1/analyseData/results/Dep/'
+    #resultFolder = './results/'
     resultFile = open (resultFolder+"resultRFAlice.txt", "w+")
     #load data
-    rainTweets_eq = pd.read_csv(folder + inputFile)
-    print("data loaded")
-    #print(rainTweets_eq)
-    #rainTweets_eq = rainTweets_eq.dropna(subset=['0'])
-    #print(rainTweets_eq)
-    #print(rainTweets_eq.columns)
-    #set labels
+    pos_data = pd.read_csv(folder + inputFile1)
+    neg_data = pd.read_csv(folder + inputFile2)
+    print("data loaded")    
+
+    # Delete unneccesary columns
+    cols = [col for col in pos_data.columns if 'Unnamed' not in col]
+    pos_data = pos_data[cols]
+    pos_data= pos_data.drop(columns=['radarX', 'radarY', 'date', 'text', 'latlon', 'tiffile'])
+    cols = [col for col in neg_data.columns if 'Unnamed' not in col]
+    neg_data = neg_data[cols]
+    neg_data= neg_data.drop(columns=['radarX', 'radarY', 'date', 'latlon', 'tiffile'])
+
+    negNan = neg_data[neg_data.isna().any(axis=1)]
+    posNan = pos_data[pos_data.isna().any(axis=1)]
+    negNan.to_csv(resultFolder+'negnNan.csv')
+    posNan.to_csv(resultFolder+'posNan.csv')
+
+    neg_data = neg_data.dropna()
+    pos_data = pos_data.dropna()
+
+    #rainTweets_eq = rainTweets_eq.dropna()
+    labelsPos = np.array(pos_data['labels'])
+    labelsNeg = np.array(neg_data['labels'])
+
+    # Set features and convert to numpy array
+    # featuresPos= pos_data.drop(columns=['labels'])
+    # featuresNeg= neg_data.drop(columns=['labels'])
     
+    # featuresPos= pos_data.drop(columns=['labels','rain'])
+    # featuresNeg= neg_data.drop(columns=['labels','rain'])
+    
+    featuresPos= pos_data[['rain']]
+    featuresNeg= neg_data[['rain']]
 
-    cols = [col for col in rainTweets_eq.columns if 'Unnamed' not in col]
-    rainTweets_eq = rainTweets_eq[cols]
-    rainTweets_eq= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text', 'latlon', 'tiffile'])
-
-    rainTweets_eq = rainTweets_eq.dropna()
-    labels = np.array(rainTweets_eq['labels'])
-    #set features and convert to numpy array
-    #with height: features= rainTweets_eq.drop(columns=['radarX', 'radarY', 'date', 'text','tiffile', 'height','labels'])
-    features= rainTweets_eq.drop(columns=['labels'])
-    #features= rainTweets_eq.drop(columns=['labels', 'rain'])
-    #features = rainTweets_eq[['rain']]
     
     # Saving feature names for later use
-    feature_list = list(features.columns)
+    feature_list = list(featuresPos.columns)
     
-    features = np.array(features)
-    print(features)
-    #k-fold cross validation
+    print(featuresPos)
+    print(featuresNeg)
+
+    featuresPos = np.array(featuresPos)
+    featuresNeg = np.array(featuresNeg)
+
+    # k-fold cross validation
     skf = StratifiedKFold(n_splits=10)
     mape = []
     treeNumber = 0
@@ -52,25 +72,31 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     precisionResult = []
     recallResult = []
     totalConfusion = [[0,0],[0,0]]
-    for train_index, test_index in skf.split(features, labels):
-        #print("Train: ", train_index, " Test: ", test_index)
-        train_features, test_features = features[train_index], features[test_index]
-        train_labels, test_labels = labels[train_index], labels[test_index]
+    for train_index, test_index in skf.split(featuresPos, labelsPos):
+        # Create training and test features and labels
+        train_features_pos, test_features_pos = featuresPos[train_index], featuresPos[test_index]
+        train_labels_pos, test_labels_pos = labelsPos[train_index], labelsPos[test_index]
 
-        #print(test_features[0])
+        train_features_neg, test_features_neg = featuresNeg[train_index], featuresNeg[test_index]
+        train_labels_neg, test_labels_neg = labelsNeg[train_index], labelsNeg[test_index]
+
+        train_features = np.concatenate((train_features_pos, train_features_neg))
+        test_features = np.concatenate((test_features_pos, test_features_neg))
+        
+        train_labels = np.concatenate((train_labels_pos, train_labels_neg))
+        test_labels = np.concatenate((test_labels_pos, test_labels_neg))
+
         #train and test the decision tree
-        # rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)        
+        #rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)  
         rf = AutoSklearnClassifier(time_left_for_this_task=60*60, per_run_time_limit=5*60)
+      
         rf.fit(train_features, train_labels)
         label_prediction = rf.predict(test_features)
 
         autosklResults = pd.DataFrame(rf.cv_results_)
         autosklResults.to_csv(resultFolder+ "autosklearn"+str(treeNumber)+".csv")
-        print(autosklResults)
-        #output performance subtree
-        #errors = abs(label_prediction - test_labels)
-        #print('Mean Absolute Error:', round(np.mean(errors), 2))
-        # Pull out one tree from the forest
+
+        # Save performance
         confusion = confusion_matrix(test_labels,label_prediction)
         totalConfusion[0][0] += confusion[0][0]
         totalConfusion[0][1] += confusion[0][1]
@@ -92,13 +118,8 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
         # import pydot# Pull out one tree from the forest
         # tree = rf.estimators_[5]# Export the image to a dot file
         # outputFile = resultFolder+"tree"+str(treeNumber)+".dot"
-        # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# Use dot file to create a graph
-        # #(graph, ) = pydot.graph_from_dot_file('tree.dot')# Write graph to a png file
-        # #graph.write_png('tree.png')
+        # export_graphviz(tree, out_file = outputFile, feature_names = feature_list, rounded = True, precision = 1)# 
         treeNumber+=1
-        
-    #output cross validation performance
-    #all_accuracies = cross_val_score(estimator=rf, X=features, y=labels, cv=10)
 
     fig, ax = plt.subplots()
     data = [accuracyResult, precisionResult, recallResult]
@@ -114,14 +135,13 @@ def randomForest(folder='/data/s2155435/pandafied_data/', inputFile='finalData.c
     resultFile.close()
     #print(cross_val_score(estimator=rf, X=features, y=labels, cv=skf, scoring="accuracy"))
     plt.savefig(resultFolder+"boxplotMeasures.png")
-    plt.show()
+    #plt.show()
    
 if __name__ == '__main__':
-    inputFile1 = 'finalDataAdress.csv'
-    inputFile2 = 'finalDataRandom.csv'
+    # y means this is a sample performed on the local computer. If other, the filepaths will be set properly for an experiment on alice.
     if(sys.argv[1] == "y"):
-        sampleFile="finalDataSample.csv"
-        randomForest(folder="../../pandafied_data/",inputFile=sampleFile)
+        sampleFile1="posHeightSample.csv"
+        sampleFile2="negHeightSample.csv"
+        trainModel(folder='../../pandafied_data/', inputFile1=sampleFile1, inputFile2=sampleFile2)
     elif(sys.argv[1] == "n"):
-        randomForest(inputFile = inputFile1, resultFolder='/home/s2155435/bep1/analyseData/results/Adress')
-        randomForest(inputFile = inputFile2, resultFolder='/home/s2155435/bep1/analyseData/results/Random')
+        trainModel()
